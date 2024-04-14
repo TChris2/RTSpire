@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Kick.performed += ctx => motor.Kick();
+        onFoot.Throw.performed += ctx => motor.Throw();
     }
 
     void FixedUpdate()

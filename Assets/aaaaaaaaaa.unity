@@ -342,7 +342,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 8.3
+  m_Height: 8.5
   m_Radius: 1.1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -407,7 +407,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 013146d052bd51a4198eed38de128baf, type: 2}
   - {fileID: 2100000, guid: d300d7fbdf642644bb5832e4e196b81f, type: 2}
   - {fileID: 2100000, guid: 385d316a324aa5643a1656a6441cc8c0, type: 2}
-  - {fileID: 2100000, guid: 2248115ba37d77d4e9880bbd0e421767, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
   KickBack:
   - {fileID: 2100000, guid: 13f7cc8504db1bc4cb29df0aa5febd2c, type: 2}
   - {fileID: 2100000, guid: d3b5f9d727cd8ce4cb7dd11dc049d3d4, type: 2}
@@ -416,7 +416,43 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7d338308bbc6aac4dbb9dc8cbc31424a, type: 2}
   - {fileID: 2100000, guid: 8e5d4490d5ffde246b531e59b175549d, type: 2}
   - {fileID: 2100000, guid: 66ba2d1fa3e143b47b0f3dae5de3b4d2, type: 2}
-  - {fileID: 2100000, guid: 6bdd45fdeac03f54cae01b87648a54eb, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  ThrowLeft:
+  - {fileID: 2100000, guid: f8d9ade646895b14abdfe984ab991965, type: 2}
+  - {fileID: 2100000, guid: d036fb1bd3aae4943bb2af0f8353fda7, type: 2}
+  - {fileID: 2100000, guid: c621cfbd46cd41745a4e257e4f5f10d3, type: 2}
+  - {fileID: 2100000, guid: 47c4b7a6063b70945a749c72aa14d7f9, type: 2}
+  - {fileID: 2100000, guid: da7600c6435f4bd4d89d6c01f7a8920f, type: 2}
+  - {fileID: 2100000, guid: 9607d9ad047fd8d4fb851fccc18d5ac3, type: 2}
+  - {fileID: 2100000, guid: 29d2a39e2c2c4d54d86f7d77e0fffaaf, type: 2}
+  - {fileID: 2100000, guid: 7b9f6dd14519fae4580fdf6416f7d94a, type: 2}
+  ThrowRight:
+  - {fileID: 2100000, guid: 6da75bd7bc61e5f41956da7941a786a4, type: 2}
+  - {fileID: 2100000, guid: fc0d7d31e30cba94bac8bb300ab235ff, type: 2}
+  - {fileID: 2100000, guid: 0478d96f0ba2cf64a98096da833fc623, type: 2}
+  - {fileID: 2100000, guid: e40f5376f7f254e4e8d6398031a66b1f, type: 2}
+  - {fileID: 2100000, guid: 6f0d218719a3be7458c3376008030103, type: 2}
+  - {fileID: 2100000, guid: 3ea59b9e229d9b645a2dab252fc81223, type: 2}
+  - {fileID: 2100000, guid: 7384498cc6ee2ac48bacd349e1eb4541, type: 2}
+  - {fileID: 2100000, guid: 597908ad4158ea04ea0e0a6a56f19686, type: 2}
+  ThrowForward:
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  - {fileID: 2100000, guid: 8876bcd356dcd89489b1a01fd6f44d81, type: 2}
+  ThrowBack:
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
+  - {fileID: 2100000, guid: 7da4668cb9d595f498607ea1288fd3e7, type: 2}
   JumpStill:
   - {fileID: 2100000, guid: d385529857301b64aa41a06fb8c39790, type: 2}
   - {fileID: 2100000, guid: d0972bebe1488db4e88bd8974031075b, type: 2}
@@ -761,7 +797,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 269958105}
@@ -864,7 +900,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 200, y: 1, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 278183791}

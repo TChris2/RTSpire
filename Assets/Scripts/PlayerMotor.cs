@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//try and add thing to adjust jump height depending on how long button is pressed
 public class PlayerMotor : MonoBehaviour
 {
     private Transform camera;
@@ -10,6 +11,7 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5;
     public static bool isGrounded;
     public static bool kickOn = false;
+    public static bool throwOn = false;
     public float gravity = -9.8f;
     public float jumpHeight = 3;
     // for player animation
@@ -54,7 +56,18 @@ public class PlayerMotor : MonoBehaviour
 
     public void Kick()
     {
-        kickOn = true;
+        if (!kickOn && !PlayerAnimation.isThrowing)
+        {
+            kickOn = true;
+        }
+    }
+
+    public void Throw()
+    {
+        if (!throwOn && !PlayerAnimation.isKicking)
+        {
+            throwOn = true;
+        }
     }
 
     void LateUpdate ()
