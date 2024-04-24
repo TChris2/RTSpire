@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//try and add thing to adjust jump height depending on how long button is pressed
 public class PlayerMotor : MonoBehaviour
 {
     private Transform camera;
@@ -68,6 +67,16 @@ public class PlayerMotor : MonoBehaviour
         {
             throwOn = true;
         }
+    }
+
+    public void ZoomIn()
+    {
+        PlayerLook.distance -= 1;
+    }
+
+    public void ZoomOut()
+    {
+        PlayerLook.distance += 1;
     }
 
     void LateUpdate ()

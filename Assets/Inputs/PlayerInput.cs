@@ -71,6 +71,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CamZoomIn"",
+                    ""type"": ""Button"",
+                    ""id"": ""b99ba89d-7b4d-4ef1-aa37-175022ce05cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CamZoomOut"",
+                    ""type"": ""Button"",
+                    ""id"": ""e38a0d35-cb50-4204-a405-361be584a684"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -359,6 +377,50 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f6bbe14-cb62-498c-a7dd-480df39a64ec"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamZoomIn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d31fc650-5f47-413a-be7f-febbf8995e2c"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamZoomIn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0cdf987-e2dc-462b-b320-0e49f07c52fa"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54e0cee1-8b7f-47e7-aa9f-eb1fd78164d5"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -372,6 +434,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Kick = m_OnFoot.FindAction("Kick", throwIfNotFound: true);
         m_OnFoot_Throw = m_OnFoot.FindAction("Throw", throwIfNotFound: true);
+        m_OnFoot_CamZoomIn = m_OnFoot.FindAction("CamZoomIn", throwIfNotFound: true);
+        m_OnFoot_CamZoomOut = m_OnFoot.FindAction("CamZoomOut", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +502,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Kick;
     private readonly InputAction m_OnFoot_Throw;
+    private readonly InputAction m_OnFoot_CamZoomIn;
+    private readonly InputAction m_OnFoot_CamZoomOut;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -447,6 +513,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Kick => m_Wrapper.m_OnFoot_Kick;
         public InputAction @Throw => m_Wrapper.m_OnFoot_Throw;
+        public InputAction @CamZoomIn => m_Wrapper.m_OnFoot_CamZoomIn;
+        public InputAction @CamZoomOut => m_Wrapper.m_OnFoot_CamZoomOut;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -471,6 +539,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
+            @CamZoomIn.started += instance.OnCamZoomIn;
+            @CamZoomIn.performed += instance.OnCamZoomIn;
+            @CamZoomIn.canceled += instance.OnCamZoomIn;
+            @CamZoomOut.started += instance.OnCamZoomOut;
+            @CamZoomOut.performed += instance.OnCamZoomOut;
+            @CamZoomOut.canceled += instance.OnCamZoomOut;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -490,6 +564,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
+            @CamZoomIn.started -= instance.OnCamZoomIn;
+            @CamZoomIn.performed -= instance.OnCamZoomIn;
+            @CamZoomIn.canceled -= instance.OnCamZoomIn;
+            @CamZoomOut.started -= instance.OnCamZoomOut;
+            @CamZoomOut.performed -= instance.OnCamZoomOut;
+            @CamZoomOut.canceled -= instance.OnCamZoomOut;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -514,5 +594,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnKick(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+        void OnCamZoomIn(InputAction.CallbackContext context);
+        void OnCamZoomOut(InputAction.CallbackContext context);
     }
 }

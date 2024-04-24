@@ -1,0 +1,119 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+// up speed for player and cupcake
+public class CupcakeMove : MonoBehaviour
+{
+    private CharacterController controller;
+    Vector3 moveDirection = Vector3.zero;
+    private Vector3 playerVelocity;
+    public float gravity = -9.8f;
+    public float speed = 5;
+    [SerializeField]
+    private float cSnap = 6;
+    public static bool isGrounded;
+    private Vector3 throwDirection;
+    
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        CupcakeDirection();
+        throwDirection = PlayerAnimation.cRotate * throwDirection;
+        StartCoroutine(CupcakeSnap());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        isGrounded = controller.isGrounded;
+
+        controller.Move(transform.TransformDirection(throwDirection) * speed * Time.deltaTime);
+        playerVelocity.y += gravity * Time.deltaTime;
+        if (isGrounded && playerVelocity.y < 0)
+        {
+            playerVelocity.y = -2;
+        }
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    private IEnumerator CupcakeSnap()
+    {
+        yield return new WaitForSeconds(cSnap);
+        Destroy(gameObject);
+    }
+
+    void CupcakeDirection()
+    {
+        // Throw Left and Throw Left Diagonal
+        if (PlayerAnimation.prevInputX < 0)
+        {   
+            // Throw Left Diagonal
+            if (PlayerAnimation.prevInputX != -1)
+            {   
+                // Throw Left Forward Diagonal
+                if (PlayerAnimation.prevInputZ > 0)
+                {
+                    throwDirection.x = -1;
+                    throwDirection.z = 1;
+                }
+
+                // Throw Left Back Diagonal
+                else if (PlayerAnimation.prevInputZ < 0)
+                {
+                    throwDirection.x = -1;
+                    throwDirection.z = -1;
+                }
+            }
+            // Throw Left Only
+            else
+            {
+                throwDirection.x = -1;
+                throwDirection.z = 0;
+            }
+        }
+
+        // Throw Right and Throw Right Diagonal
+        else if (PlayerAnimation.prevInputX > 0)
+        {   
+            // Throw Right Diagonal
+            if (PlayerAnimation.prevInputX != 1)
+            {   
+                // Throw Right Forward Diagonal
+                if (PlayerAnimation.prevInputZ > 0)
+                {
+                    throwDirection.x = 1;
+                    throwDirection.z = 1;
+                }
+
+                // Throw Right Back Diagonal
+                else if (PlayerAnimation.prevInputZ < 0)
+                {
+                    throwDirection.x = 1;
+                    throwDirection.z = -1;
+                }
+            }
+            // Throw Right Only
+            else
+            {
+                throwDirection.x = 1;
+                throwDirection.z = 0;
+            }
+        }
+
+        // Throw Forward
+        else if (PlayerAnimation.prevInputZ == 1)
+        {
+            throwDirection.x = 0;
+            throwDirection.z = 1;
+        }
+
+        // Throw Back
+        else if (PlayerAnimation.prevInputZ == -1)
+        {
+            throwDirection.x = 0;
+            throwDirection.z = -1;
+        }
+
+        throwDirection.y = 0;
+    }
+}

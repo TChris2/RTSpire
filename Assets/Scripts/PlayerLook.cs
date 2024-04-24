@@ -11,8 +11,8 @@ public class PlayerLook : MonoBehaviour
     public float xSens = 30;
     public float ySens = 30;
     [Tooltip("Distance from player")]
-    [SerializeField]
-    private float distance = 10;
+    public static float distance = 15;
+    public static Quaternion rotation;
     
     void Start()
     {
@@ -27,13 +27,13 @@ public class PlayerLook : MonoBehaviour
         float mouseX = input.x;
         float mouseY = input.y;
 
-        yRotation -= (mouseX * Time.deltaTime) * xSens;
+        yRotation += (mouseX * Time.deltaTime) * xSens;
         xRotation += (mouseY * Time.deltaTime) * ySens;
         // Restricts up down cam movement
         xRotation = Mathf.Clamp(xRotation, -30, 60);
         
         // Updates cam rotations
-        Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        rotation = Quaternion.Euler(xRotation, yRotation, 0);
         // Updates cam position
         Vector3 newPosition = player.position + rotation * new Vector3(0f, 0f, -distance);
         

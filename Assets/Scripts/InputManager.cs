@@ -19,6 +19,8 @@ public class InputManager : MonoBehaviour
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Kick.performed += ctx => motor.Kick();
         onFoot.Throw.performed += ctx => motor.Throw();
+        onFoot.CamZoomIn.performed += ctx => motor.ZoomIn();
+        onFoot.CamZoomOut.performed += ctx => motor.ZoomOut();
     }
 
     void FixedUpdate()

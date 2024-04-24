@@ -3,9 +3,15 @@ using System.Collections;
 // update cupcake throw for and back with Cupcake Text in davinci
 // add hit boxes
 // add cupcake throw
+// Add SFX to jump, kick, and throw
 // health
 public class PlayerAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject cupcake;
+    [SerializeField]
+    private Transform player;
+
     // Still Mats
     public Material stillForwardMat;
     public Material stillBackwardMat;
@@ -37,11 +43,23 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private int frameDelay = 80;
     private bool isRunning;
-    private bool isJumping;
+    public static bool isJumping;
     public static bool isKicking;
     public static bool isThrowing;
     public static float prevInputX = 0;
     public static float prevInputZ = 1;
+    // Cupcake Throw Direction
+    public static Vector3 cSpawnPos = Vector3.zero;
+    public static Quaternion cRotate;
+    public KickAttack KickForAttack;
+    public KickAttack KickForLeftAttack;
+    public KickAttack KickForRightAttack;
+    public KickAttack KickBackAttack;
+    public KickAttack KickBackLeftAttack;
+    public KickAttack KickBackRightAttack;
+    public KickAttack KickLeftAttack;
+    public KickAttack KickRightAttack;
+
 
     private void Start()
     {
@@ -71,6 +89,8 @@ public class PlayerAnimation : MonoBehaviour
             // Kick Back
             else if (prevInputZ == -1)
                 StartCoroutine(KickAnimation(KickBack));
+            
+            KickOn();
 
         }   
 
@@ -107,7 +127,7 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Idle Animation
         ---------------------------------------------- */
-        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isKicking && !isThrowing)
+        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isJumping && !isKicking && !isThrowing)
         {   
             // Left Idle and Left Diagonal Idle
             if (prevInputX < 0)
@@ -206,8 +226,6 @@ public class PlayerAnimation : MonoBehaviour
                 prevInputX = PlayerMotor.inputX;
                 prevInputZ = PlayerMotor.inputZ;
 
-                Debug.Log(PlayerMotor.inputX + " Moving Jump " + PlayerMotor.inputZ);
-                Debug.Log(prevInputX + " Moving Jump " + prevInputZ);
                 // Left Jump and Left Diagonal Jump
                 if (PlayerMotor.inputX < 0)
                     planeRenderer.material = JumpStill[0];
@@ -226,8 +244,6 @@ public class PlayerAnimation : MonoBehaviour
             }
             else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0)
             {
-                Debug.Log(PlayerMotor.inputX + " Still Motor Jump " + PlayerMotor.inputZ);
-                Debug.Log(prevInputX + " Still Prev Jump " + prevInputZ);
                 // Left Jump and Left Diagonal Jump
                 if (prevInputX < 0)
                     planeRenderer.material = JumpStill[0];
@@ -247,8 +263,7 @@ public class PlayerAnimation : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log(PlayerMotor.inputX + " End Motor Jump " + PlayerMotor.inputZ);
-        Debug.Log(prevInputX + " End Prev Jump " + prevInputZ);
+        
         isJumping = false;
     }
     
@@ -259,6 +274,12 @@ public class PlayerAnimation : MonoBehaviour
         int currentKickIndex = 0;
         planeRenderer.material = kickMats[currentKickIndex];
         float frameTimer = 0f;
+
+        if (PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
+        {
+            prevInputX = PlayerMotor.inputX;
+            prevInputZ = PlayerMotor.inputZ;
+        }
 
         while (currentKickIndex != 7)
         {
@@ -273,9 +294,143 @@ public class PlayerAnimation : MonoBehaviour
 
             yield return null;
         }
-        
+        KickOff();
         isKicking = false;
         PlayerMotor.kickOn = false;
+    }
+
+    /* Enables kicking hitbox
+    ---------------------------------------------- */
+    void KickOn()
+    {
+        // Kick Left and Throw Left Diagonal
+        if (prevInputX < 0)
+        {   
+            // Kick Left Diagonal
+            if (prevInputX != -1)
+            {   
+                // Kick Left Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    KickForLeftAttack.isKicking = true;
+                }
+
+                // Kick Left Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    KickBackLeftAttack.isKicking = true;
+                }
+            }
+            // Throw Left Only
+            else
+            {
+                KickLeftAttack.isKicking = true;
+            }
+        }
+
+        // Throw Right and Throw Right Diagonal
+        else if (prevInputX > 0)
+        {   
+            // Throw Right Diagonal
+            if (prevInputX != 1)
+            {   
+                // Throw Right Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    KickForRightAttack.isKicking = true;
+                }
+
+                // Throw Right Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    KickBackRightAttack.isKicking = true;
+                }
+            }
+            // Throw Right Only
+            else
+            {
+                KickRightAttack.isKicking = true;
+            }
+        }
+
+        // Throw Forward
+        else if (prevInputZ == 1)
+        {
+            KickForAttack.isKicking = true;
+        }
+
+        // Throw Back
+        else if (prevInputZ == -1)
+        {
+            KickForAttack.isKicking = true;
+        }
+    }
+
+    /* Disables kicking hitbox
+    ---------------------------------------------- */
+    void KickOff()
+    {
+        // Kick Left and Throw Left Diagonal
+        if (prevInputX < 0)
+        {   
+            // Kick Left Diagonal
+            if (prevInputX != -1)
+            {   
+                // Kick Left Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    KickForLeftAttack.isKicking = false;
+                }
+
+                // Kick Left Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    KickBackLeftAttack.isKicking = false;
+                }
+            }
+            // Throw Left Only
+            else
+            {
+                KickLeftAttack.isKicking = false;
+            }
+        }
+
+        // Throw Right and Throw Right Diagonal
+        else if (prevInputX > 0)
+        {   
+            // Throw Right Diagonal
+            if (prevInputX != 1)
+            {   
+                // Throw Right Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    KickForRightAttack.isKicking = false;
+                }
+
+                // Throw Right Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    KickBackRightAttack.isKicking = false;
+                }
+            }
+            // Throw Right Only
+            else
+            {
+                KickRightAttack.isKicking = false;
+            }
+        }
+
+        // Throw Forward
+        else if (prevInputZ == 1)
+        {
+            KickForAttack.isKicking = false;
+        }
+
+        // Throw Back
+        else if (prevInputZ == -1)
+        {
+            KickForAttack.isKicking = false;
+        }
     }
 
     /* Throw Animation
@@ -285,6 +440,12 @@ public class PlayerAnimation : MonoBehaviour
         int currentThrowIndex = 0;
         planeRenderer.material = throwMats[currentThrowIndex];
         float frameTimer = 0f;
+
+        if (PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
+        {
+            prevInputX = PlayerMotor.inputX;
+            prevInputZ = PlayerMotor.inputZ;
+        }
 
         while (currentThrowIndex != 7)
         {
@@ -296,16 +457,96 @@ public class PlayerAnimation : MonoBehaviour
                 currentThrowIndex = (currentThrowIndex + 1) % throwMats.Length;
                 planeRenderer.material = throwMats[currentThrowIndex];
             }
-            if (currentThrowIndex == 6)
-            {
-                //Add Code to make Cupcake Spawn
-            }
 
             yield return null;
         }
         
+        
+        CupcakeSpawn();
+
+        cRotate = Quaternion.Euler(0, PlayerLook.rotation.eulerAngles.y, 0);
+
+        Instantiate(cupcake, player.position + cRotate * cSpawnPos, Quaternion.identity);
+
         isThrowing = false;
         PlayerMotor.throwOn = false;
+    }
+
+    /* Where Cupcake spawns
+    ---------------------------------------------- */
+    void CupcakeSpawn()
+    {
+        // Throw Left and Throw Left Diagonal
+        if (prevInputX < 0)
+        {   
+            // Throw Left Diagonal
+            if (prevInputX != -1)
+            {   
+                // Throw Left Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    cSpawnPos.x = -10;
+                    cSpawnPos.z = 6;
+                }
+
+                // Throw Left Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    cSpawnPos.x = -10;
+                    cSpawnPos.z = -6;
+                }
+            }
+            // Throw Left Only
+            else
+            {
+                cSpawnPos.x = -10;
+                cSpawnPos.z = 0;
+            }
+        }
+
+        // Throw Right and Throw Right Diagonal
+        else if (prevInputX > 0)
+        {   
+            // Throw Right Diagonal
+            if (prevInputX != 1)
+            {   
+                // Throw Right Forward Diagonal
+                if (prevInputZ > 0)
+                {
+                    cSpawnPos.x = 10;
+                    cSpawnPos.z = 6;
+                }
+
+                // Throw Right Back Diagonal
+                else if (prevInputZ < 0)
+                {
+                    cSpawnPos.x = 10;
+                    cSpawnPos.z = -6;
+                }
+            }
+            // Throw Right Only
+            else
+            {
+                cSpawnPos.x = 10;
+                cSpawnPos.z = 0;
+            }
+        }
+
+        // Throw Forward
+        else if (prevInputZ == 1)
+        {
+            cSpawnPos.x = 0;
+            cSpawnPos.z = 6;
+        }
+
+        // Throw Back
+        else if (prevInputZ == -1)
+        {
+            cSpawnPos.x = 0;
+            cSpawnPos.z = -6;
+        }
+
+        cSpawnPos.y = -.5f;
     }
 }
 
