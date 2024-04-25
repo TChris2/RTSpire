@@ -464,10 +464,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.5
-  m_Speed: 10
-  m_Acceleration: 8
+  m_Speed: 20
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -708,7 +708,7 @@ MonoBehaviour:
   hurtClips:
   - {fileID: 8300000, guid: 3829b097410243349b91f494eb12fe63, type: 3}
   - {fileID: 8300000, guid: e3aec2c9ed23ad64cafd9c9a031b35dd, type: 3}
-  StartHealth: 0.25
+  StartHealth: 1
 --- !u!1 &1159612579389047853
 GameObject:
   m_ObjectHideFlags: 0

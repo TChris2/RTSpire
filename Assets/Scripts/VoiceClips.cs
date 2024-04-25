@@ -16,7 +16,7 @@ public class VoiceClips : MonoBehaviour
    
     void Update()
     {
-        if (AudioPlay == true/* && LevelReload.health > 0*/)
+        if (AudioPlay == true && !PlayerState.isDead)
             StartCoroutine(RandomClip());
     }
 

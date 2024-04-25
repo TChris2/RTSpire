@@ -1380,5 +1380,5 @@ MonoBehaviour:
   hurtClips:
   - {fileID: 8300000, guid: 0af4375a8f9acbd41be7562fe1ee1537, type: 3}
   - {fileID: 8300000, guid: 24a13372bad0973448ba22410c254481, type: 3}
-  StartHealth: 1
+  StartHealth: 5
   isTMachineDestroyed: 0

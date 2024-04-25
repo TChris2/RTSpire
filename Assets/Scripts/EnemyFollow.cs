@@ -34,8 +34,8 @@ public class EnemyFollow : MonoBehaviour
         enemy.SetDestination(player.position);
 
         // enemy stops moving once the player runs out of health
-        /*if (LevelReload.health <= 0) {
+        if (PlayerState.isDead) {
             enemy.isStopped = true;
-        }*/
+        }
     }
 }

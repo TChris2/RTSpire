@@ -19,11 +19,13 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator ESpawn () 
     {
         // spawns enemies whilst it hasn't reached the eTotal cap and the player still has a positive amount of health
-        while (true /*&& LevelReload.health > 0*/)
+        while (!PlayerState.isDead)
         {
             // starts the cooldown
             yield return new WaitForSeconds(sCooldown);
-            
+            // If loop already started
+            if (PlayerState.isDead)
+                break;
             TMachineState.eSpawnTime = true;
             Instantiate(Enemy, transform.position + new Vector3(-10, 0, 0), Quaternion.identity);
             Instantiate(Enemy, transform.position + new Vector3(10, 0, 0), Quaternion.identity);

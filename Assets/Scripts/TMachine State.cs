@@ -22,7 +22,7 @@ public class TMachineState : MonoBehaviour
 
     void Update()
     {
-        if (eSpawnTime == true && TMEntity.isTMachineDestroyed == false)
+        if (eSpawnTime == true && TMEntity.isTMachineDestroyed == false && !PlayerState.isDead)
         {
             eSpawnTime = false;
             mClosed.SetActive(false);

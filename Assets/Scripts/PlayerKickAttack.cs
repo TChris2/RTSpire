@@ -11,8 +11,6 @@ public class KickAttack : MonoBehaviour
     public bool isKicking = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (isKicking == true) 
-        {    
             // Check if the entering collider has the tag "Enemy"
             if (other.CompareTag("Enemy"))
             {
@@ -37,6 +35,6 @@ public class KickAttack : MonoBehaviour
                     TMachine.Health -= kDamage;
                 }
             }
-        }
+     
     }
 }

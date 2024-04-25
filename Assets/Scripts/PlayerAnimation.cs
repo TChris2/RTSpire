@@ -34,6 +34,10 @@ public class PlayerAnimation : MonoBehaviour
     public Material[] runRightMats = new Material[7];
     public Material[] runForwardMats = new Material[7];
     public Material[] runBackMats = new Material[7];
+    // Win Mat
+    public Material[] winMats;
+    // Win Mat
+    public Material[] deathMats;
     
     [SerializeField]
     private Transform pback;
@@ -46,31 +50,47 @@ public class PlayerAnimation : MonoBehaviour
     public static bool isJumping;
     public static bool isKicking;
     public static bool isThrowing;
+    bool isDying;
     public static float prevInputX = 0;
     public static float prevInputZ = 1;
     // Cupcake Throw Direction
     public static Vector3 cSpawnPos = Vector3.zero;
     public static Quaternion cRotate;
-    public KickAttack KickForAttack;
-    public KickAttack KickForLeftAttack;
-    public KickAttack KickForRightAttack;
-    public KickAttack KickBackAttack;
-    public KickAttack KickBackLeftAttack;
-    public KickAttack KickBackRightAttack;
-    public KickAttack KickLeftAttack;
-    public KickAttack KickRightAttack;
+    // Hitbox
+    [SerializeField]
+    private GameObject KickForAttack;
+    [SerializeField]
+    private GameObject KickBackAttack;
+    [SerializeField]
+    private GameObject KickLeftAttack;
+    [SerializeField]
+    private GameObject KickRightAttack;
 
 
     private void Start()
     {
+        isDying = false;
         planeRenderer.material = stillForwardMat;
+
+        KickLeftAttack.SetActive(false);
+        KickRightAttack.SetActive(false);
+        KickForAttack.SetActive(false);
+        KickBackAttack.SetActive(false);
+        
     }
 
     private void Update()
     {
+        /* Death Animation
+        ---------------------------------------------- */
+        if (PlayerState.isDead && !isDying) {
+            isDying = true;
+            StartCoroutine(DeathAnimation());
+        }
+
         /* Kicking Animation
         ---------------------------------------------- */
-        if (PlayerMotor.kickOn && !isKicking && !isThrowing)
+        else if (PlayerMotor.kickOn && !isKicking && !isThrowing && !isDying)
         {   
             // Prevents other animations from playing
             isKicking = true;
@@ -89,14 +109,12 @@ public class PlayerAnimation : MonoBehaviour
             // Kick Back
             else if (prevInputZ == -1)
                 StartCoroutine(KickAnimation(KickBack));
-            
-            KickOn();
 
         }   
 
         /* Throwing Animation
         ---------------------------------------------- */
-        if (PlayerMotor.throwOn && !isKicking && !isThrowing)
+        else if (PlayerMotor.throwOn && !isKicking && !isThrowing && !isDying)
         {   
             // Prevents other animations from playing
             isThrowing = true;
@@ -120,14 +138,14 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Jump Animation
         ---------------------------------------------- */
-        else if (!PlayerMotor.isGrounded && !isJumping && !isKicking && !isThrowing)
+        else if (!PlayerMotor.isGrounded && !isJumping && !isKicking && !isThrowing && !isDying)
         {   
             StartCoroutine(Jump());
         }
 
         /* Idle Animation
         ---------------------------------------------- */
-        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isJumping && !isKicking && !isThrowing)
+        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isJumping && !isKicking && !isThrowing && !isDying)
         {   
             // Left Idle and Left Diagonal Idle
             if (prevInputX < 0)
@@ -148,7 +166,7 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Running Animation
         ---------------------------------------------- */
-        else if (!isRunning && !isJumping && !isKicking && !isThrowing)
+        else if (!isRunning && !isJumping && !isKicking && !isThrowing && !isDying)
         {   
             // Left and Left Diagonal
             if (PlayerMotor.inputX < 0)
@@ -187,7 +205,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             frameTimer += Time.deltaTime;
             // If the player jumps or attacks
-            if (!PlayerMotor.isGrounded || isKicking || isThrowing)
+            if (!PlayerMotor.isGrounded || isKicking || isThrowing || isDying)
             {
                 break;
             }
@@ -217,7 +235,7 @@ public class PlayerAnimation : MonoBehaviour
 
         while (PlayerMotor.isGrounded == false)
         {
-            if (isKicking || isThrowing)
+            if (isKicking || isThrowing || isDying)
             {
                 break;
             }
@@ -283,6 +301,10 @@ public class PlayerAnimation : MonoBehaviour
 
         while (currentKickIndex != 7)
         {
+            if (isDying)
+            {
+                break;
+            }
             frameTimer += Time.deltaTime;
 
             if (frameTimer >= frameDelay / 1000f) 
@@ -290,6 +312,10 @@ public class PlayerAnimation : MonoBehaviour
                 frameTimer = 0f;
                 currentKickIndex = (currentKickIndex + 1) % kickMats.Length;
                 planeRenderer.material = kickMats[currentKickIndex];
+            }
+
+            if (currentKickIndex == 2) {
+                KickOn();
             }
 
             yield return null;
@@ -303,66 +329,28 @@ public class PlayerAnimation : MonoBehaviour
     ---------------------------------------------- */
     void KickOn()
     {
-        // Kick Left and Throw Left Diagonal
+        // Kick Left
         if (prevInputX < 0)
         {   
-            // Kick Left Diagonal
-            if (prevInputX != -1)
-            {   
-                // Kick Left Forward Diagonal
-                if (prevInputZ > 0)
-                {
-                    KickForLeftAttack.isKicking = true;
-                }
-
-                // Kick Left Back Diagonal
-                else if (prevInputZ < 0)
-                {
-                    KickBackLeftAttack.isKicking = true;
-                }
-            }
-            // Throw Left Only
-            else
-            {
-                KickLeftAttack.isKicking = true;
-            }
+            KickLeftAttack.SetActive(true);
         }
 
-        // Throw Right and Throw Right Diagonal
+        // Throw Right 
         else if (prevInputX > 0)
         {   
-            // Throw Right Diagonal
-            if (prevInputX != 1)
-            {   
-                // Throw Right Forward Diagonal
-                if (prevInputZ > 0)
-                {
-                    KickForRightAttack.isKicking = true;
-                }
-
-                // Throw Right Back Diagonal
-                else if (prevInputZ < 0)
-                {
-                    KickBackRightAttack.isKicking = true;
-                }
-            }
-            // Throw Right Only
-            else
-            {
-                KickRightAttack.isKicking = true;
-            }
+            KickRightAttack.SetActive(true);
         }
 
         // Throw Forward
         else if (prevInputZ == 1)
         {
-            KickForAttack.isKicking = true;
+            KickForAttack.SetActive(true);
         }
 
         // Throw Back
         else if (prevInputZ == -1)
         {
-            KickForAttack.isKicking = true;
+            KickBackAttack.SetActive(true);
         }
     }
 
@@ -370,66 +358,28 @@ public class PlayerAnimation : MonoBehaviour
     ---------------------------------------------- */
     void KickOff()
     {
-        // Kick Left and Throw Left Diagonal
+        // Kick Left
         if (prevInputX < 0)
         {   
-            // Kick Left Diagonal
-            if (prevInputX != -1)
-            {   
-                // Kick Left Forward Diagonal
-                if (prevInputZ > 0)
-                {
-                    KickForLeftAttack.isKicking = false;
-                }
-
-                // Kick Left Back Diagonal
-                else if (prevInputZ < 0)
-                {
-                    KickBackLeftAttack.isKicking = false;
-                }
-            }
-            // Throw Left Only
-            else
-            {
-                KickLeftAttack.isKicking = false;
-            }
+            KickLeftAttack.SetActive(false);
         }
 
-        // Throw Right and Throw Right Diagonal
+        // Throw Right 
         else if (prevInputX > 0)
         {   
-            // Throw Right Diagonal
-            if (prevInputX != 1)
-            {   
-                // Throw Right Forward Diagonal
-                if (prevInputZ > 0)
-                {
-                    KickForRightAttack.isKicking = false;
-                }
-
-                // Throw Right Back Diagonal
-                else if (prevInputZ < 0)
-                {
-                    KickBackRightAttack.isKicking = false;
-                }
-            }
-            // Throw Right Only
-            else
-            {
-                KickRightAttack.isKicking = false;
-            }
+            KickRightAttack.SetActive(false);
         }
 
         // Throw Forward
         else if (prevInputZ == 1)
         {
-            KickForAttack.isKicking = false;
+            KickForAttack.SetActive(false);
         }
 
         // Throw Back
         else if (prevInputZ == -1)
         {
-            KickForAttack.isKicking = false;
+            KickBackAttack.SetActive(false);
         }
     }
 
@@ -449,6 +399,10 @@ public class PlayerAnimation : MonoBehaviour
 
         while (currentThrowIndex != 7)
         {
+            if (isDying)
+            {
+                break;
+            }
             frameTimer += Time.deltaTime;
 
             if (frameTimer >= frameDelay / 1000f) 
@@ -547,6 +501,29 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         cSpawnPos.y = -.5f;
+    }
+
+    /* Death Animation
+    ---------------------------------------------- */
+    private IEnumerator DeathAnimation()
+    {
+        int currentIndex = 0;
+        planeRenderer.material = deathMats[currentIndex];
+        float frameTimer = 0f;
+
+        while (currentIndex != 28)
+        {
+            frameTimer += Time.deltaTime;
+
+            if (frameTimer >= frameDelay / 1000f) 
+            {
+                frameTimer = 0f;
+                currentIndex = (currentIndex + 1) % deathMats.Length;
+                planeRenderer.material = deathMats[currentIndex];
+            }
+
+            yield return null;
+        }
     }
 }
 

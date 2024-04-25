@@ -30,24 +30,27 @@ public class PlayerMotor : MonoBehaviour
 
     public void ProcessMove(Vector2 input)
     {
-        Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
-        // Gets it for playeranimation
-        inputX = input.x;
-        inputZ = input.y;
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
-        {
-            playerVelocity.y = -2;
+        if (!PlayerState.isDead)
+        {    
+            Vector3 moveDirection = Vector3.zero;
+            moveDirection.x = input.x;
+            moveDirection.z = input.y;
+            // Gets it for playeranimation
+            inputX = input.x;
+            inputZ = input.y;
+            controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+            playerVelocity.y += gravity * Time.deltaTime;
+            if (isGrounded && playerVelocity.y < 0)
+            {
+                playerVelocity.y = -2;
+            }
+            controller.Move(playerVelocity * Time.deltaTime);
         }
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     public void Jump()
     {
-        if (isGrounded) 
+        if (isGrounded && !PlayerState.isDead) 
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
         }
@@ -55,7 +58,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Kick()
     {
-        if (!kickOn && !PlayerAnimation.isThrowing)
+        if (!kickOn && !PlayerAnimation.isThrowing && !PlayerState.isDead)
         {
             kickOn = true;
         }
@@ -63,7 +66,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void Throw()
     {
-        if (!throwOn && !PlayerAnimation.isKicking)
+        if (!throwOn && !PlayerAnimation.isKicking && !PlayerState.isDead)
         {
             throwOn = true;
         }

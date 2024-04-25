@@ -24,21 +24,24 @@ public class PlayerLook : MonoBehaviour
 
     public void ProcessLook(Vector2 input)
     {
-        float mouseX = input.x;
-        float mouseY = input.y;
+        if (!PlayerState.isDead)   
+        {
+            float mouseX = input.x;
+            float mouseY = input.y;
 
-        yRotation += (mouseX * Time.deltaTime) * xSens;
-        xRotation += (mouseY * Time.deltaTime) * ySens;
-        // Restricts up down cam movement
-        xRotation = Mathf.Clamp(xRotation, -30, 60);
-        
-        // Updates cam rotations
-        rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        // Updates cam position
-        Vector3 newPosition = player.position + rotation * new Vector3(0f, 0f, -distance);
-        
-        // Apply the new position and look at the target
-        cam.transform.position = newPosition;
-        cam.transform.LookAt(player);
+            yRotation += (mouseX * Time.deltaTime) * xSens;
+            xRotation += (mouseY * Time.deltaTime) * ySens;
+            // Restricts up down cam movement
+            xRotation = Mathf.Clamp(xRotation, -30, 60);
+            
+            // Updates cam rotations
+            rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            // Updates cam position
+            Vector3 newPosition = player.position + rotation * new Vector3(0f, 0f, -distance);
+            
+            // Apply the new position and look at the target
+            cam.transform.position = newPosition;
+            cam.transform.LookAt(player);
+        }
     }
 }
