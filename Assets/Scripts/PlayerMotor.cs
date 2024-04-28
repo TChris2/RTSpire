@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
+    // get posistion from player when grounded for warping
+
+
+
+
     private Transform camera;
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -16,10 +21,11 @@ public class PlayerMotor : MonoBehaviour
     // for player animation
     public static float inputX;
     public static float inputZ;
+    public static Vector3 lastGroundPos;
 
     void Start()
     {
-        camera = GameObject.Find("PlayerCam").GetComponent<Transform>();
+        camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -28,10 +34,14 @@ public class PlayerMotor : MonoBehaviour
         isGrounded = controller.isGrounded;
     }
 
+    // Player Movement
     public void ProcessMove(Vector2 input)
     {
-        if (!PlayerState.isDead)
-        {    
+        if (!PlayerState.isDead && !PlayerState.isWin)
+        {   
+            // Gets the player's last ground pos
+            if (isGrounded)
+                lastGroundPos = transform.position;
             Vector3 moveDirection = Vector3.zero;
             moveDirection.x = input.x;
             moveDirection.z = input.y;
@@ -48,40 +58,48 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    // Jumping
     public void Jump()
     {
-        if (isGrounded && !PlayerState.isDead) 
+        if (isGrounded && !PlayerState.isDead && !PlayerState.isWin) 
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
         }
     }
 
+    // Kick Attack
     public void Kick()
     {
-        if (!kickOn && !PlayerAnimation.isThrowing && !PlayerState.isDead)
+        if (!kickOn && !PlayerAnimation.isThrowing && !PlayerState.isDead && !PlayerState.isWin)
         {
             kickOn = true;
         }
     }
 
+    // Throw Attack
     public void Throw()
     {
-        if (!throwOn && !PlayerAnimation.isKicking && !PlayerState.isDead)
+        if (!throwOn && !PlayerAnimation.isKicking && !PlayerState.isDead && !PlayerState.isWin)
         {
             throwOn = true;
         }
     }
 
+    // Camera zoom in
     public void ZoomIn()
     {
-        PlayerLook.distance -= 1;
+        if (!PlayerState.isDead && !PlayerState.isWin)
+            PlayerLook.distance -= 1;
     }
 
+    // Camera zoom out
     public void ZoomOut()
     {
-        PlayerLook.distance += 1;
+        if (!PlayerState.isDead && !PlayerState.isWin)
+            PlayerLook.distance += 1;
     }
 
+    // Orientates the player to the camera
     void LateUpdate ()
     {
         //orientates player to camera

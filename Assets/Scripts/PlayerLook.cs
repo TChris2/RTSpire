@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Camera Stuff
 public class PlayerLook : MonoBehaviour
 {
     private Transform player;
@@ -17,14 +18,18 @@ public class PlayerLook : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Transform>();
-        cam = GameObject.Find("PlayerCam").GetComponent<Camera>();
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+        // Get player cam distance between lvs
+        distance = PlayerPrefs.GetFloat("CamDistance", 20);
+
         // Set initial position
         transform.position = player.position + new Vector3(0, 0, -distance);
     }
 
     public void ProcessLook(Vector2 input)
     {
-        if (!PlayerState.isDead)   
+        if (!PlayerState.isDead && !PlayerState.isWin)   
         {
             float mouseX = input.x;
             float mouseY = input.y;
@@ -43,5 +48,12 @@ public class PlayerLook : MonoBehaviour
             cam.transform.position = newPosition;
             cam.transform.LookAt(player);
         }
+    }
+
+    private void OnDisable()
+    {
+        //saves adjustments to cam distance
+        PlayerPrefs.SetFloat("CamDistance", distance);
+        PlayerPrefs.Save();
     }
 }

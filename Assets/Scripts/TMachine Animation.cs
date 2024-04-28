@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TMachineAnimation
 public class TMachineAnimation : MonoBehaviour
 {
-    public float maxSize = 9f;  // Maximum y size
-    public float minSize = 1f;  // Minimum y size
-    public float changeSpeed = 1f;  // Speed of size change
+    // Max y size
+    public float maxSize = 9f;  
+    // Min y size
+    public float minSize = 1f;  
+    // Speed of size change
+    public float changeSpeed = 1f;  
 
-    private bool increasing = true;  // Flag to track if size is increasing or decreasing
+    // Flag to track if size is increasing or decreasing
+    private bool increasing = true;  
 
     void Update()
     {

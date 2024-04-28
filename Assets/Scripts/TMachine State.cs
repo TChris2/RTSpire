@@ -12,6 +12,8 @@ public class TMachineState : MonoBehaviour
     private AudioSource audioSource;
     public static bool eSpawnTime;
     public TMachineEntity TMEntity;
+    [SerializeField]
+    private bool isBreakable;
 
 
     void Start()
@@ -22,7 +24,7 @@ public class TMachineState : MonoBehaviour
 
     void Update()
     {
-        if (eSpawnTime == true && TMEntity.isTMachineDestroyed == false && !PlayerState.isDead)
+        if (!isBreakable && eSpawnTime && !PlayerState.isDead && !PlayerState.isWin || isBreakable && eSpawnTime && TMEntity.isTMachineDestroyed == false && !PlayerState.isDead && !PlayerState.isWin)
         {
             eSpawnTime = false;
             mClosed.SetActive(false);
@@ -35,7 +37,7 @@ public class TMachineState : MonoBehaviour
 
     void MachineClose()
     {
-        if (TMEntity.isTMachineDestroyed == false)
+        if (!isBreakable || TMEntity.isTMachineDestroyed == false)
         {
             mOpen.SetActive(false);
             mClosed.SetActive(true);

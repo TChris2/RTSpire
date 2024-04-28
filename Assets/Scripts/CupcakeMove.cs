@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// up speed for player and cupcake
+
+// Controls movement for Cupcake
 public class CupcakeMove : MonoBehaviour
 {
     private CharacterController controller;
     Vector3 moveDirection = Vector3.zero;
     private Vector3 playerVelocity;
     public float gravity = -9.8f;
-    public float speed = 5;
+    // How fast it moves
+    [SerializeField]
+    private float speed = 5;
+    // How long till it is deleted
     [SerializeField]
     private float cSnap = 6;
     public static bool isGrounded;
@@ -16,19 +20,24 @@ public class CupcakeMove : MonoBehaviour
     
     void Start()
     {
+        // Gets controller from the object
         controller = GetComponent<CharacterController>();
+        // Determines the direction from the player Cupcake moves
         CupcakeDirection();
         throwDirection = PlayerAnimation.cRotate * throwDirection;
+        // Starts the snap countdown
         StartCoroutine(CupcakeSnap());
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Sees if player is grounded
         isGrounded = controller.isGrounded;
 
+        // Applies movement
         controller.Move(transform.TransformDirection(throwDirection) * speed * Time.deltaTime);
         playerVelocity.y += gravity * Time.deltaTime;
+        // If player is in the air
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2;
@@ -36,12 +45,14 @@ public class CupcakeMove : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    // Snaps Cupcake
     private IEnumerator CupcakeSnap()
     {
         yield return new WaitForSeconds(cSnap);
         Destroy(gameObject);
     }
 
+    // Determines the direction from the player Cupcake moves
     void CupcakeDirection()
     {
         // Throw Left and Throw Left Diagonal

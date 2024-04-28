@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Gets inputs from player
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls health of TMachines
 public class TMachineEntity : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,8 @@ public class TMachineEntity : MonoBehaviour
     private float StartHealth = 5;
     private float health;
     public bool isTMachineDestroyed = false;
+    // Text
+    private TMPro.TMP_Text DestroyCounter;
 
     public float Health
     {
@@ -35,13 +38,16 @@ public class TMachineEntity : MonoBehaviour
                 float delay = hurtClips[1].length; 
                 mOpen.SetActive(false);
                 mClosed.SetActive(false);
-                Invoke("DestroyMachine", delay);
+                Invoke("DestroyMachine", delay-1f);
             }
         }
     }
 
     void DestroyMachine()
     {
+        // Updates counter
+        ObjectiveDestroyMachine.TMachineCounter -= 1;
+        DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
         Destroy(gameObject);
     }
 
@@ -50,5 +56,7 @@ public class TMachineEntity : MonoBehaviour
         //sets health
         Health = StartHealth;
         audioSource = gameObject.GetComponent<AudioSource>();
+        DestroyCounter = GameObject.Find("DestroyCounter").GetComponent<TMPro.TMP_Text>();
+        DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
     }
 }

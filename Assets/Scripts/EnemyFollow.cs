@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Controls enemy movement
 public class EnemyFollow : MonoBehaviour
 {
     private NavMeshAgent enemy;
@@ -15,14 +16,13 @@ public class EnemyFollow : MonoBehaviour
     
     void Start()
     {
+        // Sets a random size for an enemy
         float ranSize = Random.Range(-.1f, .2f);
         eFrame.localScale -= new Vector3(ranSize, ranSize, 0);
-                    
-        //eFrame.position = currentSize;
 
         planeRenderer.material = EnemyList[Random.Range(1, 400)];
 
-        // gets player object
+        // Gets player object
         player = GameObject.Find("Player").GetComponent<Transform>();
         enemy = GetComponent<NavMeshAgent>();
     }
@@ -30,11 +30,11 @@ public class EnemyFollow : MonoBehaviour
     
     void Update()
     {
-        // sets player's current position as a destination
+        // Sets player's current position as a destination
         enemy.SetDestination(player.position);
 
-        // enemy stops moving once the player runs out of health
-        if (PlayerState.isDead) {
+        // Enemy stops moving once the player is dead or wins
+        if (PlayerState.isDead || PlayerState.isWin) {
             enemy.isStopped = true;
         }
     }

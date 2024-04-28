@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections;
-// update cupcake throw for and back with Cupcake Text in davinci
-// add hit boxes
-// add cupcake throw
-// Add SFX to jump, kick, and throw
-// health
+// Controls the player's animations alongside attacks
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField]
@@ -36,9 +32,8 @@ public class PlayerAnimation : MonoBehaviour
     public Material[] runBackMats = new Material[7];
     // Win Mat
     public Material[] winMats;
-    // Win Mat
+    // Death Mat
     public Material[] deathMats;
-    
     [SerializeField]
     private Transform pback;
     [SerializeField]
@@ -51,6 +46,7 @@ public class PlayerAnimation : MonoBehaviour
     public static bool isKicking;
     public static bool isThrowing;
     bool isDying;
+    public static bool isWinning;
     public static float prevInputX = 0;
     public static float prevInputZ = 1;
     // Cupcake Throw Direction
@@ -70,6 +66,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Start()
     {
         isDying = false;
+        isWinning = false;
         planeRenderer.material = stillForwardMat;
 
         KickLeftAttack.SetActive(false);
@@ -88,9 +85,16 @@ public class PlayerAnimation : MonoBehaviour
             StartCoroutine(DeathAnimation());
         }
 
+        /* Win Animation
+        ---------------------------------------------- */
+        if (PlayerState.isWin && !isWinning) {
+            isWinning = true;
+            StartCoroutine(WinAnimation());
+        }
+
         /* Kicking Animation
         ---------------------------------------------- */
-        else if (PlayerMotor.kickOn && !isKicking && !isThrowing && !isDying)
+        else if (PlayerMotor.kickOn && !isKicking && !isThrowing && !isDying && !isWinning)
         {   
             // Prevents other animations from playing
             isKicking = true;
@@ -114,7 +118,7 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Throwing Animation
         ---------------------------------------------- */
-        else if (PlayerMotor.throwOn && !isKicking && !isThrowing && !isDying)
+        else if (PlayerMotor.throwOn && !isKicking && !isThrowing && !isDying && !isWinning)
         {   
             // Prevents other animations from playing
             isThrowing = true;
@@ -138,14 +142,14 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Jump Animation
         ---------------------------------------------- */
-        else if (!PlayerMotor.isGrounded && !isJumping && !isKicking && !isThrowing && !isDying)
+        else if (!PlayerMotor.isGrounded && !isJumping && !isKicking && !isThrowing && !isDying && !isWinning)
         {   
             StartCoroutine(Jump());
         }
 
         /* Idle Animation
         ---------------------------------------------- */
-        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isJumping && !isKicking && !isThrowing && !isDying)
+        else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0 && !isJumping && !isKicking && !isThrowing && !isDying && !isWinning)
         {   
             // Left Idle and Left Diagonal Idle
             if (prevInputX < 0)
@@ -166,7 +170,7 @@ public class PlayerAnimation : MonoBehaviour
 
         /* Running Animation
         ---------------------------------------------- */
-        else if (!isRunning && !isJumping && !isKicking && !isThrowing && !isDying)
+        else if (!isRunning && !isJumping && !isKicking && !isThrowing && !isDying && !isWinning)
         {   
             // Left and Left Diagonal
             if (PlayerMotor.inputX < 0)
@@ -205,7 +209,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             frameTimer += Time.deltaTime;
             // If the player jumps or attacks
-            if (!PlayerMotor.isGrounded || isKicking || isThrowing || isDying)
+            if (!PlayerMotor.isGrounded || isKicking || isThrowing || isDying || isWinning)
             {
                 break;
             }
@@ -235,7 +239,7 @@ public class PlayerAnimation : MonoBehaviour
 
         while (PlayerMotor.isGrounded == false)
         {
-            if (isKicking || isThrowing || isDying)
+            if (isKicking || isThrowing || isDying || isWinning)
             {
                 break;
             }
@@ -301,7 +305,7 @@ public class PlayerAnimation : MonoBehaviour
 
         while (currentKickIndex != 7)
         {
-            if (isDying)
+            if (isDying || isWinning)
             {
                 break;
             }
@@ -399,7 +403,7 @@ public class PlayerAnimation : MonoBehaviour
 
         while (currentThrowIndex != 7)
         {
-            if (isDying)
+            if (isDying || isWinning)
             {
                 break;
             }
@@ -520,6 +524,29 @@ public class PlayerAnimation : MonoBehaviour
                 frameTimer = 0f;
                 currentIndex = (currentIndex + 1) % deathMats.Length;
                 planeRenderer.material = deathMats[currentIndex];
+            }
+
+            yield return null;
+        }
+    }
+
+    /* Win Animation
+    ---------------------------------------------- */
+    private IEnumerator WinAnimation()
+    {
+        int currentIndex = 0;
+        planeRenderer.material = winMats[currentIndex];
+        float frameTimer = 0f;
+
+        while (currentIndex != 20)
+        {
+            frameTimer += Time.deltaTime;
+
+            if (frameTimer >= frameDelay / 1000f) 
+            {
+                frameTimer = 0f;
+                currentIndex = (currentIndex + 1) % winMats.Length;
+                planeRenderer.material = winMats[currentIndex];
             }
 
             yield return null;
