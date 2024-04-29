@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 983dc969da2415541b5470f59ebd38ff
   - enabled: 1
-    path: Assets/Scenes/Destroy1.unity
+    path: Assets/Scenes/DestroyWalkways.unity
     guid: 85fbb281b8729a04e80dd19f65dcc480
   - enabled: 1
-    path: Assets/Scenes/Survive1.unity
+    path: Assets/Scenes/SurviveWalkways.unity
     guid: afa53f1b5ef359e45a9e3f6adbbd0700
   - enabled: 1
-    path: Assets/Scenes/Destroy2.unity
-    guid: 1d7e6614aa09a9a42bc412eff6f25f7f
+    path: Assets/Scenes/DestroyFort.unity
+    guid: 864a9166147f0ae4681a2793ecdb6ee4
   - enabled: 1
-    path: Assets/Scenes/Survive2.unity
-    guid: da1d298d27625384d886d772d685473c
+    path: Assets/Scenes/SurviveFort.unity
+    guid: 0fcbce280fd3c014fa99a1c348964f8b
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 11f67571707c8244da0e616bf1f1c406
