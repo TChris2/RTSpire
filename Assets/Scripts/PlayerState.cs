@@ -89,7 +89,10 @@ public class PlayerState : MonoBehaviour
             if (other.CompareTag("Enemy"))
             {
                 isDamaged = true;
-                health -= eDamage;
+                if (health - eDamage < 0)
+                    health = 0;
+                else
+                    health -= eDamage;
                 healthDisplay.text = $"{health}";
                 if (health > 0)
                     StartCoroutine(PlayerHurt());
