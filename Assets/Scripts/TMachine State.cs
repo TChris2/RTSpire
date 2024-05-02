@@ -10,37 +10,41 @@ public class TMachineState : MonoBehaviour
     private GameObject mClosed;
     public AudioClip ding; 
     private AudioSource audioSource;
-    public static bool eSpawnTime;
+    public bool eSpawnTime;
     public TMachineEntity TMEntity;
     [SerializeField]
     private bool isBreakable;
+    private Animator TMAni;
 
 
     void Start()
     {
-        audioSource = gameObject.GetComponent<AudioSource>();
-        mOpen.SetActive(false);
+        audioSource = gameObject.GetComponentInChildren<AudioSource>();
+        TMAni = gameObject.GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (!isBreakable && eSpawnTime && !PlayerState.isDead && !PlayerState.isWin || isBreakable && eSpawnTime && TMEntity.isTMachineDestroyed == false && !PlayerState.isDead && !PlayerState.isWin)
+        if (TMEntity != null && TMEntity.isTMachineDestroyed)
+            TMAni.SetTrigger("Destroyed");
+        else if (!isBreakable && eSpawnTime && !PlayerState.isDead && !PlayerState.isWin || eSpawnTime && !PlayerState.isDead && !PlayerState.isWin && TMEntity != null && !TMEntity.isTMachineDestroyed)
         {
             eSpawnTime = false;
-            mClosed.SetActive(false);
-            mOpen.SetActive(true);
+            TMAni.SetTrigger("Open");
             audioSource.PlayOneShot(ding);
             float delay = ding.length; 
-            Invoke("MachineClose", delay-1);
+            Invoke("MachineClose", delay-1f);
         }
+        else if (PlayerState.isDead || PlayerState.isWin)
+            TMAni.SetTrigger("Close");
+        
     }
 
     void MachineClose()
     {
         if (!isBreakable || TMEntity.isTMachineDestroyed == false)
         {
-            mOpen.SetActive(false);
-            mClosed.SetActive(true);
+            TMAni.SetTrigger("Close");
         }
     }
 }

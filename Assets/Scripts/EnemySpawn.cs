@@ -11,6 +11,7 @@ public class EnemySpawn : MonoBehaviour
     // Enemy spawn cooldown
     [SerializeField]
     private float sCooldown = 10f;
+    public TMachineState TMState;
 
     void Start ()
     {
@@ -25,10 +26,10 @@ public class EnemySpawn : MonoBehaviour
             // starts the cooldown
             yield return new WaitForSeconds(sCooldown);
             // If the loop has already started
-            if (PlayerState.isDead)
+            if (PlayerState.isDead || PlayerState.isWin)
                 break;
             // Sends signal to TMachineState to change animations
-            TMachineState.eSpawnTime = true;
+            TMState.eSpawnTime = true;
             // Spawns enemies on each side of the machine
             Instantiate(Enemy, transform.position + new Vector3(-10, 0, 0), Quaternion.identity);
             Instantiate(Enemy, transform.position + new Vector3(10, 0, 0), Quaternion.identity);

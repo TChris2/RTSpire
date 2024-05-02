@@ -14,22 +14,18 @@ public class PlayerState : MonoBehaviour
     private GameObject RTPain;
     [SerializeField]
     private GameObject RTDead;
-    // loading
+    // Loading Transitions
     [SerializeField]
     private GameObject DeathUI;
-    [SerializeField]
     private Animator deathUITransition;
     [SerializeField]
     private GameObject DeathLoad;
-    [SerializeField]
     private Animator deathLoadTransition;
     [SerializeField]
     private GameObject LvLoadIntro;
-    [SerializeField]
     private Animator lvLoadIntroTransition;
     [SerializeField]
     private GameObject LvLoadOutro;
-    [SerializeField]
     private Animator lvLoadOutroTransition;
     // Text
     private TMPro.TMP_Text healthDisplay;
@@ -48,26 +44,26 @@ public class PlayerState : MonoBehaviour
     public static bool isDead;
     public static bool isDamaged;
     public static bool isWin;
-
+    
     void Awake()
+    { 
+        isDead = false;
+        isDamaged = false;
+        isWin = false;
+    }
+    
+    void Start()
     {   
         audioSource = gameObject.GetComponent<AudioSource>();
         
         // Sets player ui states
         RTDead.SetActive(false);
         RTPain.SetActive(false);
-        DeathUI.SetActive(false);
-        DeathLoad.SetActive(false);
-        LvLoadOutro.SetActive(false);
         
         // Lv intro transition
-        LvLoadIntro.SetActive(true);
-        lvLoadIntroTransition.speed = .9f;
+        Instantiate(LvLoadIntro, Vector3.zero, Quaternion.identity);
+        lvLoadIntroTransition = GameObject.Find("IntroLvLoad").GetComponent<Animator>();
         lvLoadIntroTransition.SetTrigger("Start");
-
-        isDead = false;
-        isDamaged = false;
-        isWin = false;
 
         // Sets health display
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
@@ -87,7 +83,7 @@ public class PlayerState : MonoBehaviour
     // Takes damage from enemy
     private void OnTriggerEnter(Collider other)
     {
-        if (!isDamaged && !PlayerState.isDead && !PlayerState.isWin)
+        if (!isDamaged && !isDead && !isWin)
         {
             // Check if the entering collider has the tag "Enemy"
             if (other.CompareTag("Enemy"))
@@ -132,8 +128,9 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(delay-1f);
         
         // Death load screen
-        DeathLoad.SetActive(true);
-        deathLoadTransition.speed = .5f;
+        Instantiate(DeathLoad, Vector3.zero, Quaternion.identity);
+        deathLoadTransition = GameObject.Find("DeathLoad").GetComponent<Animator>();
+
         deathLoadTransition.SetTrigger("Death");
         audioSource.PlayOneShot(vonLaugh);
         delay = vonLaugh.length; 
@@ -141,11 +138,12 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(delay+.5f);
 
         // Restart screen + Main menu screen
-        DeathUI.SetActive(true);
+        Instantiate(DeathUI, Vector3.zero, Quaternion.identity);
+        deathUITransition = GameObject.Find("Death UI").GetComponent<Animator>();
         deathUITransition.SetTrigger("Death");
+        
         yield return null;
     }
-
     private IEnumerator PlayerWin()
     {
         audioSource.PlayOneShot(win);
@@ -154,8 +152,9 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(delay);
         
         // Lv outro transition
-        LvLoadOutro.SetActive(true);
-        lvLoadOutroTransition.speed = .8f;
+        Instantiate(LvLoadOutro, Vector3.zero, Quaternion.identity);
+        lvLoadOutroTransition = GameObject.Find("OutroLvLoad").GetComponent<Animator>();
+
         lvLoadOutroTransition.SetTrigger("Win");
 
         yield return new WaitForSeconds(2f);

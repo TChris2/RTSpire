@@ -28,13 +28,13 @@ public class ObjectiveSurvive : MonoBehaviour
 
     private IEnumerator TimerStart()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
         counting = true;
     }
 
     void FixedUpdate()
     {
-        if (counting)    
+        if (counting && !PlayerState.isDead)    
         {
             timer -= Time.deltaTime;
             int roundedTime = Mathf.RoundToInt(timer);

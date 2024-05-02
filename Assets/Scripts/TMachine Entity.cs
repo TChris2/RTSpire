@@ -14,7 +14,8 @@ public class TMachineEntity : MonoBehaviour
     [SerializeField]
     private float StartHealth = 5;
     private float health;
-    public bool isTMachineDestroyed = false;
+    private float healthCheck;
+    public bool isTMachineDestroyed;
     // Text
     private TMPro.TMP_Text DestroyCounter;
 
@@ -26,28 +27,33 @@ public class TMachineEntity : MonoBehaviour
         }
         set
         {
-            if (health != value && audioSource != null && health > 0f) {
+            healthCheck = health;
+            health = value;
+            if (audioSource != null && health != healthCheck && health > 0f) {
                 audioSource.PlayOneShot(hurtClips[0]);
             }
-            health = value;
             //destroys objects when their health reaches 0
-            if (health <= 0f)
+            else if (audioSource != null && health <= 0f && !isTMachineDestroyed)
             {
                 isTMachineDestroyed = true;
                 audioSource.PlayOneShot(hurtClips[1]);
                 float delay = hurtClips[1].length; 
-                mOpen.SetActive(false);
-                mClosed.SetActive(false);
+                
+                Invoke("UpdateCounter", 1f);
                 Invoke("DestroyMachine", delay-1f);
             }
         }
     }
 
-    void DestroyMachine()
+    void UpdateCounter()
     {
         // Updates counter
         ObjectiveDestroyMachine.TMachineCounter -= 1;
         DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
+    }
+
+    void DestroyMachine()
+    {
         Destroy(gameObject);
     }
 
@@ -55,7 +61,8 @@ public class TMachineEntity : MonoBehaviour
     {
         //sets health
         Health = StartHealth;
-        audioSource = gameObject.GetComponent<AudioSource>();
+        isTMachineDestroyed = false;
+        audioSource = gameObject.GetComponentInChildren<AudioSource>();
         DestroyCounter = GameObject.Find("DestroyCounter").GetComponent<TMPro.TMP_Text>();
         DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
     }

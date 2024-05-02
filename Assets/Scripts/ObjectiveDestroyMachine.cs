@@ -20,7 +20,7 @@ public class ObjectiveDestroyMachine : MonoBehaviour
         DestroyCounter = GameObject.Find("DestroyCounter").GetComponent<TMPro.TMP_Text>();
 
         // Updates text
-        DestroyText.text = $"{"Destroy All Machines"}";
+        DestroyText.text = $"{"Destroy Machines"}";
         DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
     }
 

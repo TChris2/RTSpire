@@ -14,10 +14,11 @@ public class TMachineAnimation : MonoBehaviour
 
     // Flag to track if size is increasing or decreasing
     private bool increasing = true;  
+    public TMachineState TMState;
 
     void Update()
     {
-        if (TMachineState.eSpawnTime == false)
+        if (TMState.eSpawnTime == false)
         {
             // Check if size is increasing
             if (increasing)
