@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 983dc969da2415541b5470f59ebd38ff
   - enabled: 1
     path: Assets/Scenes/DestroyWalkways.unity
-    guid: 85fbb281b8729a04e80dd19f65dcc480
+    guid: aeeea0345bd83074fb41908e65029caf
   - enabled: 1
     path: Assets/Scenes/SurviveWalkways.unity
     guid: afa53f1b5ef359e45a9e3f6adbbd0700

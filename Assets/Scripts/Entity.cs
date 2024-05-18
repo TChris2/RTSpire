@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     [SerializeField]
     private float StartHealth = 5;
     private float health;
+    private float healthCheck;
 
     public float Health
     {
@@ -21,13 +22,14 @@ public class Entity : MonoBehaviour
         }
         set
         {   
+            healthCheck = health;
+            health = value;
             // Plays clip when enemy is hurt
-            if (health != value && health > 0f) {
+            if (audioSource != null && health != healthCheck && health > 0f) {
                 audioSource.PlayOneShot(hurtClips[0]);
             }
-            health = value;
             // When enemy health reaches 0
-            if (health <= 0f)
+            if (audioSource != null && health <= 0f)
             {
                 // Has a 1 in 10 chance to play the scream
                 int randomClipNum = Random.Range(0, 11);

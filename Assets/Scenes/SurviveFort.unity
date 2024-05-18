@@ -486,6 +486,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7216769717761261310, guid: a1e2c46f4ad3341409a2f02d281d3816, type: 3}
+      propertyPath: RTDead
+      value: 
+      objectReference: {fileID: 8737365714723101756}
+    - target: {fileID: 7216769717761261310, guid: a1e2c46f4ad3341409a2f02d281d3816, type: 3}
+      propertyPath: RTPain
+      value: 
+      objectReference: {fileID: 8737365714723101757}
+    - target: {fileID: 7216769717761261310, guid: a1e2c46f4ad3341409a2f02d281d3816, type: 3}
+      propertyPath: RTNormal
+      value: 
+      objectReference: {fileID: 8737365714723101758}
     - target: {fileID: 8781662190471951227, guid: a1e2c46f4ad3341409a2f02d281d3816, type: 3}
       propertyPath: RTDead
       value: 

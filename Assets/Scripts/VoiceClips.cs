@@ -23,8 +23,8 @@ public class VoiceClips : MonoBehaviour
     IEnumerator RandomClip ()
     {
         AudioPlay = false;
-        int randomClipNum = Random.Range(0, 101);
-        if (randomClipNum < 52)
+        int randomClipNum = Random.Range(0, 117);
+        if (randomClipNum < 59)
             audioSource.PlayOneShot(voiceClips[randomClipNum]);
         yield return new WaitForSeconds(Random.Range(0, 60));
         AudioPlay = true;

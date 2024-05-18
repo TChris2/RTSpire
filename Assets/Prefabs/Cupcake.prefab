@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3429578496033011673}
-  - component: {fileID: 1758861789578792970}
   - component: {fileID: 9066993884485910010}
   - component: {fileID: 8972614967909889052}
+  - component: {fileID: 6181252918892800673}
   m_Layer: 0
   m_Name: Cupcake
   m_TagString: Untagged
@@ -35,30 +35,6 @@ Transform:
   - {fileID: 1361453609570538307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1758861789578792970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5633147777806363375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d12be1b07a34149a9dbbd83ab55238, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cSpinMats:
-  - {fileID: 2100000, guid: ba3fef2c93d84f546abb9ab7bf8109dc, type: 2}
-  - {fileID: 2100000, guid: 84855f64c1a0f8a47b69b36615f8fc02, type: 2}
-  - {fileID: 2100000, guid: 94e0cf609a910fd408eaa2189364486a, type: 2}
-  - {fileID: 2100000, guid: 801c153eb7909b44c9a1f450fd27287d, type: 2}
-  - {fileID: 2100000, guid: 534b22034d69e8642a257ec2bd169d16, type: 2}
-  - {fileID: 2100000, guid: 5698bd2dc601224449700493d4fae02c, type: 2}
-  - {fileID: 2100000, guid: 7e196a46b44524b4986098f60e54dada, type: 2}
-  - {fileID: 2100000, guid: 33853fe9ff60bfd4a93fd7775803fcb9, type: 2}
-  cupcake: {fileID: 8442843206467002786}
-  planeRenderer: {fileID: 252319326953709300}
-  frameDelay: 80
 --- !u!143 &9066993884485910010
 CharacterController:
   m_ObjectHideFlags: 0
@@ -100,6 +76,27 @@ MonoBehaviour:
   gravity: -9.8
   speed: 32
   cSnap: 3
+--- !u!95 &6181252918892800673
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633147777806363375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 591bd2e2ee2510e4a8130954593f1d19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6444178623413790117
 GameObject:
   m_ObjectHideFlags: 0

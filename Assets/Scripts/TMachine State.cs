@@ -26,17 +26,17 @@ public class TMachineState : MonoBehaviour
     void Update()
     {
         if (TMEntity != null && TMEntity.isTMachineDestroyed)
-            TMAni.SetTrigger("Destroyed");
+            TMAni.Play("TMachineDestroyed");
         else if (!isBreakable && eSpawnTime && !PlayerState.isDead && !PlayerState.isWin || eSpawnTime && !PlayerState.isDead && !PlayerState.isWin && TMEntity != null && !TMEntity.isTMachineDestroyed)
         {
             eSpawnTime = false;
-            TMAni.SetTrigger("Open");
+            TMAni.Play("TMachineOpen");
             audioSource.PlayOneShot(ding);
             float delay = ding.length; 
             Invoke("MachineClose", delay-1f);
         }
         else if (PlayerState.isDead || PlayerState.isWin)
-            TMAni.SetTrigger("Close");
+            TMAni.Play("TMachineClosed");
         
     }
 
@@ -44,7 +44,7 @@ public class TMachineState : MonoBehaviour
     {
         if (!isBreakable || TMEntity.isTMachineDestroyed == false)
         {
-            TMAni.SetTrigger("Close");
+            TMAni.Play("TMachineClosed");
         }
     }
 }

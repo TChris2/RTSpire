@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8943659963095794aa319f8ed98428c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LvLoadOutro: {fileID: 8587797441267646085, guid: e2de863a2636d6b4a92601f294aadb16, type: 3}
+  LvLoad: {fileID: 3763172523488613446, guid: 02f72c27829d77c4b8c05906b61a835a, type: 3}
 --- !u!224 &855596572705580274
 RectTransform:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class Buttons : MonoBehaviour
 {
     [SerializeField]
-    private GameObject LvLoadOutro;
-    private Animator lvLoadOutroTransition;
+    private GameObject LvLoad;
+    private Animator lvLoadTransition;
     private Animator DeathUITransition;
 
     public void DeathRestartLvButton ()
@@ -40,7 +40,7 @@ public class Buttons : MonoBehaviour
         DeathUITransition = GameObject.Find("Death UI").GetComponent<Animator>();
 
         // Lv outro transition
-        DeathUITransition.SetTrigger("New");
+        DeathUITransition.Play("DeathUIFade");
     
         yield return new WaitForSeconds(2f);
 
@@ -59,11 +59,11 @@ public class Buttons : MonoBehaviour
 
     private IEnumerator Transition(int state)
     {
-        Instantiate(LvLoadOutro, Vector3.zero, Quaternion.identity);
-        lvLoadOutroTransition = GameObject.Find("OutroLvLoad").GetComponent<Animator>();
+        Instantiate(LvLoad, Vector3.zero, Quaternion.identity);
+        lvLoadTransition = GameObject.Find("LvLoad").GetComponent<Animator>();
 
         // Lv outro transition
-        lvLoadOutroTransition.SetTrigger("Win");
+        lvLoadTransition.Play("LvLoadOutro");
         // ---------------------------
         // ---------------------------
         // ---------------------------
