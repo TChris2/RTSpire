@@ -369,7 +369,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &5290781973497438087
+--- !u!143 &1780182016 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 6125684496176671664, guid: a1e2c46f4ad3341409a2f02d281d3816, type: 3}
+  m_PrefabInstance: {fileID: 7546389116677844757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2285191255333453857
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -377,57 +382,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1475382387294293255, guid: b513e351242123c4482939fc9ceb5105, type: 3}
-      propertyPath: m_Name
-      value: SurviveWalkways
-      objectReference: {fileID: 0}
-    - target: {fileID: 6831445185911752218, guid: b513e351242123c4482939fc9ceb5105, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 73d0d631d18fd944eb8f920bbf479793, type: 2}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.40007252
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalPosition.y
       value: -17.673738
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalPosition.z
       value: 49.582508
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8276183693970159107, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 5275341937388416325, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8866033253048259581, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+    - target: {fileID: 6440831889262018647, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+      propertyPath: RTPain
+      value: 
+      objectReference: {fileID: 6233020997350427073}
+    - target: {fileID: 6440831889262018647, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+      propertyPath: RTNormal
+      value: 
+      objectReference: {fileID: 6233020997350427072}
+    - target: {fileID: 6440831889262018647, guid: b513e351242123c4482939fc9ceb5105, type: 3}
       propertyPath: playerController
       value: 
+      objectReference: {fileID: 1780182016}
+    - target: {fileID: 8849991236344575673, guid: b513e351242123c4482939fc9ceb5105, type: 3}
+      propertyPath: m_Name
+      value: SurviveWalkways
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -707,4 +716,4 @@ SceneRoots:
   - {fileID: 128314758}
   - {fileID: 6233020997350427071}
   - {fileID: 7546389116677844757}
-  - {fileID: 5290781973497438087}
+  - {fileID: 2285191255333453857}
