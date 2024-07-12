@@ -55,7 +55,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Kick"",
+                    ""name"": ""Melee"",
                     ""type"": ""Button"",
                     ""id"": ""03e8ef25-7837-4b71-812a-a1abb70d8775"",
                     ""expectedControlType"": ""Button"",
@@ -341,7 +341,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Kick"",
+                    ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -352,7 +352,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Kick"",
+                    ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -432,7 +432,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Movement = m_OnFoot.FindAction("Movement", throwIfNotFound: true);
         m_OnFoot_Jump = m_OnFoot.FindAction("Jump", throwIfNotFound: true);
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
-        m_OnFoot_Kick = m_OnFoot.FindAction("Kick", throwIfNotFound: true);
+        m_OnFoot_Melee = m_OnFoot.FindAction("Melee", throwIfNotFound: true);
         m_OnFoot_Throw = m_OnFoot.FindAction("Throw", throwIfNotFound: true);
         m_OnFoot_CamZoomIn = m_OnFoot.FindAction("CamZoomIn", throwIfNotFound: true);
         m_OnFoot_CamZoomOut = m_OnFoot.FindAction("CamZoomOut", throwIfNotFound: true);
@@ -500,7 +500,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Movement;
     private readonly InputAction m_OnFoot_Jump;
     private readonly InputAction m_OnFoot_Look;
-    private readonly InputAction m_OnFoot_Kick;
+    private readonly InputAction m_OnFoot_Melee;
     private readonly InputAction m_OnFoot_Throw;
     private readonly InputAction m_OnFoot_CamZoomIn;
     private readonly InputAction m_OnFoot_CamZoomOut;
@@ -511,7 +511,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_OnFoot_Movement;
         public InputAction @Jump => m_Wrapper.m_OnFoot_Jump;
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
-        public InputAction @Kick => m_Wrapper.m_OnFoot_Kick;
+        public InputAction @Melee => m_Wrapper.m_OnFoot_Melee;
         public InputAction @Throw => m_Wrapper.m_OnFoot_Throw;
         public InputAction @CamZoomIn => m_Wrapper.m_OnFoot_CamZoomIn;
         public InputAction @CamZoomOut => m_Wrapper.m_OnFoot_CamZoomOut;
@@ -533,9 +533,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Kick.started += instance.OnKick;
-            @Kick.performed += instance.OnKick;
-            @Kick.canceled += instance.OnKick;
+            @Melee.started += instance.OnMelee;
+            @Melee.performed += instance.OnMelee;
+            @Melee.canceled += instance.OnMelee;
             @Throw.started += instance.OnThrow;
             @Throw.performed += instance.OnThrow;
             @Throw.canceled += instance.OnThrow;
@@ -558,9 +558,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Kick.started -= instance.OnKick;
-            @Kick.performed -= instance.OnKick;
-            @Kick.canceled -= instance.OnKick;
+            @Melee.started -= instance.OnMelee;
+            @Melee.performed -= instance.OnMelee;
+            @Melee.canceled -= instance.OnMelee;
             @Throw.started -= instance.OnThrow;
             @Throw.performed -= instance.OnThrow;
             @Throw.canceled -= instance.OnThrow;
@@ -592,7 +592,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnKick(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnCamZoomIn(InputAction.CallbackContext context);
         void OnCamZoomOut(InputAction.CallbackContext context);

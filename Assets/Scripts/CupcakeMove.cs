@@ -17,9 +17,12 @@ public class CupcakeMove : MonoBehaviour
     private float cSnap = 6;
     public static bool isGrounded;
     private Vector3 throwDirection;
+
+    private CupcakeCounter cCount;
     
     void Start()
     {
+        cCount = GameObject.Find("CupcakeCounter").GetComponent<CupcakeCounter>();
         // Gets controller from the object
         controller = GetComponent<CharacterController>();
         // Determines the direction from the player Cupcake moves
@@ -49,6 +52,7 @@ public class CupcakeMove : MonoBehaviour
     private IEnumerator CupcakeSnap()
     {
         yield return new WaitForSeconds(cSnap);
+        cCount.CounterUp();
         Destroy(gameObject);
     }
 

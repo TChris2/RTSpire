@@ -21,7 +21,7 @@ public class ObjectiveDestroyMachine : MonoBehaviour
 
         // Updates text
         DestroyText.text = $"{"Destroy Machines"}";
-        DestroyCounter.text = $"{ObjectiveDestroyMachine.TMachineCounter}";
+        DestroyCounter.text = $"{TMachineCounter}";
     }
 
     // Update is called once per frame

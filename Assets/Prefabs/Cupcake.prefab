@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9066993884485910010}
   - component: {fileID: 8972614967909889052}
   - component: {fileID: 6181252918892800673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cupcake
-  m_TagString: Untagged
+  m_TagString: Cupcake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ CharacterController:
   m_Height: 9.8
   m_Radius: 1
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -107,9 +107,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1361453609570538307}
   - component: {fileID: 1402654496854910611}
+  - component: {fileID: 4165193812497567379}
+  - component: {fileID: 3432910910850723584}
   m_Layer: 0
   m_Name: Cupcake Orientate
-  m_TagString: Untagged
+  m_TagString: Cupcake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +129,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5316203488609042456}
   - {fileID: 8442843206467002786}
   m_Father: {fileID: 3429578496033011673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,60 +144,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f52b902b22aa74b895c75ef4a5ec90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7125484298690919356
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5316203488609042456}
-  - component: {fileID: 3986621338629206830}
-  - component: {fileID: 6923734962291398982}
-  m_Layer: 0
-  m_Name: Cupcake Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5316203488609042456
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125484298690919356}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 4}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1361453609570538307}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3986621338629206830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125484298690919356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f117d7be628d1428a704ff7666027b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushForce: 2000
-  cDamage: 0.25
---- !u!65 &6923734962291398982
+--- !u!65 &4165193812497567379
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125484298690919356}
+  m_GameObject: {fileID: 6444178623413790117}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -209,8 +163,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 9.8, z: 1}
+  m_Size: {x: 12, y: 9.8, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3432910910850723584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444178623413790117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7196fba9d1d28479680b847ff2b71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 0.25
+  forForce: 16
+  upForce: 14
 --- !u!1 &7431506895818467721
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,9 +191,9 @@ GameObject:
   - component: {fileID: 8442843206467002786}
   - component: {fileID: 8087636251958517181}
   - component: {fileID: 252319326953709300}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CupcakeFrame
-  m_TagString: Untagged
+  m_TagString: Cupcake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 7431506895818467721}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.54, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8000026, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

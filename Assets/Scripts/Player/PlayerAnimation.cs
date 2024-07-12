@@ -5,29 +5,31 @@ public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField]
     private GameObject cupcake;
-    [SerializeField]
-    private Transform player;
 
-    // Throw Mats
-    public Material[] ThrowLeft = new Material[8];
-    public Material[] ThrowRight = new Material[8];
-    public Material[] ThrowForward = new Material[8];
-    public Material[] ThrowBack = new Material[8];
     public static bool isRunning;
     public static bool isJumping;
-    public static bool isKicking;
+    public static bool isMelee;
+    public static bool isAtking;
     public static bool isThrowing;
     bool isDying;
     public static bool isWinning;
-    // Stores direction of player
     public static float prevInputX;
     public static float prevInputZ;
-    // Cupcake throw direction
-    public static Vector3 cSpawnPos;
+    private Vector3 cSpawnPos;
     public static Quaternion cRotate;
     private Animator PlayerAni;
 
+    float comboCount;
+    float prevAtkInputX;
+    float prevAtkInputZ;
+    float atkCooldown;
 
+    public float t1 = 1f;
+    public float t2 = .25f;
+
+    private Coroutine attackOffCoroutine;
+
+    private CupcakeCounter cCount;
     private void Start()
     {
         PlayerAni = gameObject.GetComponent<Animator>();
@@ -36,48 +38,38 @@ public class PlayerAnimation : MonoBehaviour
 
         isDying = false;
         isWinning = false;
+        comboCount = 0;
+
+        cCount = GameObject.Find("CupcakeCounter").GetComponent<CupcakeCounter>();
     }
 
     private void Update()
     {
         if (PlayerState.isDead || PlayerState.isWin)
         {
-            /* Death Animation
-            ---------------------------------------------- */
-            if (PlayerState.isDead && !isDying) {
+            if (PlayerState.isDead && !isDying)
+            {
                 isDying = true;
                 PlayerAni.Play("Death");
             }
 
-            /* Win Animation
-            ---------------------------------------------- */
-            if (PlayerState.isWin && !isWinning) {
+            if (PlayerState.isWin && !isWinning)
+            {
                 isWinning = true;
                 PlayerAni.Play("Win");
             }
         }
-
-        else if (!isKicking && !isThrowing)
-        {   
-            /* Jump Animation
-            ---------------------------------------------- */
-            if (!PlayerMotor.isGrounded) 
+        else if (!isMelee && !isThrowing)
+        {
+            if (!PlayerMotor.isGrounded)
                 Jump();
-
-            /* Run Animation
-            ---------------------------------------------- */
             else if (PlayerMotor.isGrounded && PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
                 Run();
-
-            /* Idle Animation
-            ---------------------------------------------- */
             else if (PlayerMotor.isGrounded && PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0)
-                Idle();//StartCoroutine(IdleCheck());
+                Idle();
         }
     }
 
-    /* Checks if player is idle
-    ---------------------------------------------- */
     private IEnumerator IdleCheck()
     {
         float checkX = PlayerMotor.inputX;
@@ -89,53 +81,35 @@ public class PlayerAnimation : MonoBehaviour
             Idle();
     }
 
-    /* Jump Animation
-    ---------------------------------------------- */
     public void Jump()
-    {   
+    {
         if (PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
         {
             prevInputX = PlayerMotor.inputX;
             prevInputZ = PlayerMotor.inputZ;
 
-            // Left Jump and Left Diagonal Jump
             if (PlayerMotor.inputX < 0)
                 PlayerAni.Play("JumpLeft");
-
-            // Right Jump and Right Diagonal Jump
             else if (PlayerMotor.inputX > 0)
                 PlayerAni.Play("JumpRight");
-                
-            // Forward Jump
             else if (PlayerMotor.inputZ == 1)
                 PlayerAni.Play("JumpForward");
-
-            // Back Jump
             else if (PlayerMotor.inputZ == -1)
                 PlayerAni.Play("JumpBack");
         }
         else if (PlayerMotor.inputX == 0 && PlayerMotor.inputZ == 0)
         {
-            // Left Jump and Left Diagonal Jump
             if (prevInputX < 0)
                 PlayerAni.Play("JumpLeft");
-            
-            // Right Jump and Right Diagonal Jump
             else if (prevInputX > 0)
                 PlayerAni.Play("JumpRight");
-
-            // Forward Jump
             else if (prevInputZ == 1)
                 PlayerAni.Play("JumpForward");
-
-            // Back Jump
             else if (prevInputZ == -1)
                 PlayerAni.Play("JumpBack");
         }
     }
 
-    /* Run Animation
-    ---------------------------------------------- */
     public void Run()
     {
         if (PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
@@ -144,129 +118,175 @@ public class PlayerAnimation : MonoBehaviour
             prevInputZ = PlayerMotor.inputZ;
         }
 
-        // Left and Left Diagonal
         if (PlayerMotor.inputX < 0)
             PlayerAni.Play("RunLeft");
-
-        // Right and Right Diagonal
         else if (PlayerMotor.inputX > 0)
             PlayerAni.Play("RunRight");
-
-        // Forward
         else if (PlayerMotor.inputZ == 1)
             PlayerAni.Play("RunForward");
-
-        // Backwards
         else if (PlayerMotor.inputZ == -1)
             PlayerAni.Play("RunBack");
     }
 
-    /* Idle Animation
-    ---------------------------------------------- */
     public void Idle()
     {
-        // Left Idle and Left Diagonal Idle
         if (prevInputX < 0)
             PlayerAni.Play("StillLeft");
-
-        // Right Idle and Right Diagonal Idle    
         else if (prevInputX > 0)
             PlayerAni.Play("StillRight");
-
-        // Forward Idle
         else if (prevInputZ == 1)
             PlayerAni.Play("StillForward");
-
-        // Back Idle
         else if (prevInputZ == -1)
             PlayerAni.Play("StillBack");
     }
-    
-    /* Kick Animation
-    ---------------------------------------------- */
-    public void Kick()
+
+    public void Melee()
     {
-        if (!isKicking && !isThrowing && !PlayerState.isDead && !PlayerState.isWin)
+        if (!isAtking && !isThrowing && !PlayerState.isDead && !PlayerState.isWin)
         {
-            isKicking = true;
-
-            // Left and Left Diagonal
-            if (prevInputX < 0)
-                PlayerAni.Play("KickLeft");
-
-            // Right and Right Diagonal
-            else if (prevInputX > 0)
+            if (PlayerMotor.inputX != 0 || PlayerMotor.inputZ != 0)
             {
-                PlayerAni.Play("KickRight");
+                prevInputX = PlayerMotor.inputX;
+                prevInputZ = PlayerMotor.inputZ;
+
+                if (prevAtkInputX != prevInputX || prevAtkInputZ != prevInputZ)
+                {
+                    comboCount = 0;
+                }
+            }
+            isMelee = true;
+            isAtking = true;
+
+            prevAtkInputX = prevInputX;
+            prevAtkInputZ = prevInputZ;
+
+            if (PlayerMotor.isGrounded && comboCount < 2)
+            {
+                if (comboCount == 0)
+                {
+                    if (prevInputX < 0)
+                        PlayerAni.Play("PunchLeftP1");
+                    else if (prevInputX > 0)
+                        PlayerAni.Play("PunchRightP1");
+                    else if (prevInputZ == 1)
+                        PlayerAni.Play("PunchForwardP1");
+                    else if (prevInputZ == -1)
+                        PlayerAni.Play("PunchBackP1");
+                }
+                else if (comboCount == 1)
+                {
+                    if (prevInputX < 0)
+                        PlayerAni.Play("PunchLeftP2");
+                    else if (prevInputX > 0)
+                        PlayerAni.Play("PunchRightP2");
+                    else if (prevInputZ == 1)
+                        PlayerAni.Play("PunchForwardP2");
+                    else if (prevInputZ == -1)
+                        PlayerAni.Play("PunchBackP2");
+                }
+
+                comboCount += 1;
+                atkCooldown = .48f;
+            }
+            else if (!PlayerMotor.isGrounded || comboCount == 2 && prevAtkInputX == prevInputX && prevAtkInputZ == prevInputZ)
+            {
+                if (prevInputX < 0)
+                    PlayerAni.Play("KickLeft");
+                else if (prevInputX > 0)
+                    PlayerAni.Play("KickRight");
+                else if (prevInputZ == 1)
+                    PlayerAni.Play("KickForward");
+                else if (prevInputZ == -1)
+                    PlayerAni.Play("KickBack");
+
+                atkCooldown = .817f;
+                comboCount = 3;
             }
 
-            // Forward
-            else if (prevInputZ == 1)
-                PlayerAni.Play("KickForward");
-
-            // Back
-            else if (prevInputZ == -1)
-                PlayerAni.Play("KickBack");
-
-            StartCoroutine(AttackOff());
+            if (attackOffCoroutine != null)
+            {
+                StopCoroutine(attackOffCoroutine);
+            }
+            attackOffCoroutine = StartCoroutine(AttackOff());
         }
     }
 
-    /* Throw Animation
-    ---------------------------------------------- */
-    public void Throw()
-    {   
-        if (!isKicking && !isThrowing && !PlayerState.isDead && !PlayerState.isWin)
-        {
-            isThrowing = true;
-
-            // Left and Left Diagonal
-            if (prevInputX < 0)
-                PlayerAni.Play("ThrowLeft");
-
-            // Right and Right Diagonal
-            else if (prevInputX > 0)
-            {
-                PlayerAni.Play("ThrowRight");
-            }
-
-            // Forward
-            else if (prevInputZ == 1)
-                PlayerAni.Play("ThrowForward");
-
-            // Back
-            else if (prevInputZ == -1)
-                PlayerAni.Play("ThrowBack");
-
-            StartCoroutine(AttackOff());
-        }
-    }
-
-    /* Turns off attack trigger
-    ---------------------------------------------- */
     private IEnumerator AttackOff()
     {
-        yield return new WaitForSeconds(.817f);
-        
-        if (isKicking)
+        yield return new WaitForSeconds(atkCooldown);
+
+        if (isAtking)
         {
-            isKicking = false;
+            if (comboCount <= 2 && comboCount != 0)
+            {
+                isAtking = false;
+                float temp = comboCount;
+                yield return new WaitForSeconds(t1);
+                if (!isAtking && temp == comboCount)
+                {
+                    comboCount = 0;
+                    isMelee = false;
+                }
+            }
+            else if (comboCount == 3)
+            {
+                comboCount = 0;
+                yield return new WaitForSeconds(t2);
+                isMelee = false;
+                isAtking = false;
+            }
         }
         else if (isThrowing)
         {
-            CupcakeSpawn();
-
-            cRotate = Quaternion.Euler(0, PlayerLook.rotation.eulerAngles.y, 0);
-
-            Instantiate(cupcake, player.position + cRotate * cSpawnPos, Quaternion.identity);
-
             isThrowing = false;
         }
+
+        attackOffCoroutine = null;
+    }
+
+    public void Throw()
+    {
+        if (!isMelee && !isThrowing && cCount.cupcakeCount-1 != -1 && !PlayerState.isDead && !PlayerState.isWin)
+        {
+            cCount.CounterDown();
+            isThrowing = true;
+
+            if (prevInputX < 0)
+                PlayerAni.Play("ThrowLeft");
+            else if (prevInputX > 0)
+                PlayerAni.Play("ThrowRight");
+            else if (prevInputZ == 1)
+                PlayerAni.Play("ThrowForward");
+            else if (prevInputZ == -1)
+                PlayerAni.Play("ThrowBack");
+
+            StartCoroutine(CupcakeSpawn());
+
+            atkCooldown = .817f;
+            if (attackOffCoroutine != null)
+            {
+                StopCoroutine(attackOffCoroutine);
+            }
+            attackOffCoroutine = StartCoroutine(AttackOff());
+        }
+    }
+
+    /* Spawns A Cupcake
+    ---------------------------------------------- */
+    private IEnumerator CupcakeSpawn()
+    {
+        yield return new WaitForSeconds(0.595729166667f);
+
+        CupcakeSpawnPos();
+
+        cRotate = Quaternion.Euler(0, PlayerLook.rotation.eulerAngles.y, 0);
+
+        Instantiate(cupcake, transform.position + cRotate * cSpawnPos, Quaternion.identity);
     }
 
     /* Where Cupcake spawns
     ---------------------------------------------- */
-    void CupcakeSpawn()
+    void CupcakeSpawnPos()
     {
         // Throw Left and Throw Left Diagonal
         if (prevInputX < 0)
@@ -277,21 +297,21 @@ public class PlayerAnimation : MonoBehaviour
                 // Throw Left Forward Diagonal
                 if (prevInputZ > 0)
                 {
-                    cSpawnPos.x = -10;
-                    cSpawnPos.z = 6;
+                    cSpawnPos.x = -6;
+                    cSpawnPos.z = 1;
                 }
 
                 // Throw Left Back Diagonal
                 else if (prevInputZ < 0)
                 {
-                    cSpawnPos.x = -10;
-                    cSpawnPos.z = -6;
+                    cSpawnPos.x = -6;
+                    cSpawnPos.z = -1;
                 }
             }
             // Throw Left Only
             else
             {
-                cSpawnPos.x = -10;
+                cSpawnPos.x = -6;
                 cSpawnPos.z = 0;
             }
         }
@@ -305,21 +325,21 @@ public class PlayerAnimation : MonoBehaviour
                 // Throw Right Forward Diagonal
                 if (prevInputZ > 0)
                 {
-                    cSpawnPos.x = 10;
-                    cSpawnPos.z = 6;
+                    cSpawnPos.x = 6;
+                    cSpawnPos.z = 1;
                 }
 
                 // Throw Right Back Diagonal
                 else if (prevInputZ < 0)
                 {
-                    cSpawnPos.x = 10;
-                    cSpawnPos.z = -6;
+                    cSpawnPos.x = 6;
+                    cSpawnPos.z = -1;
                 }
             }
             // Throw Right Only
             else
             {
-                cSpawnPos.x = 10;
+                cSpawnPos.x = 6;
                 cSpawnPos.z = 0;
             }
         }
@@ -328,14 +348,14 @@ public class PlayerAnimation : MonoBehaviour
         else if (prevInputZ == 1)
         {
             cSpawnPos.x = 0;
-            cSpawnPos.z = 6;
+            cSpawnPos.z = 1;
         }
 
         // Throw Back
         else if (prevInputZ == -1)
         {
             cSpawnPos.x = 0;
-            cSpawnPos.z = -6;
+            cSpawnPos.z = -1;
         }
 
         cSpawnPos.y = -.5f;

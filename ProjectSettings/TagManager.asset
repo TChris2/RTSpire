@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Cupcake
   - TMachine
+  - RT Kick
+  - NavMesh
+  - RT Punch
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - TMachine
+  - Enemy
   - 
   - 
   - 

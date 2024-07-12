@@ -1,0 +1,285 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1615563509769909345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8127689929709605954, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8437988187835917278}
+  - component: {fileID: 2402033559282109628}
+  - component: {fileID: 1458442129680925737}
+  - component: {fileID: 4983173774932187153}
+  - component: {fileID: 813240149809680663}
+  m_Layer: 0
+  m_Name: HealMuffin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8437988187835917278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615563509769909345}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5405413988418614908}
+  m_Father: {fileID: 5507277476768097469}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2402033559282109628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4671477039344667009, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615563509769909345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1458442129680925737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7635253563143182625, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615563509769909345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8295157083113cd4b9778dc1e5f4653a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hMuffin: {fileID: 9038818046065834544}
+  heal: 20
+  HealBob: {fileID: 4983173774932187153}
+  healsfx: {fileID: 8300000, guid: cc4d5a16553db0f4a9ef15211115b4aa, type: 3}
+--- !u!95 &4983173774932187153
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8269805297558674306, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615563509769909345}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35b9ed12099aa97449ee1bf13aabef19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &813240149809680663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1542280465571570229, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615563509769909345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f52b902b22aa74b895c75ef4a5ec90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6043543298661782938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5507277476768097469}
+  m_Layer: 0
+  m_Name: HealMuffinControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5507277476768097469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043543298661782938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: 7.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8437988187835917278}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9038818046065834544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3350319076287585268, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5405413988418614908}
+  - component: {fileID: 6645351237558633328}
+  - component: {fileID: 2751266909764966786}
+  m_Layer: 0
+  m_Name: HealMuffinPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5405413988418614908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6170304603992844435, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038818046065834544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8437988187835917278}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+--- !u!33 &6645351237558633328
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2818685290432876026, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038818046065834544}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2751266909764966786
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3655348993068247486, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+  m_PrefabInstance: {fileID: 5878005763102020448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038818046065834544}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9cafdebb1ab5e7d42a3b8c4b9b09d337, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &5878005763102020448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5507277476768097469}
+    m_Modifications:
+    - target: {fileID: 3350319076287585268, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_Name
+      value: HealMuffinPlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 8127689929709605954, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_Name
+      value: HealMuffin
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727515403592554526, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 86887d8fcb5d684479f201e70f914d36, type: 3}

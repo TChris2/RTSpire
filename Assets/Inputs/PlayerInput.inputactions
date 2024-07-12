@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Kick",
+                    "name": "Melee",
                     "type": "Button",
                     "id": "03e8ef25-7837-4b71-812a-a1abb70d8775",
                     "expectedControlType": "Button",
@@ -319,7 +319,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Kick",
+                    "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -330,7 +330,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Kick",
+                    "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

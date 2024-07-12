@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
         animate = GetComponent<PlayerAnimation>();
 
         onFoot.Jump.performed += ctx => motor.Jump();
-        onFoot.Kick.performed += ctx => animate.Kick();
+        onFoot.Melee.performed += ctx => animate.Melee();
         onFoot.Throw.performed += ctx => animate.Throw();
         onFoot.CamZoomIn.performed += ctx => motor.ZoomIn();
         onFoot.CamZoomOut.performed += ctx => motor.ZoomOut();

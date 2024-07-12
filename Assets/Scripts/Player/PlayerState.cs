@@ -33,20 +33,26 @@ public class PlayerState : MonoBehaviour
     private AudioSource audioSource;
     // Health
     public static float health = 100;
-    // Enemy Damage
-    [SerializeField]
-    private float eDamage = 5f;
     [SerializeField]
     private float eAttackCool = 2f;
     public static bool isDead;
     public static bool isDamaged;
     public static bool isWin;
-    
+    public static bool hasWon;
+    [SerializeField]
+    private bool isInvincible;
+
+    AttackInfo eAtInfo;
+    EnemyHurt eHurt;
+
+    private Coroutine CoroutCheck;
+
     void Awake()
     { 
         isDead = false;
         isDamaged = false;
         isWin = false;
+        hasWon = false;
     }
     
     void Start()
@@ -72,8 +78,12 @@ public class PlayerState : MonoBehaviour
     void Update()
     {
         // Checks if the player has won
-        if (isWin && !PlayerAnimation.isWinning) {
-            StartCoroutine(PlayerWin());
+        if (isWin) {
+            PlayerAnimation.isWinning = false;
+            if (!hasWon)
+            {
+                StartCoroutine(PlayerWin());
+            }
         } 
     }
     
@@ -83,20 +93,28 @@ public class PlayerState : MonoBehaviour
         if (!isDamaged && !isDead && !isWin)
         {
             // Check if the entering collider has the tag "Enemy"
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Enemy") && !isInvincible)
             {
-                isDamaged = true;
-                if (health - eDamage < 0)
-                    health = 0;
-                else
-                    health -= eDamage;
-                healthDisplay.text = $"{health}";
-                if (health > 0)
-                    StartCoroutine(PlayerHurt());
-                // Death
-                else if (health <= 0) {
-                    isDead = true;
-                    StartCoroutine(PlayerDead());
+                eHurt = other.GetComponent<EnemyHurt>();
+                if (!eHurt.isHit)
+                {
+                    isDamaged = true;
+                    eAtInfo = other.GetComponent<AttackInfo>();
+
+                    if (health - eAtInfo.dmg < 0)
+                        health = 0;
+                    else
+                        health -= eAtInfo.dmg;
+
+                    healthDisplay.text = $"{health}";
+
+                    if (health > 0)
+                        StartCoroutine(PlayerHurt());
+                    // Death
+                    else if (health <= 0) {
+                        isDead = true;
+                        StartCoroutine(PlayerDead());
+                    }
                 }
             }
         }
@@ -142,6 +160,7 @@ public class PlayerState : MonoBehaviour
     }
     private IEnumerator PlayerWin()
     {
+        hasWon = true;
         audioSource.PlayOneShot(win);
         float delay = win.length; 
         // Waits until the player win sfx finishes playing

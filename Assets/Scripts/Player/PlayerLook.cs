@@ -11,8 +11,7 @@ public class PlayerLook : MonoBehaviour
     private float yRotation = 0f;
     public float xSens = 30;
     public float ySens = 30;
-    [Tooltip("Distance from player")]
-    public static float distance = 15;
+    public static float distance = 24;
     public static Quaternion rotation;
     
     void Start()
@@ -21,7 +20,7 @@ public class PlayerLook : MonoBehaviour
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         // Get player cam distance between lvs
-        distance = PlayerPrefs.GetFloat("CamDistance", 20);
+        distance = PlayerPrefs.GetFloat("CamDistance", 24);
 
         // Set initial position
         transform.position = player.position + new Vector3(0, 0, -distance);
