@@ -11,9 +11,10 @@ public class Entity : MonoBehaviour
     // Controls starting health for enemies
     [SerializeField]
     private float StartHealth = 5;
+    // Keeps track of enemy health
     private float health;
     private UnityEngine.AI.NavMeshAgent enemy;
-    private Collider eCollider;
+    private Animator eAni;
 
     public float Health
     {
@@ -28,19 +29,22 @@ public class Entity : MonoBehaviour
             if (audioSource != null && health > 0f) {
                 audioSource.PlayOneShot(hurtClips[0]);
                 float delay = hurtClips[0].length;
+                eAni.Play("Enemy Hurt");
             }
-            // When enemy health reaches 0
+            // When enemy health reaches zero and dies
             if (audioSource != null && health <= 0f)
             {
-                // Has a 1 in 10 chance to play the scream
-                int randomClipNum = Random.Range(0, 11);
+                // Has a 1 in 50 chance to play the scream
+                int randomClipNum = Random.Range(0, 51);
                 if (randomClipNum > 0)
                     randomClipNum = 0;
                 else
                     randomClipNum = 1;
                 audioSource.PlayOneShot(hurtClips[randomClipNum]);
                 enemy.enabled = false;
-                float delay = hurtClips[randomClipNum].length; 
+                float delay = hurtClips[randomClipNum].length;
+                eAni.Play("Enemy Hurt");
+                eAni.Play("DeathFade");
                 // Destroys enemy after the sound is played
                 Invoke("DestroyEnemy", delay);
             }
@@ -55,10 +59,11 @@ public class Entity : MonoBehaviour
 
     void Start()
     {
-        // Sets health
+        // Sets start health for enemies
         Health = StartHealth;
+        // Gets enemy components
         audioSource = gameObject.GetComponent<AudioSource>();
         enemy = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        eCollider = GetComponent<Collider>();
+        eAni = GetComponent<Animator>();
     }
 }

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HealthMuffin : MonoBehaviour
 {
-    // Text
+    // Player Heal Text
     private TMPro.TMP_Text healthDisplay;
-    public GameObject hMuffin;
     // Heal Amount
     [SerializeField]
     private float heal = 20f;
+    // When the muffin can heal the player
     bool Healing;
-    [SerializeField]
-    private Animator HealBob;
-
+    // Animator for muffin
+    private Animator muffinAni;
+    // Heal audio
     [SerializeField]
     private AudioClip healsfx; 
     private AudioSource audioSource;
@@ -22,8 +22,9 @@ public class HealthMuffin : MonoBehaviour
     {
         audioSource = GameObject.Find("P Hitbox").GetComponent<AudioSource>();
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
-        HealBob.speed = .8f;
-
+        muffinAni = gameObject.GetComponent<Animator>();
+        muffinAni.Play("HealBob");
+        muffinAni.speed = .8f;
         Healing = true;
     }
 
@@ -33,32 +34,32 @@ public class HealthMuffin : MonoBehaviour
         if (other.CompareTag("Player"))
         {   
             // prevents player from repeatly healing during cooldown
-            if (Healing == true) {
+            if (Healing == true && PlayerState.health != PlayerState.hMax) {
                 audioSource.PlayOneShot(healsfx);
 
                 PlayerState.health += heal;
                 // caps health at 100
-                if (PlayerState.health > 100)
+                if (PlayerState.health > PlayerState.hMax)
                 {
-                    PlayerState.health = 100;
+                    PlayerState.health = PlayerState.hMax;
                 }
                 healthDisplay.text = $"{PlayerState.health}";
 
                 // starts healing cooldown and disables healing
-                StartCoroutine(DeleteRespawn());
+                StartCoroutine(DisRenable());
             }
         }
     }
 
-    IEnumerator DeleteRespawn()
+    IEnumerator DisRenable()
     {
         Healing = false;
         // disables object
-        hMuffin.SetActive(false);
+        muffinAni.Play("FadeOut");
         // wait 10 seconds
         yield return new WaitForSeconds(10f);
         Healing = true;
         // renables the object
-        hMuffin.SetActive(true);
+        muffinAni.Play("FadeIn");
     }
 }

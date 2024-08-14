@@ -7,23 +7,10 @@ using UnityEngine.SceneManagement;
 // Controls player state and player ui alongside lv load transitions
 public class PlayerState : MonoBehaviour
 {
-    // Image States
-    [SerializeField]
-    private GameObject RTNormal;
-    [SerializeField]
-    private GameObject RTPain;
-    [SerializeField]
-    private GameObject RTDead;
-    // Loading Transitions
-    [SerializeField]
-    private GameObject DeathUI;
-    private Animator deathUITransition;
-    [SerializeField]
-    private GameObject DeathLoad;
-    private Animator deathLoadTransition;
-    [SerializeField]
-    private GameObject LvLoad;
-    private Animator lvLoadTransition;
+    // UI Anis
+    private Animator deathUIAni;
+    private Animator deathLoadAni;
+    private Animator lvLoadAni;
     // Text
     private TMPro.TMP_Text healthDisplay;
     // Audio
@@ -33,6 +20,7 @@ public class PlayerState : MonoBehaviour
     private AudioSource audioSource;
     // Health
     public static float health = 100;
+    public static float hMax = 100;
     [SerializeField]
     private float eAttackCool = 2f;
     public static bool isDead;
@@ -42,10 +30,12 @@ public class PlayerState : MonoBehaviour
     [SerializeField]
     private bool isInvincible;
 
-    AttackInfo eAtInfo;
-    EnemyHurt eHurt;
+    // Health UI Animator
+    private Animator playerUIAni;
+    private Animator playerAni;
 
-    private Coroutine CoroutCheck;
+    AttackInfo eAtkInfo;
+    EnemyHurt eHurt;
 
     void Awake()
     { 
@@ -57,29 +47,31 @@ public class PlayerState : MonoBehaviour
     
     void Start()
     {   
+        AudioListener.pause = false;
         audioSource = gameObject.GetComponent<AudioSource>();
-        
-        // Sets player ui states
-        RTDead.SetActive(false);
-        RTPain.SetActive(false);
-        
+        audioSource.ignoreListenerPause = true;
+
+        deathUIAni = GameObject.Find("Death UI").GetComponent<Animator>();
+        deathLoadAni = GameObject.Find("Death Transition").GetComponent<Animator>();
+        lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
         // Lv intro transition
-        Instantiate(LvLoad, Vector3.zero, Quaternion.identity);
-        lvLoadTransition = GameObject.Find("LvLoad").GetComponent<Animator>();
-        lvLoadTransition.Play("LvLoadIntro");
+        lvLoadAni.Play("LvIntro");
 
         // Sets health display
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
         // Gets player's health from previous level
         health = PlayerPrefs.GetFloat("PlayerHealth", 0);
         healthDisplay.text = $"{health}";
+
+        playerUIAni = GameObject.Find("Player UI").GetComponent<Animator>();
+        playerAni = GetComponentInParent<Animator>();
     }
 
     void Update()
     {
         // Checks if the player has won
         if (isWin) {
-            PlayerAnimation.isWinning = false;
+            PlayerAniMovement.isWinning = false;
             if (!hasWon)
             {
                 StartCoroutine(PlayerWin());
@@ -90,21 +82,22 @@ public class PlayerState : MonoBehaviour
     // Takes damage from enemy
     private void OnTriggerEnter(Collider other)
     {
+        // Checks to see if the player has already taken damage
         if (!isDamaged && !isDead && !isWin)
         {
-            // Check if the entering collider has the tag "Enemy"
+            // Check if the object entering collider is an enemy
             if (other.CompareTag("Enemy") && !isInvincible)
             {
                 eHurt = other.GetComponent<EnemyHurt>();
                 if (!eHurt.isHit)
                 {
                     isDamaged = true;
-                    eAtInfo = other.GetComponent<AttackInfo>();
+                    eAtkInfo = other.GetComponent<AttackInfo>();
 
-                    if (health - eAtInfo.dmg < 0)
+                    if (health - eAtkInfo.dmg < 0)
                         health = 0;
                     else
-                        health -= eAtInfo.dmg;
+                        health -= eAtkInfo.dmg;
 
                     healthDisplay.text = $"{health}";
 
@@ -122,31 +115,32 @@ public class PlayerState : MonoBehaviour
 
     private IEnumerator PlayerHurt()
     {
-        // Changes ui
-        RTNormal.SetActive(false);
-        RTPain.SetActive(true);
+        // Changes UI
+        playerUIAni.Play("Hurt");
+        playerAni.Play("PlayerHurt");
 
         audioSource.PlayOneShot(hurt[0]);
         // Gives a short time of invincibility to the player until they can get hit again
         yield return new WaitForSeconds(eAttackCool);
 
-        // Changes ui back
-        RTNormal.SetActive(true);
-        RTPain.SetActive(false);
+        // Changes UI back
+        playerUIAni.Play("Normal");
+
         isDamaged = false;
     }
 
     private IEnumerator PlayerDead()
     {
+        AudioListener.pause = true;
         audioSource.PlayOneShot(hurt[1]);
         float delay = hurt[1].length; 
-        RTNormal.SetActive(false);
-        RTDead.SetActive(true);
+        
+        playerUIAni.Play("Dead");
         // Waits until the player dead sfx finishes playing
-        yield return new WaitForSeconds(delay-1f);
+        yield return new WaitForSeconds(delay-1.2f);
         
         // Death load screen
-        Instantiate(DeathLoad, Vector3.zero, Quaternion.identity);
+        deathLoadAni.Play("DeathLoad");
 
         audioSource.PlayOneShot(vonLaugh);
         delay = vonLaugh.length; 
@@ -154,9 +148,10 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(delay+.5f);
 
         // Restart screen + Main menu screen
-        Instantiate(DeathUI, Vector3.zero, Quaternion.identity);
+        deathUIAni.Play("DeathUILoad");
         
-        yield return null;
+        
+
     }
     private IEnumerator PlayerWin()
     {
@@ -167,7 +162,7 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(delay);
         
         // Lv outro transition
-        lvLoadTransition.Play("LvLoadOutro");
+        lvLoadAni.Play("LvOutro");
 
         yield return new WaitForSeconds(2f);
         // Next level

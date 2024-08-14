@@ -92,7 +92,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ding: {fileID: 8300000, guid: 0edb72f3d523dc641a3057e92a32390b, type: 3}
   eSpawnTime: 0
-  TMEntity: {fileID: 5611536157438836178}
   isBreakable: 1
 --- !u!114 &5611536157438836178
 MonoBehaviour:
@@ -466,6 +465,7 @@ MonoBehaviour:
   Enemy: {fileID: 5454778379122511400, guid: dbd18b6d812a1ae4e9254809d532d8a8, type: 3}
   sCooldown: 5
   TMState: {fileID: 7886629004187288426}
+  TMEntity: {fileID: 5611536157438836178}
 --- !u!82 &2032801319505484855
 AudioSource:
   m_ObjectHideFlags: 0

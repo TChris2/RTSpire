@@ -5,16 +5,19 @@ using UnityEngine;
 // Orientates objects so they face the camera
 public class ObjectCamOrientate : MonoBehaviour
 {
-    private Transform camera;
+    // Main/Player cam
+    private Transform pCam;
     
     void Start()
     {
-        camera = GameObject.Find("Main Camera").GetComponent<Transform>();
+        // Gets Cam
+        pCam = GameObject.Find("Main Camera").GetComponent<Transform>();
     }
 
     void LateUpdate()
     {
-        Vector3 eulerRotation = new Vector3(transform.eulerAngles.x, camera.transform.eulerAngles.y, transform.eulerAngles.z);
+        // Rotates the object to face the camera
+        Vector3 eulerRotation = new Vector3(transform.eulerAngles.x, pCam.transform.eulerAngles.y, transform.eulerAngles.z);
         transform.rotation = Quaternion.Euler(eulerRotation);
     }
 }

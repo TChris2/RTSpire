@@ -5,28 +5,36 @@ using UnityEngine;
 // Incase the player falls out of bounds
 public class PlayerOutOfBounds : MonoBehaviour
 {
-    [SerializeField]
+    // Player
     private CharacterController playerController;
+    // Hurt clip for player
     [SerializeField]
     private AudioClip hurt; 
     private AudioSource audioSource;
     // Fall damage
     [SerializeField]
     private float fDamage = 5f;
+    // Cooldown
     [SerializeField]
     private float AttackCool = 2f;
     // Text
     private TMPro.TMP_Text healthDisplay;
-    // Image States
-    [SerializeField]
-    private GameObject RTNormal;
-    [SerializeField]
-    private GameObject RTPain;
+
+    // Health UI Animator
+    private Animator playerUIAni;
+    private Animator playerAni;
 
     void Start()
     {
+        // Gets audiosource
         audioSource = GameObject.Find("P Hitbox").GetComponent<AudioSource>();
+        // Gets health text
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
+        playerController = GameObject.Find("Player").GetComponent<CharacterController>();
+
+        // Gets Health UI animator
+        playerUIAni = GameObject.Find("Player UI").GetComponent<Animator>();
+        playerAni = GameObject.Find("Player").GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,7 +43,8 @@ public class PlayerOutOfBounds : MonoBehaviour
         if (other.CompareTag("Player"))
         {   
             audioSource.PlayOneShot(hurt);
-            // Will not kill the player if they are on low health
+
+            // Will not dmg the player if it would kill them
             if (PlayerState.health - fDamage > 0) 
             {
                 PlayerState.health -= fDamage;
@@ -43,14 +52,14 @@ public class PlayerOutOfBounds : MonoBehaviour
                 StartCoroutine(PlayerHurt());
             }
 
-            // Disables player movement temporarily
+            // Disables player movement
             playerController.enabled = false; 
-            // Teleport the player
+            // Teleports the player
             playerController.transform.position = PlayerMotor.lastGroundPos; 
             // Renables player movement
             playerController.enabled = true; 
         }
-        // Checks if enemy
+        // Will intstantly kill an enemey if they are out of bounds
         if (other.CompareTag("Enemy"))
         {
             // Kills enemy
@@ -64,16 +73,17 @@ public class PlayerOutOfBounds : MonoBehaviour
     private IEnumerator PlayerHurt()
     {
         PlayerState.isDamaged = true;
-        // Changes ui
-        RTNormal.SetActive(false);
-        RTPain.SetActive(true);
+
+        // Changes UI
+        playerUIAni.Play("Hurt");
+        playerAni.Play("PlayerHurt");
 
         // Gives a short time of invincibility to the player until they can get hit again
         yield return new WaitForSeconds(AttackCool);
 
-        // Changes ui back
-        RTNormal.SetActive(true);
-        RTPain.SetActive(false);
+        // Changes UI back
+        playerUIAni.Play("Normal");
+
         PlayerState.isDamaged = false;
     }
 }

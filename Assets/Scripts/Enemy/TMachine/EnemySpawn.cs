@@ -12,6 +12,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField]
     private float sCooldown = 10f;
     public TMachineState TMState;
+    public TMachineEntity TMEntity;
 
     void Start ()
     {
@@ -25,8 +26,8 @@ public class EnemySpawn : MonoBehaviour
         {
             // starts the cooldown
             yield return new WaitForSeconds(sCooldown);
-            // If the loop has already started
-            if (PlayerState.isDead || PlayerState.isWin)
+            // If the loop has already started when the player died/won
+            if (PlayerState.isDead || PlayerState.isWin || TMEntity.isTMachineDestroyed)
                 break;
             // Sends signal to TMachineState to change animations
             TMState.eSpawnTime = true;

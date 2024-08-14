@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controls animation state of TMachines
 public class TMachineState : MonoBehaviour
 {
     public AudioClip ding; 
     private AudioSource audioSource;
     public bool eSpawnTime;
-    public TMachineEntity TMEntity;
+    private TMachineEntity TMEntity;
     [SerializeField]
     private bool isBreakable;
     private Animator TMAni;
@@ -15,26 +16,31 @@ public class TMachineState : MonoBehaviour
 
     void Start()
     {
-        audioSource = gameObject.GetComponentInChildren<AudioSource>();
-        TMAni = gameObject.GetComponent<Animator>();
+        // Gets TMachine components
+        audioSource = GetComponentInChildren<AudioSource>();
+        TMEntity = GetComponentInChildren<TMachineEntity>();
+        TMAni = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (TMEntity != null && TMEntity.isTMachineDestroyed)
+        if (!PlayerState.isDead && !PlayerState.isWin) 
         {
-            TMAni.Play("TMachineDestroyed");
-        }
-        else if (!isBreakable && eSpawnTime && !PlayerState.isDead && !PlayerState.isWin || eSpawnTime && !PlayerState.isDead && !PlayerState.isWin && TMEntity != null && !TMEntity.isTMachineDestroyed)
-        {
-            eSpawnTime = false;
-            TMAni.Play("TMachineOpen");
-            audioSource.PlayOneShot(ding);
-            float delay = ding.length; 
-            Invoke("MachineClose", delay-1f);
-        }
+            // Open and closing animations
+            if (!isBreakable && eSpawnTime || eSpawnTime && TMEntity != null && !TMEntity.isTMachineDestroyed)
+            {
+                eSpawnTime = false;
+                TMAni.Play("TMachineOpen");
+                audioSource.PlayOneShot(ding);
+                float delay = ding.length; 
+                // Closes machine after delay
+                Invoke("MachineClose", delay-1f);
+            }
+        } 
+        // If player has died or won
         else if (PlayerState.isDead || PlayerState.isWin)
-            TMAni.Play("TMachineClosed");
+            if (!isBreakable || !TMEntity.isTMachineDestroyed)
+                TMAni.Play("TMachineClosed");
         
     }
 

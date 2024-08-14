@@ -7,42 +7,48 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerInput.OnFootActions onFoot;
+    private PlayerInput.PlayerActions player;
     
     private PlayerMotor motor;
     private PlayerLook look;
-    private PlayerAnimation animate;
+    private PlayerAniMelee aniMelee;
+    private PlayerAniThrow aniThrow;
+    private MenuPause pause; 
     void Awake()
     {
         playerInput = new PlayerInput();
-        onFoot = playerInput.OnFoot;
+        player = playerInput.Player;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
-        animate = GetComponent<PlayerAnimation>();
+        aniMelee = GetComponent<PlayerAniMelee>();
+        aniThrow = GetComponent<PlayerAniThrow>();
+        pause = GetComponent<MenuPause>();
 
-        onFoot.Jump.performed += ctx => motor.Jump();
-        onFoot.Melee.performed += ctx => animate.Melee();
-        onFoot.Throw.performed += ctx => animate.Throw();
-        onFoot.CamZoomIn.performed += ctx => motor.ZoomIn();
-        onFoot.CamZoomOut.performed += ctx => motor.ZoomOut();
+        player.Jump.performed += ctx => motor.Jump();
+        player.Melee.performed += ctx => aniMelee.Melee();
+        player.Throw.performed += ctx => aniThrow.Throw();
+        player.CamZoomIn.performed += ctx => motor.ZoomIn();
+        player.CamZoomOut.performed += ctx => motor.ZoomOut();
     }
 
     void FixedUpdate()
     {
-        motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        if (!PlayerState.isDead && !PlayerState.isWin)   
+            motor.ProcessMove(player.Movement.ReadValue<Vector2>());
     }
 
     void LateUpdate()
     {
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        if (!PlayerState.isDead && !PlayerState.isWin)
+            look.ProcessLook(player.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()
     {
-        onFoot.Enable();
+        player.Enable();
     }
     private void OnDisable()
     {
-        onFoot.Disable();
+        player.Disable();
     }
 }
