@@ -6,8 +6,9 @@ using UnityEngine.InputSystem;
 // Gets inputs from player
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private PlayerInput.PlayerActions player;
+    public static PlayerInput playerInput;
+    public static PlayerInput.PlayerActions player;
+    public static PlayerInput.MenuActions menu;
     
     private PlayerMotor motor;
     private PlayerLook look;
@@ -18,6 +19,9 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         player = playerInput.Player;
+        menu = playerInput.Menu;
+        menu.Disable();
+
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
         aniMelee = GetComponent<PlayerAniMelee>();
@@ -29,6 +33,8 @@ public class InputManager : MonoBehaviour
         player.Throw.performed += ctx => aniThrow.Throw();
         player.CamZoomIn.performed += ctx => motor.ZoomIn();
         player.CamZoomOut.performed += ctx => motor.ZoomOut();
+        player.Pause.performed += ctx => pause.Pause();
+        menu.Pause.performed += ctx => pause.Pause();
     }
 
     void FixedUpdate()
