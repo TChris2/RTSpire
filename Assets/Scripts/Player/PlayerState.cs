@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 // Controls player state and player ui alongside lv load transitions
 public class PlayerState : MonoBehaviour
@@ -33,6 +34,9 @@ public class PlayerState : MonoBehaviour
     // Health UI Animator
     private Animator playerUIAni;
     private Animator playerAni;
+
+    [SerializeField]
+    private GameObject dMenuInitial;
 
     AttackInfo eAtkInfo;
     EnemyHurt eHurt;
@@ -150,8 +154,7 @@ public class PlayerState : MonoBehaviour
         // Restart screen + Main menu screen
         deathUIAni.Play("DeathUILoad");
         
-        
-
+        EventSystem.current.SetSelectedGameObject(dMenuInitial);
     }
     private IEnumerator PlayerWin()
     {
