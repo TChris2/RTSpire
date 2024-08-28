@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Buttons
-public class DeathMenuButtons : MonoBehaviour
+public class PauseMenuBaseButtons : MonoBehaviour
 {
     // Animator for lv load object
     private Animator lvLoadAni;
@@ -33,9 +32,9 @@ public class DeathMenuButtons : MonoBehaviour
     }
 
     // Opening screen when the player presses start
-    public void StartGameButton()
+    public void StartGame()
     {
-        //PlayerState.health = 100;
+        PlayerState.health = 100;
         StartCoroutine(Transition(1));
     }
 
@@ -87,12 +86,5 @@ public class DeathMenuButtons : MonoBehaviour
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex+1);
         }
-    }
-
-    private void OnDisable()
-    {
-        // Saves player health for next lv
-        PlayerPrefs.SetFloat("PlayerHealth", PlayerState.health);
-        PlayerPrefs.Save();
     }
 }
