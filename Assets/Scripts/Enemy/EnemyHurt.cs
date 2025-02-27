@@ -19,6 +19,7 @@ public class EnemyHurt : MonoBehaviour
     // Checks to see whether the enemy has been hit
     public bool isHit;
     // Controls when the EnemyFollow script can start the checking to renable movement
+    // Used in EnemyFollow script
     public bool airWait;
     private BoxCollider attackCollider;
 
@@ -42,24 +43,8 @@ public class EnemyHurt : MonoBehaviour
         if (!isHit)
         {
             // Checks to see which attack the enemy is being attacked by\
-            // If kick
-            if (other.CompareTag("RT Kick") && other.gameObject.name == "Kick Hitbox")
-            {
-                // Sets to true to prevent the enemy being hit multiple times while hit
-                isHit = true;
-                airWait = true;
-                // Gets collider of attack
-                attackCollider = other.GetComponent<BoxCollider>();
-                // Gets attack info
-                atkInfo = other.GetComponent<AttackInfo>();
-                // Deals damage
-                eEntity.Health -= atkInfo.dmg;
-
-                // Applies knockback
-                StartCoroutine(MeleeKnockback(other));
-            }
-            // If punch
-            else if (other.CompareTag("RT Punch") && other.gameObject.name == "Punch Hitbox")
+            // If RT attack
+            if (other.CompareTag("RT Attack") && other.gameObject.name == "Attack Hitbox")
             {
                 // Sets to true to prevent the enemy being hit multiple times while hit
                 isHit = true;
@@ -111,10 +96,10 @@ public class EnemyHurt : MonoBehaviour
         // Gets forward of attack collider
         Vector3 Forward = attackTransform.forward;
         // Sets y comp to zero
-        Vector3 knockbackDirection = new Vector3(Forward.x, 0, Forward.z).normalized;
+        Forward = new Vector3(Forward.x, 0, Forward.z).normalized;
 
         // Adds all forces together
-        Vector3 force = (2*knockbackDirection + directionToAttack/2).normalized * atkInfo.forForce + Vector3.up * atkInfo.upForce;
+        Vector3 force = (2*Forward + directionToAttack/2).normalized * atkInfo.forForce + Vector3.up * atkInfo.upForce;
 
         yield return new WaitForSeconds(.1f);
         
@@ -148,10 +133,10 @@ public class EnemyHurt : MonoBehaviour
         // Gets forward of attack collider
         Vector3 Forward = attackTransform.forward;
         // Sets y comp to zero
-        Vector3 knockbackDirection = new Vector3(Forward.x, 0, Forward.z).normalized;
+        Forward = new Vector3(Forward.x, 0, Forward.z).normalized;
 
         // Adds all forces together
-        Vector3 force = (knockbackDirection/2 + 2*directionToAttack).normalized * atkInfo.forForce + Vector3.up * atkInfo.upForce;
+        Vector3 force = (Forward/2 + 2*directionToAttack).normalized * atkInfo.forForce + Vector3.up * atkInfo.upForce;
         
         yield return new WaitForSeconds(.1f);
 

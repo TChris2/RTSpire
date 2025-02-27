@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Gets inputs from player
+// Gets inputs from the player
 public class InputManager : MonoBehaviour
 {
-    public static PlayerInput playerInput;
-    public static PlayerInput.PlayerActions player;
-    public static PlayerInput.MenuActions menu;
+    private PlayerInput playerInput;
+    public PlayerInput.PlayerActions player;
+    public PlayerInput.MenuActions menu;
     
     private PlayerMotor motor;
     private PlayerLook look;
     private PlayerAniMelee aniMelee;
     private PlayerAniThrow aniThrow;
     private MenuPause pause; 
+    private PlayerState pState;
+    
+    //Maybe change to start
     void Awake()
     {
         playerInput = new PlayerInput();
         player = playerInput.Player;
         menu = playerInput.Menu;
-        menu.Disable();
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
@@ -31,30 +33,42 @@ public class InputManager : MonoBehaviour
         player.Jump.performed += ctx => motor.Jump();
         player.Melee.performed += ctx => aniMelee.Melee();
         player.Throw.performed += ctx => aniThrow.Throw();
-        player.CamZoomIn.performed += ctx => motor.ZoomIn();
-        player.CamZoomOut.performed += ctx => motor.ZoomOut();
+        player.CamZoomIn.performed += ctx => look.StartZoomIn();
+        player.CamZoomIn.canceled += ctx => look.StopZoomIn();
+        player.CamZoomOut.performed += ctx => look.StartZoomOut();
+        player.CamZoomOut.canceled += ctx => look.StopZoomOut();
         player.Pause.performed += ctx => pause.Pause();
         menu.Pause.performed += ctx => pause.Pause();
+
+        pState = GetComponentInChildren<PlayerState>();
     }
 
     void FixedUpdate()
     {
-        if (!PlayerState.isDead && !PlayerState.isWin)   
+        if (!pState.isDead && !pState.isWin)   
             motor.ProcessMove(player.Movement.ReadValue<Vector2>());
     }
 
     void LateUpdate()
     {
-        if (!PlayerState.isDead && !PlayerState.isWin)
+        if (!pState.isDead && !pState.isWin)
+        {
             look.ProcessLook(player.Look.ReadValue<Vector2>());
+        
+            if (look.isZoomIn)
+                look.ZoomIn();
+            if (look.isZoomOut)
+                look.ZoomOut();
+        }
     }
 
     private void OnEnable()
     {
-        player.Enable();
+        playerInput.Enable();
+        menu.Disable();
     }
     private void OnDisable()
     {
-        player.Disable();
+        playerInput.Disable();
     }
 }

@@ -9,7 +9,7 @@ public class TMachineHurt : MonoBehaviour
     AttackInfo atkInfo;
     // Gets health for entity
     TMachineEntity TMEntity;
-    // Controls when the EnemyFollow script can start the checking to renable movement
+    // Controls when player can attack the enemy again
     public bool isHit;
     void Start()
     {
@@ -25,21 +25,8 @@ public class TMachineHurt : MonoBehaviour
         if (!isHit)
         {
             // Checks to see which attack the enemy is being attacked by
-            // If kick
-            if (other.CompareTag("RT Kick") && other.gameObject.name == "Kick Hitbox")
-            {
-                // Sets to true to prevent the enemy being hit multiple times while hit
-                isHit = true;
-                // Gets attack info
-                atkInfo = other.GetComponent<AttackInfo>();
-                // Deals damage
-                TMEntity.Health -= atkInfo.dmg;
-
-                // Starts hit cooldown
-                StartCoroutine(HitCooldown());
-            }
-            // If punch
-            else if (other.CompareTag("RT Punch") && other.gameObject.name == "Punch Hitbox")
+            // If RT attack
+            if (other.CompareTag("RT Attack") && other.gameObject.name == "Attack Hitbox")
             {
                 // Sets to true to prevent the enemy being hit multiple times while hit
                 isHit = true;

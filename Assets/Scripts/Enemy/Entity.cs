@@ -32,14 +32,22 @@ public class Entity : MonoBehaviour
                 eAni.Play("Enemy Hurt");
             }
             // When enemy health reaches zero and dies
-            if (audioSource != null && health <= 0f)
+            else if (audioSource != null && health <= 0f)
             {
-                // Has a 1 in 50 chance to play the scream
-                int randomClipNum = Random.Range(0, 51);
-                if (randomClipNum > 0)
+                
+                int randomClipNum = Random.Range(1, 101);
+                if (randomClipNum > 15) 
+                {
                     randomClipNum = 0;
-                else
+                }
+                else if (randomClipNum <= 15 && randomClipNum > 5)
+                {
                     randomClipNum = 1;
+                }
+                else if (randomClipNum <= 5)
+                {
+                    randomClipNum = 2;
+                }
                 audioSource.PlayOneShot(hurtClips[randomClipNum]);
                 enemy.enabled = false;
                 float delay = hurtClips[randomClipNum].length;

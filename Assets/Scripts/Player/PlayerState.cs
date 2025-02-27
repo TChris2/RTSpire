@@ -20,14 +20,16 @@ public class PlayerState : MonoBehaviour
     public AudioClip win; 
     private AudioSource audioSource;
     // Health
-    public static float health = 100;
-    public static float hMax = 100;
+    public float health = 100;
+    public float hMax = 100;
     [SerializeField]
     private float eAttackCool = 2f;
-    public static bool isDead;
-    public static bool isDamaged;
-    public static bool isWin;
-    public static bool hasWon;
+    // Used in EnemySpawn, EnemyFollow
+    public bool isDead;
+    public bool isDamaged;
+    // Used in EnemySpawn, EnemyFollow, VoiceClips
+    public bool isWin;
+    public bool hasWon;
     [SerializeField]
     private bool isInvincible;
 
@@ -51,9 +53,7 @@ public class PlayerState : MonoBehaviour
     
     void Start()
     {   
-        AudioListener.pause = false;
-        audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.ignoreListenerPause = true;
+        audioSource = GetComponent<AudioSource>();
 
         deathUIAni = GameObject.Find("Death UI").GetComponent<Animator>();
         deathLoadAni = GameObject.Find("Death Transition").GetComponent<Animator>();
@@ -64,7 +64,7 @@ public class PlayerState : MonoBehaviour
         // Sets health display
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
         // Gets player's health from previous level
-        health = PlayerPrefs.GetFloat("PlayerHealth", 0);
+        health = PlayerPrefs.GetFloat("Player Health", hMax);
         healthDisplay.text = $"{health}";
 
         playerUIAni = GameObject.Find("Player UI").GetComponent<Animator>();
@@ -75,7 +75,6 @@ public class PlayerState : MonoBehaviour
     {
         // Checks if the player has won
         if (isWin) {
-            PlayerAniMovement.isWinning = false;
             if (!hasWon)
             {
                 StartCoroutine(PlayerWin());
@@ -106,7 +105,7 @@ public class PlayerState : MonoBehaviour
                     healthDisplay.text = $"{health}";
 
                     if (health > 0)
-                        StartCoroutine(PlayerHurt());
+                        StartCoroutine(PlayerHurt(eAttackCool));
                     // Death
                     else if (health <= 0) {
                         isDead = true;
@@ -117,18 +116,19 @@ public class PlayerState : MonoBehaviour
         }
     }
 
-    private IEnumerator PlayerHurt()
+    public IEnumerator PlayerHurt(float cooldown)
     {
         // Changes UI
         playerUIAni.Play("Hurt");
-        playerAni.Play("PlayerHurt");
+        playerAni.Play("Player Hurt");
 
         audioSource.PlayOneShot(hurt[0]);
         // Gives a short time of invincibility to the player until they can get hit again
-        yield return new WaitForSeconds(eAttackCool);
+        yield return new WaitForSeconds(cooldown);
 
         // Changes UI back
         playerUIAni.Play("Normal");
+        playerAni.SetTrigger("No Longer Invincible");
 
         isDamaged = false;
     }
@@ -136,12 +136,16 @@ public class PlayerState : MonoBehaviour
     private IEnumerator PlayerDead()
     {
         AudioListener.pause = true;
+        audioSource.ignoreListenerPause = true;
+        playerAni.updateMode = AnimatorUpdateMode.UnscaledTime;
+        Time.timeScale = 0;
         audioSource.PlayOneShot(hurt[1]);
         float delay = hurt[1].length; 
         
         playerUIAni.Play("Dead");
+        playerAni.Play("Death");
         // Waits until the player dead sfx finishes playing
-        yield return new WaitForSeconds(delay-1.2f);
+        yield return new WaitForSecondsRealtime(delay-1.2f);
         
         // Death load screen
         deathLoadAni.Play("DeathLoad");
@@ -149,25 +153,32 @@ public class PlayerState : MonoBehaviour
         audioSource.PlayOneShot(vonLaugh);
         delay = vonLaugh.length; 
         // Waits until the laugh sfx plays
-        yield return new WaitForSeconds(delay+.5f);
+        yield return new WaitForSecondsRealtime(delay+.5f);
 
         // Restart screen + Main menu screen
         deathUIAni.Play("DeathUILoad");
         
         EventSystem.current.SetSelectedGameObject(dMenuInitial);
     }
+
     private IEnumerator PlayerWin()
     {
         hasWon = true;
+        AudioListener.pause = true;
+        audioSource.ignoreListenerPause = true;
+        playerAni.updateMode = AnimatorUpdateMode.UnscaledTime;
+        Time.timeScale = 0;
         audioSource.PlayOneShot(win);
         float delay = win.length; 
+        // Plays player win animation
+        playerAni.Play("Win");
         // Waits until the player win sfx finishes playing
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         
         // Lv outro transition
         lvLoadAni.Play("LvOutro");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         // Next level
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex+1);
@@ -178,7 +189,11 @@ public class PlayerState : MonoBehaviour
     private void OnDisable()
     {
         // Saves player health for next lv
-        PlayerPrefs.SetFloat("PlayerHealth", health);
+        PlayerPrefs.SetFloat("Player Health", health);
         PlayerPrefs.Save();
+
+        // Resets timescale & audiolistener before moving to the next scene
+        Time.timeScale = 1;
+        AudioListener.pause = false;
     }
 }

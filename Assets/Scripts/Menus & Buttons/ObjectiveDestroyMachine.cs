@@ -9,7 +9,7 @@ public class ObjectiveDestroyMachine : MonoBehaviour
     [SerializeField]
     private float TMachineTotal;
     // Keeps track of the remaining machines the player has to destroy
-    public static float TMachineCounter;
+    public float TMachineCounter;
     // Text
     private TMPro.TMP_Text DestroyText;
     private TMPro.TMP_Text DestroyCounter;

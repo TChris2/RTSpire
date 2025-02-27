@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// Reselects UI
 public class UIReselector : MonoBehaviour
 {
     private GameObject pMenuCurrent;

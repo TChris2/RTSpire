@@ -17,33 +17,36 @@ public class CupcakeMove : MonoBehaviour
     // How long till it is deleted
     [SerializeField]
     private float cSnap = 6;
-    public static bool isGrounded;
+    public bool isGrounded;
     private Animator cupcakeAni;
     private CupcakeCounter cCount;
+    private GameObject player;
+    private PlayerAniThrow pAniThrow;
+    private PlayerAniMovement pAniMovement;
     
     void Start()
     {
         cupcakeAni = GetComponent<Animator>();
         cCount = GameObject.Find("CupcakeCounter").GetComponent<CupcakeCounter>();
+        player = GameObject.Find("Player");
+        pAniThrow = player.GetComponent<PlayerAniThrow>();
+        pAniMovement = player.GetComponent<PlayerAniMovement>();
         // Gets controller from the object
         controller = GetComponent<CharacterController>();
         // Determines the direction from the player Cupcake moves
         CupcakeDirection();
-        throwDirection = PlayerAniThrow.cRotate * throwDirection;
+        throwDirection = pAniThrow.cRotate * throwDirection;
         // Starts the snap countdown
         StartCoroutine(CupcakeSnap());
     }
 
     void Update()
     {
-        // Sees if player is grounded
-        isGrounded = controller.isGrounded;
-
         // Applies movement
         controller.Move(transform.TransformDirection(throwDirection) * speed * Time.deltaTime);
         playerVelocity.y += gravity * Time.deltaTime;
         // If in the air
-        if (isGrounded && playerVelocity.y < 0)
+        if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2;
         }
@@ -64,20 +67,20 @@ public class CupcakeMove : MonoBehaviour
     void CupcakeDirection()
     {
         // Throw Left and Throw Left Diagonal
-        if (PlayerAniMovement.prevInputX < 0)
+        if (pAniMovement.prevInputX < 0)
         {   
             // Throw Left Diagonal
-            if (PlayerAniMovement.prevInputX != -1)
+            if (pAniMovement.prevInputX != -1)
             {   
                 // Throw Left Forward Diagonal
-                if (PlayerAniMovement.prevInputZ > 0)
+                if (pAniMovement.prevInputZ > 0)
                 {
                     throwDirection.x = -1;
                     throwDirection.z = 1;
                 }
 
                 // Throw Left Back Diagonal
-                else if (PlayerAniMovement.prevInputZ < 0)
+                else if (pAniMovement.prevInputZ < 0)
                 {
                     throwDirection.x = -1;
                     throwDirection.z = -1;
@@ -92,20 +95,20 @@ public class CupcakeMove : MonoBehaviour
         }
 
         // Throw Right and Throw Right Diagonal
-        else if (PlayerAniMovement.prevInputX > 0)
+        else if (pAniMovement.prevInputX > 0)
         {   
             // Throw Right Diagonal
-            if (PlayerAniMovement.prevInputX != 1)
+            if (pAniMovement.prevInputX != 1)
             {   
                 // Throw Right Forward Diagonal
-                if (PlayerAniMovement.prevInputZ > 0)
+                if (pAniMovement.prevInputZ > 0)
                 {
                     throwDirection.x = 1;
                     throwDirection.z = 1;
                 }
 
                 // Throw Right Back Diagonal
-                else if (PlayerAniMovement.prevInputZ < 0)
+                else if (pAniMovement.prevInputZ < 0)
                 {
                     throwDirection.x = 1;
                     throwDirection.z = -1;
@@ -120,14 +123,14 @@ public class CupcakeMove : MonoBehaviour
         }
 
         // Throw Forward
-        else if (PlayerAniMovement.prevInputZ == 1)
+        else if (pAniMovement.prevInputZ == 1)
         {
             throwDirection.x = 0;
             throwDirection.z = 1;
         }
 
         // Throw Back
-        else if (PlayerAniMovement.prevInputZ == -1)
+        else if (pAniMovement.prevInputZ == -1)
         {
             throwDirection.x = 0;
             throwDirection.z = -1;

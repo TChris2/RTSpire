@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Buttons
+// Button functions for the death menu
 public class DeathMenuButtons : MonoBehaviour
 {
     // Animator for lv load object
     private Animator lvLoadAni;
     // Animator for death ui
     private Animator deathUIAni;
+    private PlayerState pState;
+
+    void Start()
+    {
+        pState = GameObject.Find("Player Hitbox").GetComponent<PlayerState>();
+    }
 
     // When the player dies and selects the restart option
     public void LvRestart()
     {
         // Resets player health
-        //PlayerState.health = 100;
+        pState.health = 100;
 
         StartCoroutine(TransitionDeath(1));
     }
@@ -35,7 +41,7 @@ public class DeathMenuButtons : MonoBehaviour
     // Opening screen when the player presses start
     public void StartGame()
     {
-        PlayerState.health = 100;
+        pState.health = 100;
         StartCoroutine(Transition(1));
     }
 
@@ -45,7 +51,7 @@ public class DeathMenuButtons : MonoBehaviour
         deathUIAni = GameObject.Find("Death UI").GetComponent<Animator>();
         // Lv outro transition
         deathUIAni.Play("DeathUIFade");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
 
         // Goes to Main Menu
         if (state == 0)
@@ -71,7 +77,7 @@ public class DeathMenuButtons : MonoBehaviour
         // ---------------------------
         // ---------------------------
         // Maybe make longer
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
 
         // Goes to Main Menu
         if (state == 0)
@@ -82,7 +88,7 @@ public class DeathMenuButtons : MonoBehaviour
         else if (state == 1)
         {
             // Sets player health to full
-            PlayerState.health = 100;
+            pState.health = pState.hMax;
 
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex+1);
@@ -92,7 +98,7 @@ public class DeathMenuButtons : MonoBehaviour
     private void OnDisable()
     {
         // Saves player health for next lv
-        PlayerPrefs.SetFloat("PlayerHealth", PlayerState.health);
+        PlayerPrefs.SetFloat("PlayerHealth", pState.health);
         PlayerPrefs.Save();
     }
 }

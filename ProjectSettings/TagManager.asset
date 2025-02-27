@@ -8,9 +8,9 @@ TagManager:
   - Enemy
   - Cupcake
   - TMachine
-  - RT Kick
   - NavMesh
-  - RT Punch
+  - RT Attack
+  - RT
   layers:
   - Default
   - TransparentFX

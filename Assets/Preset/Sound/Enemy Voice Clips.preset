@@ -1,0 +1,411 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enemy Voice Clips
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 977724d34d475e74381ca4bdac38b42e, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.size
+    value: 95
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[0]
+    value: 
+    objectReference: {fileID: 8300000, guid: 0e90f976dd32427428efe6424b6d3e1d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[1]
+    value: 
+    objectReference: {fileID: 8300000, guid: e61cc20667a25e54e966a6d8e5474698, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[2]
+    value: 
+    objectReference: {fileID: 8300000, guid: ecb9ed45659a0164f9d65722b5b7ac77, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[3]
+    value: 
+    objectReference: {fileID: 8300000, guid: be396f4d13135d446af82105fff98c6d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[4]
+    value: 
+    objectReference: {fileID: 8300000, guid: f3d04aa6226e496468f4303dce6b45ed, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[5]
+    value: 
+    objectReference: {fileID: 8300000, guid: 229ad1422bd54ff48887fc6e6af6847b, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[6]
+    value: 
+    objectReference: {fileID: 8300000, guid: c6c3339441282a247ac3fd0005daecb6, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[7]
+    value: 
+    objectReference: {fileID: 8300000, guid: 0168638694023824e857fc7e36ed2a2f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[8]
+    value: 
+    objectReference: {fileID: 8300000, guid: a656a0252d41f864883e87dcd7187b79, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[9]
+    value: 
+    objectReference: {fileID: 8300000, guid: 8835a8018b6a07f4f847781e2d8dc5db, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[10]
+    value: 
+    objectReference: {fileID: 8300000, guid: 238318d64098fee479933e26a944e5c0, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[11]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2f6678f21f6fe454a883390714f1109e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[12]
+    value: 
+    objectReference: {fileID: 8300000, guid: 70a36625054dfbd4fa023092a4524dca, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[13]
+    value: 
+    objectReference: {fileID: 8300000, guid: d44d7388615affb4ebbdf76ef8e7d88b, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[14]
+    value: 
+    objectReference: {fileID: 8300000, guid: a254504b6ae0069499122827a1ab069f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[15]
+    value: 
+    objectReference: {fileID: 8300000, guid: 16265613ca4dd8a458c7cf43d229d847, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[16]
+    value: 
+    objectReference: {fileID: 8300000, guid: 4b51224ccf74cc94e87e257d51bce43e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[17]
+    value: 
+    objectReference: {fileID: 8300000, guid: e680e6a4687431d49a659169a5aa63ed, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[18]
+    value: 
+    objectReference: {fileID: 8300000, guid: 768cabe5957cd2c47a427136fb90d1ca, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[19]
+    value: 
+    objectReference: {fileID: 8300000, guid: 5584bde06cd640640881a742a0753ba3, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[20]
+    value: 
+    objectReference: {fileID: 8300000, guid: 131c217d9e10a544894e46e427e3fc2d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[21]
+    value: 
+    objectReference: {fileID: 8300000, guid: 09d0c13447b8ff8499a0e40e4ba8b8de, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[22]
+    value: 
+    objectReference: {fileID: 8300000, guid: 111e54c36bd2e41429f19b3acc3323df, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[23]
+    value: 
+    objectReference: {fileID: 8300000, guid: f499ff1ec029a7147942a5c7b48ad707, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[24]
+    value: 
+    objectReference: {fileID: 8300000, guid: 253df51eb1b65764ab28596eba645db1, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[25]
+    value: 
+    objectReference: {fileID: 8300000, guid: c3d2446fdce734d499ba24b49a3c3f83, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[26]
+    value: 
+    objectReference: {fileID: 8300000, guid: 9f9cdd5713cde7a4ba2ff4e563f75d94, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[27]
+    value: 
+    objectReference: {fileID: 8300000, guid: 8d846542f4b1e83458e050cef335cc78, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[28]
+    value: 
+    objectReference: {fileID: 8300000, guid: c5845da696ba4bd4d922bc12d6e84ad7, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[29]
+    value: 
+    objectReference: {fileID: 8300000, guid: 7130f7412673ab141a1976165c2fa5e1, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[30]
+    value: 
+    objectReference: {fileID: 8300000, guid: d76445422f30a4d448e968a034f4e390, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[31]
+    value: 
+    objectReference: {fileID: 8300000, guid: 7d5b08da78dfab642902e82a9fa6f81f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[32]
+    value: 
+    objectReference: {fileID: 8300000, guid: 36e3af918aa3f544d916205f4db97bb0, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[33]
+    value: 
+    objectReference: {fileID: 8300000, guid: 966a2425f483eb647aa180b72bed2825, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[34]
+    value: 
+    objectReference: {fileID: 8300000, guid: a808b6440029c724dad7a4d4a11844c4, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[35]
+    value: 
+    objectReference: {fileID: 8300000, guid: b7f45e01ba37ac742a32d8d58a8d882c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[36]
+    value: 
+    objectReference: {fileID: 8300000, guid: 3e2d64da227b98242b65683180c13837, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[37]
+    value: 
+    objectReference: {fileID: 8300000, guid: abddd6e47a2ef4343a5d0f387555e153, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[38]
+    value: 
+    objectReference: {fileID: 8300000, guid: a7f8290b320d0084c9ac868fca808782, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[39]
+    value: 
+    objectReference: {fileID: 8300000, guid: c07c5c98e011f524cbe21802ab4c88b6, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[40]
+    value: 
+    objectReference: {fileID: 8300000, guid: 69615d3a6f9e49a4991e1f67a65469f6, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[41]
+    value: 
+    objectReference: {fileID: 8300000, guid: ba39a0959436ab143a00ac494502bff2, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[42]
+    value: 
+    objectReference: {fileID: 8300000, guid: 75b45cd43e7399a428e2a963c4334f7a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[43]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2240dc77137405b4a96b4e6c9a00506c, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[44]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2267a8437a692834cbb343626a098699, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[45]
+    value: 
+    objectReference: {fileID: 8300000, guid: 5aede9f7c90147c4ebe8c14959be275e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[46]
+    value: 
+    objectReference: {fileID: 8300000, guid: 5e4240d8b983bf745b3fa6a6b43e944d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[47]
+    value: 
+    objectReference: {fileID: 8300000, guid: d645de9f514b56c48bb2214581f4878d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[48]
+    value: 
+    objectReference: {fileID: 8300000, guid: b27c45ec0acad8e48ac27a8e645f7f76, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[49]
+    value: 
+    objectReference: {fileID: 8300000, guid: b2018ae0c2c62834fb1b5b53a64c067a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[50]
+    value: 
+    objectReference: {fileID: 8300000, guid: 60311fc4f4633544990c24867aa79625, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[51]
+    value: 
+    objectReference: {fileID: 8300000, guid: 5e99bb467138d6943a13f9541db4548a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[52]
+    value: 
+    objectReference: {fileID: 8300000, guid: d301629bff6043c4da64542fde1339fe, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[53]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2ccbfcc922092374f8425f790e251b83, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[54]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2028142b2733c814dac67aa19022c6db, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[55]
+    value: 
+    objectReference: {fileID: 8300000, guid: 1e6d9c7665e69f24491c6316936ee013, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[56]
+    value: 
+    objectReference: {fileID: 8300000, guid: e7aa6fa7c0ebc8a45b1ab98faab697e0, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[57]
+    value: 
+    objectReference: {fileID: 8300000, guid: d561e44f09d8a4a40af244b52a3e664f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[58]
+    value: 
+    objectReference: {fileID: 8300000, guid: a584e2c497d0a10448d5237c70b13250, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[59]
+    value: 
+    objectReference: {fileID: 8300000, guid: e0b86e71557527e47b3f32f395565d76, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[60]
+    value: 
+    objectReference: {fileID: 8300000, guid: ce2ede65a98cc5c438252ff32a3ffb5f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[61]
+    value: 
+    objectReference: {fileID: 8300000, guid: 8424680d0686def4ca04119d56b8e692, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[62]
+    value: 
+    objectReference: {fileID: 8300000, guid: d9c49b055a41f51418dadd4d5adb168e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[63]
+    value: 
+    objectReference: {fileID: 8300000, guid: 3191765e81b43a5448a956e959a89e4a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[64]
+    value: 
+    objectReference: {fileID: 8300000, guid: 15ac34bffb1d75944a8cef1adbc9c8e5, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[65]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2378c9263706b964f9e7e4330ec476fa, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[66]
+    value: 
+    objectReference: {fileID: 8300000, guid: 2fef67fc8595ca141bcfcc36cdd53c0a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[67]
+    value: 
+    objectReference: {fileID: 8300000, guid: 326ade71311267d42b8e8d1695ea3941, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[68]
+    value: 
+    objectReference: {fileID: 8300000, guid: ce821826076c4144eae4582a86708a41, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[69]
+    value: 
+    objectReference: {fileID: 8300000, guid: 7447b2b0d8a9ac543aeeb01da6322e12, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[70]
+    value: 
+    objectReference: {fileID: 8300000, guid: 698da16a837b8ce4ab31ca28a17587d6, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[71]
+    value: 
+    objectReference: {fileID: 8300000, guid: f051f249199140c4aa7038ec9fef69e9, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[72]
+    value: 
+    objectReference: {fileID: 8300000, guid: 92dc90f6bb6dee84e81c21a84866397b, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[73]
+    value: 
+    objectReference: {fileID: 8300000, guid: 01f0a75071bc02240a8dbb180a06aebd, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[74]
+    value: 
+    objectReference: {fileID: 8300000, guid: 53ce89c3c4491a346883ecfcc2dd9c11, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[75]
+    value: 
+    objectReference: {fileID: 8300000, guid: d156df1ac507db24094ba13fa876b6b8, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[76]
+    value: 
+    objectReference: {fileID: 8300000, guid: 53b13ae88b245834e835c8e564e71344, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[77]
+    value: 
+    objectReference: {fileID: 8300000, guid: 33770594a3f45194db91439ba413e887, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[78]
+    value: 
+    objectReference: {fileID: 8300000, guid: 70474d090cc88e14e818b1f01c26eb82, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[79]
+    value: 
+    objectReference: {fileID: 8300000, guid: 7f6acac5d7a9c3d4f907f976ea4682a3, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[80]
+    value: 
+    objectReference: {fileID: 8300000, guid: f62f6fb5d0200b244a256011c19e25a9, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[81]
+    value: 
+    objectReference: {fileID: 8300000, guid: f0f6e42bfe5a6b349b56f1b6656594d8, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[82]
+    value: 
+    objectReference: {fileID: 8300000, guid: aba84bcf66bc53e4ea9ba160eb4d1bae, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[83]
+    value: 
+    objectReference: {fileID: 8300000, guid: cd259742b1cbfcc4aa014ad839b5d6af, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[84]
+    value: 
+    objectReference: {fileID: 8300000, guid: 24b53a896f258a240ab07b7d02d5f3b4, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[85]
+    value: 
+    objectReference: {fileID: 8300000, guid: f0f87362d2ef2714f876303c4542a24f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[86]
+    value: 
+    objectReference: {fileID: 8300000, guid: 8a5e6502b85e42b4aa3846a67a880521, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[87]
+    value: 
+    objectReference: {fileID: 8300000, guid: 627be07cc8b99104baa857f1120639c2, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[88]
+    value: 
+    objectReference: {fileID: 8300000, guid: be8a7bc00b8bfff4b9a7ac5f798ed991, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[89]
+    value: 
+    objectReference: {fileID: 8300000, guid: dbcb5ee271f365e4e9225e1df8fd26c4, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[90]
+    value: 
+    objectReference: {fileID: 8300000, guid: 240b892fe794f5d499a6fcdc9f479d8d, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[91]
+    value: 
+    objectReference: {fileID: 8300000, guid: 6d3a9f6a43da58f4881cde9d625d18aa, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[92]
+    value: 
+    objectReference: {fileID: 8300000, guid: 848dbb1263364fe4d825ba44d8d18373, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[93]
+    value: 
+    objectReference: {fileID: 8300000, guid: 7f706062b335f8544b54ae7ad8c05ef1, type: 3}
+  - target: {fileID: 0}
+    propertyPath: voiceClips.Array.data[94]
+    value: 
+    objectReference: {fileID: 8300000, guid: ccefbd6460c0c6948a273bda142f9562, type: 3}
+  m_ExcludedProperties: []

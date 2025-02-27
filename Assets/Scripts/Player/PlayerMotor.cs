@@ -9,18 +9,21 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     public float speed = 5;
-    public static bool isGrounded;
     public float gravity = -9.8f;
     public float jumpHeight = 3;
     // for player animation
-    public static float inputX;
-    public static float inputZ;
-    public static Vector3 lastGroundPos;
+    public float inputX;
+    public float inputZ;
+    public Vector3 lastGroundPos;
+    public bool isGrounded;
+    private PlayerState pState;
 
     void Start()
     {
         pCam = GameObject.Find("Main Camera").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
+
+        pState = GetComponentInChildren<PlayerState>();
     }
 
     void Update()
@@ -34,6 +37,7 @@ public class PlayerMotor : MonoBehaviour
         // Gets the player's last ground pos
         if (isGrounded)
             lastGroundPos = transform.position;
+            
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
@@ -42,7 +46,7 @@ public class PlayerMotor : MonoBehaviour
         inputZ = input.y;
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
         playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
+        if (controller.isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -2;
         }
@@ -52,24 +56,10 @@ public class PlayerMotor : MonoBehaviour
     // Jumping
     public void Jump()
     {
-        if (isGrounded && !PlayerState.isDead && !PlayerState.isWin) 
+        if (isGrounded && !pState.isDead && !pState.isWin) 
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
         }
-    }
-
-    // Camera zoom in
-    public void ZoomIn()
-    {
-        if (!PlayerState.isDead && !PlayerState.isWin)
-            PlayerLook.distance -= 1;
-    }
-
-    // Camera zoom out
-    public void ZoomOut()
-    {
-        if (!PlayerState.isDead && !PlayerState.isWin)
-            PlayerLook.distance += 1;
     }
 
     // Orientates the player to the camera

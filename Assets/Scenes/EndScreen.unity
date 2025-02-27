@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465878, g: 0.4964224, b: 0.57482475, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -791,8 +791,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102356913003515623}
-  - component: {fileID: 2602547304837939033}
   - component: {fileID: 2602547304837939034}
+  - component: {fileID: 2602547304837939035}
   m_Layer: 5
   m_Name: Start UI
   m_TagString: Untagged
@@ -800,18 +800,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2602547304837939033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2602547304837939032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8943659963095794aa319f8ed98428c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2602547304837939034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,6 +810,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b84981dba20116b8ac50b162fe8534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2602547304837939035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602547304837939032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fe16afe70155f4cb338e422cc4785b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3059013387864911516
@@ -1138,8 +1138,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2602547304837939033}
-        m_TargetAssemblyTypeName: DeathMenuButtons, Assembly-CSharp
+      - m_Target: {fileID: 2602547304837939035}
+        m_TargetAssemblyTypeName: StartMenuButtons, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:

@@ -23,6 +23,7 @@ public class EnemyFollow : MonoBehaviour
     // Enemy animator
     Animator eAni;
     // If the enemy can move
+    // Used in EnemyHurt
     public bool isWalk;
     Rigidbody enemyRb;
 
@@ -41,33 +42,25 @@ public class EnemyFollow : MonoBehaviour
 
     void Update()
     {
-        // If the player has not yet won or died
-        if (!PlayerState.isDead && !PlayerState.isWin)  
+        // If airWait, the navmesh agent, and isWalk is disabled
+        if (!eHurt.airWait && !enemy.enabled && !isWalk)
         {
-            // If airWait, the navmesh agent, and isWalk is disabled
-            if (!eHurt.airWait && !enemy.enabled && !isWalk)
+            // Checks to see if the enemy is on a navmesh
+            IsOnNavMesh = CheckIfOnNavMesh();
+            // If the enemy is on a navmesh
+            if (IsOnNavMesh) 
             {
-                // Checks to see if the enemy is on a navmesh
-                IsOnNavMesh = CheckIfOnNavMesh();
-                // If the enemy is on a navmesh
-                if (IsOnNavMesh) 
-                {
-                    // Sets isWalk to true
-                    isWalk = true;
-                    // Plays down animation
-                    eAni.SetTrigger("Down");
-                    // Renables movement
-                    StartCoroutine(NavMeshOn());
-                }
+                // Sets isWalk to true
+                isWalk = true;
+                // Plays down animation
+                eAni.SetTrigger("Down");
+                // Renables movement
+                StartCoroutine(NavMeshOn());
             }
-            // Sets player's current position as a destination
-            if (enemy.enabled)
-                enemy.SetDestination(player.position);
         }
-        // Enemy stops moving once the player is dead or wins
-        if (enemy.enabled && PlayerState.isDead || enemy.enabled && PlayerState.isWin) {
-            enemy.isStopped = true;
-        }
+        // Sets player's current position as a destination
+        if (enemy.enabled)
+            enemy.SetDestination(player.position);
     }
 
     // Checks to see if the player is on a navmesh

@@ -9,11 +9,14 @@ public class ObjectiveSurvive : MonoBehaviour
     [SerializeField]
     private float totalTime = 80;
     // Current time
-    public static float timer;
+    public float timer;
     // Text
     private TMPro.TMP_Text SurviveText;
     private TMPro.TMP_Text Timer;
     private bool counting;
+    
+    private PlayerState pState;
+
     void Start()
     {
         // Gets Start time for lv
@@ -28,6 +31,8 @@ public class ObjectiveSurvive : MonoBehaviour
         SurviveText.text = $"{"Survive"}";
         Timer.text = $"{timer}";
         StartCoroutine(TimerStart());
+
+        pState = GameObject.Find("Player Hitbox").GetComponent<PlayerState>();
     }
 
     private IEnumerator TimerStart()
@@ -40,7 +45,7 @@ public class ObjectiveSurvive : MonoBehaviour
     void FixedUpdate()
     {
         // Decreases timer
-        if (counting && !PlayerState.isDead)    
+        if (counting)    
         {
             timer -= Time.deltaTime;
             int roundedTime = Mathf.RoundToInt(timer);
@@ -48,7 +53,7 @@ public class ObjectiveSurvive : MonoBehaviour
             if (roundedTime >= 0)
                 Timer.text = $"{roundedTime}";
             else
-                PlayerState.isWin = true;
+                pState.isWin = true;
         }
     }
 }

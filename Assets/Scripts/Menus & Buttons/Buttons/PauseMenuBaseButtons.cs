@@ -2,89 +2,159 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
+// Button functions for the pause screen menu
 public class PauseMenuBaseButtons : MonoBehaviour
 {
     // Animator for lv load object
     private Animator lvLoadAni;
-    // Animator for death ui
-    private Animator deathUIAni;
+    private MenuPause pause;
 
-    // When the player dies and selects the restart option
-    public void LvRestart()
-    {
-        // Resets player health
-        //PlayerState.health = 100;
+    [SerializeField]
+    private CanvasGroup pScreenBase;
+    [SerializeField]
+    private CanvasGroup ynScreen;
+    [SerializeField]
+    private GameObject ynInitial;
+    private GameObject pScreenPrev;
+    [SerializeField]
+    private TMPro.TMP_Text ynText;
+    [SerializeField]
+    private CanvasGroup opMenu;
+    [SerializeField]
+    private CanvasGroup gameMenu;
+    [SerializeField]
+    private CanvasGroup audioMenu;
+    [SerializeField]
+    private GameObject opInitial;
+    // Decides what scene the game exits to
+    // 1: Hub 2: Menu 3: Exits Game
+    private float ynNext;
 
-        StartCoroutine(TransitionDeath(1));
-    }
-
-    // When the player dies and selects main menu
-    public void DeathMainMenu()
-    {
-        StartCoroutine(TransitionDeath(0));
-    }
-
-    // When the player beats the game and goes back to the main menu
-    public void MainMenu()
-    {
-        StartCoroutine(Transition(0));
-    }
-
-    // Opening screen when the player presses start
-    public void StartGame()
-    {
-        PlayerState.health = 100;
-        StartCoroutine(Transition(1));
-    }
-
-    // Does fade load to death UI to next scene
-    private IEnumerator TransitionDeath(int state)
-    {
-        deathUIAni = GameObject.Find("Death UI").GetComponent<Animator>();
-        // Lv outro transition
-        deathUIAni.Play("DeathUIFade");
-        yield return new WaitForSeconds(2f);
-
-        // Goes to Main Menu
-        if (state == 0)
-        {
-            SceneManager.LoadScene(0);
-        }
-        // Restarts level
-        else if (state == 1)
-        {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex);
-        }
-    }
-
-    // Transitions to main menu or start of game
-    private IEnumerator Transition(int state)
+    void Start()
     {
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
+    }
 
+    // Resumes the game
+    public void Resume()
+    {
+        pause = GameObject.Find("Player").GetComponent<MenuPause>();
+        pause.Pause();
+    }
+
+    // Exits to hub
+    public void ExitHub(GameObject prevBtn)
+    {
+        ynText.text = $"{"\nExit To Hub?"}";
+        ynNext = 1;
+        ynMenuOpen(prevBtn);
+    }
+
+    // Exits to main menu
+    public void ExitMainMenu(GameObject prevBtn)
+    {
+        ynText.text = $"{"Exit To\nMain Menu?"}";
+        ynNext = 2;
+        ynMenuOpen(prevBtn);
+    }
+
+    // Exits the game
+    public void ExitGame(GameObject prevBtn)
+    {
+        ynText.text = $"{"\nExit Game?"}";
+        ynNext = 3;
+        ynMenuOpen(prevBtn);
+    }
+
+    void ynMenuOpen(GameObject prevBtn) 
+    {
+        pScreenPrev = prevBtn;
+        pScreenBase.interactable = false;
+        pScreenBase.alpha = 0;
+        pScreenBase.blocksRaycasts = false;
+
+        EventSystem.current.SetSelectedGameObject(ynInitial);
+
+        ynScreen.interactable = true;
+        ynScreen.alpha = 1;
+        ynScreen.blocksRaycasts = true;
+    }
+
+    public void OpMenuOpen(GameObject prevBtn) 
+    {
+        pScreenPrev = prevBtn;
+        pScreenBase.interactable = false;
+        pScreenBase.alpha = 0;
+
+        // Ensures menu is disabled when the option menu is opened
+        audioMenu.interactable = false;
+        audioMenu.alpha = 0;
+        audioMenu.blocksRaycasts = false;
+
+        EventSystem.current.SetSelectedGameObject(opInitial);
+
+        gameMenu.interactable = true;
+        gameMenu.alpha = 1;
+        gameMenu.blocksRaycasts = true;
+
+        opMenu.interactable = true;
+        opMenu.alpha = 1;
+        opMenu.blocksRaycasts = true;
+    }
+
+    public void Yes()
+    {
+        ynScreen.interactable = false;
+        StartCoroutine(Next());
+    }
+
+    IEnumerator Next()
+    {
         // Lv outro transition
+        lvLoadAni.speed = 1.5f;
         lvLoadAni.Play("LvOutro");
         // ---------------------------
         // ---------------------------
         // ---------------------------
         // Maybe make longer
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
-        // Goes to Main Menu
-        if (state == 0)
+        switch (ynNext)
         {
-            SceneManager.LoadScene(0);
+            // 1: Hub 
+            case 1:
+                Debug.Log("Does Not Have Functionality Currently");
+                No();
+                break;
+            // 2: Menu
+            case 2:
+                SceneManager.LoadScene(0);
+                break;
+            // 3: Exits Game
+            case 3:
+                Application.Quit();
+                break;
         }
-        // Starts Game
-        else if (state == 1)
-        {
-            // Sets player health to full
-            PlayerState.health = 100;
+    }
 
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex+1);
-        }
+    public void No()
+    {
+        ynScreen.interactable = false;
+        ynScreen.alpha = 0;
+        ynScreen.blocksRaycasts = false;
+
+        EventSystem.current.SetSelectedGameObject(pScreenPrev);
+
+        pScreenBase.interactable = true;
+        pScreenBase.alpha = 1;
+        pScreenBase.blocksRaycasts = true;
+    }
+
+    private void OnDisable()
+    {
+        lvLoadAni.speed = 1;
+        Time.timeScale = 1;
     }
 }

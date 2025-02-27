@@ -7,11 +7,20 @@ public class TMachineState : MonoBehaviour
 {
     public AudioClip ding; 
     private AudioSource audioSource;
-    public bool eSpawnTime;
     private TMachineEntity TMEntity;
+    // Determines whether the machine is breakable or unbreakable
     [SerializeField]
     private bool isBreakable;
     private Animator TMAni;
+    // For spawning enemies
+    [SerializeField]
+    private Transform centerPos;
+    // Enemy prefab
+    [SerializeField]
+    private GameObject Enemy;
+    // Enemy spawn cooldown
+    [SerializeField]
+    private float sCooldown = 10f;
 
 
     void Start()
@@ -20,34 +29,37 @@ public class TMachineState : MonoBehaviour
         audioSource = GetComponentInChildren<AudioSource>();
         TMEntity = GetComponentInChildren<TMachineEntity>();
         TMAni = GetComponent<Animator>();
+
+        StartCoroutine(ESpawn());
     }
 
-    void Update()
+    IEnumerator ESpawn() 
     {
-        if (!PlayerState.isDead && !PlayerState.isWin) 
+        while (true) 
         {
-            // Open and closing animations
-            if (!isBreakable && eSpawnTime || eSpawnTime && TMEntity != null && !TMEntity.isTMachineDestroyed)
-            {
-                eSpawnTime = false;
-                TMAni.Play("TMachineOpen");
-                audioSource.PlayOneShot(ding);
-                float delay = ding.length; 
-                // Closes machine after delay
-                Invoke("MachineClose", delay-1f);
-            }
-        } 
-        // If player has died or won
-        else if (PlayerState.isDead || PlayerState.isWin)
-            if (!isBreakable || !TMEntity.isTMachineDestroyed)
-                TMAni.Play("TMachineClosed");
-        
-    }
+            // Starts the cooldown
+            yield return new WaitForSeconds(sCooldown);
 
-    void MachineClose()
-    {
-        if (!isBreakable || TMEntity.isTMachineDestroyed == false)
-        {
+            // If the loop has already started when the machine was already destroyed
+            if (isBreakable && TMEntity != null && TMEntity.isTMachineDestroyed) 
+                break;
+
+            TMAni.Play("TMachineOpen");
+            audioSource.PlayOneShot(ding);
+            float delay = ding.length; 
+
+            // Spawns enemies on each side of the machine
+            Instantiate(Enemy, centerPos.position + new Vector3(-10, 0, 0), Quaternion.identity);
+            Instantiate(Enemy, centerPos.position + new Vector3(10, 0, 0), Quaternion.identity);
+            Instantiate(Enemy, centerPos.position + new Vector3(0, 0, 10), Quaternion.identity);
+            Instantiate(Enemy, centerPos.position + new Vector3(0, 0, -10), Quaternion.identity);
+            
+            yield return new WaitForSeconds(delay-1f);
+
+            // Prevents closed animation from spawning when the TMachine is destroyed
+            if (isBreakable && TMEntity != null && TMEntity.isTMachineDestroyed)
+                break;
+
             TMAni.Play("TMachineClosed");
         }
     }
