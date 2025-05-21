@@ -34,11 +34,11 @@ public class TumbleAudioSettings : MonoBehaviour
     // Sub op menu
     [SerializeField]
     private CanvasGroup subOpMenu;
-    // Initial selected object for the clip menu
+    // Initial selected object for the sub op menu
     [SerializeField]
     private GameObject subMenuInitial;
     [SerializeField]
-    private VoiceClipSelectionMenuButtons vClipMenu;
+    private VoiceClipSelectionButtons vClipMenu;
     [SerializeField]
     private SubOptionMenuButtons SubOpMenuBtns;
     // Toggle for Enemy Voice Clip Play
@@ -54,15 +54,13 @@ public class TumbleAudioSettings : MonoBehaviour
     private Button exitSubMenuBtn;
     [SerializeField]
     private Selectable vClipMenuBtnNav;
-    // For reseting ScrollRects when a menu is opened
-    [SerializeField]
-    private ScrollRect vClipScrollRect;
     // Auto Scroll
-    [SerializeField]
     private ScrollRectAutoScroll vClipAutoScroll;
 
     void Start()
     {
+        vClipAutoScroll = GameObject.Find("Voice Clip Main Menu").GetComponent<ScrollRectAutoScroll>();
+
         // Loads the previous value of the sliders
         yapSlider.value = PlayerPrefs.GetFloat("Tumble Yap Rate", 75);
         SetYapRate();
@@ -142,9 +140,8 @@ public class TumbleAudioSettings : MonoBehaviour
         // Tells the script which sub menu it is opening
         SubOpMenuBtns.subOpMenuOpen = "Voice Clip";
         
-        
-        // Loads value of clip buttons
-        vClipMenu.LoadAllClipBtns();
+        // Resets all clip's temp enabled values before entering the menu
+        vClipMenu.ReloadClips();
 
         // Disables the audio menu
         audioMenu.interactable = false;
@@ -162,7 +159,11 @@ public class TumbleAudioSettings : MonoBehaviour
         vClipAutoScroll.isMenuOpen = true;
         StartCoroutine(vClipAutoScroll.AutoScroll());
         // Resets scroll view
+        ScrollRect vClipScrollRect = vClipAutoScroll.GetComponent<ScrollRect>();
         vClipScrollRect.verticalNormalizedPosition = 1;
+        // Updates navigation
+        MenuNavigation menuNav = vClipAutoScroll.GetComponentInChildren<MenuNavigation>();
+        menuNav.UpdateTopBarNavigation();
 
         // Updates sub menu navigation to the open menu
         Navigation saveSubMenuBtnNav = saveSubMenuBtn.navigation;

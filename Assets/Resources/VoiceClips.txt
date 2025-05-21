@@ -1,0 +1,1752 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+_SFW_
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+File Name: Youtube Normal
+Clip Name: "Youtube" [Normal]
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: True
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Youtube Shocked
+Clip Name: "Youtube" [Shocked]
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: True
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Youtube Scared
+Clip Name: "Youtube" [Scared]
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: True
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Here We Go
+Clip Name: "Here We Go"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Be Afraid
+Clip Name: "Be Afraid"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Sebby
+Clip Name: "Sebby Sebby"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: 100% Who Have Been Born Died
+Clip Name: "It’s Actually Confirmed That 100% of People Who’ve Born Have Died"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Will All Die Someday
+Clip Name: "Will All Die Someday"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Skaboodle
+Clip Name: "Skaboodle"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: True
+isConcern: False
+
+File Name: Sussy Baka
+Clip Name: "Sussy Baka Among Us"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: True
+isConcern: False
+
+File Name: Serious Gamer Mode
+Clip Name: "Serious Gamer Mode"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Its Potting Time
+Clip Name: "It’s Potting Time"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: I Want To Play A Game
+Clip Name: "I Want To Play A Game"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT
+Clip Name: "RT"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Jack Moment
+Clip Name: "This Is A Real Jack Moment"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: RTBunger
+Clip Name: "Bunger"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Whose to say
+Clip Name: "Whose To Say"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Drift King
+Clip Name: "I Don’t Mean To Brag, But They Used Call Me The Drift King Back In College You Know"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: No Escape
+Clip Name: "You Can’t Escape"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: You're All Gay
+Clip Name: "You’re All Gay Here You’ve No Choice"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Spongebob
+Clip Name: "Spongebob"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I'll Show You A Bogey
+Clip Name: "I'll Show You A Bogey"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I'll Show You A Job
+Clip Name: "I'll Show You Ya Job"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hey Coming Right At Ya
+Clip Name: "Hey, Coming Right At Ya"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: OwO
+Clip Name: "OwO"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: True
+isConcern: False
+
+File Name: What Have You Done
+Clip Name: "What Have You Done"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: What In Gods Name Have You Done
+Clip Name: "What In God's Name Have You Done"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Hey It's Me
+Clip Name: "Hey It’s Me, A Sad Loser"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Mansplain Manipulate Manslaughter
+Clip Name: "Mansplain, Manipulate, Manslaughter"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Gluten and the Irish
+Clip Name: "There’s Two Things I Can’t Stand,
+Gluten And The Irish"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: PIVOT
+Clip Name: "PIVOT PIVOT"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Floorsafe
+Clip Name: "Floorsafe I Sure Hope It Is"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: WHAAT
+Clip Name: "WHAAAAAT"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: NOOO WAY
+Clip Name: "NOOO WAY"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: I Guess You Have No Taste
+Clip Name: "Well I Guess You Just No Taste And Are A Terrible Human Being"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Excuse Me Mr. Heterosexual
+Clip Name: "Excuse Me Like Mr. Heterosexual In The Chat You Gotta Leave"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: It Is Illegal For You To Be Here
+Clip Name: "It Is Illegal For You To Be Here Right Now"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ninja Gaiden 3
+Clip Name: "Ninja Gaiden 3"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: No 1
+Clip Name: "Nooo"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: ONE MILLION DOLLARS
+Clip Name: "ONE MILLION DOLLARS"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Meow Meow
+Clip Name: "Meow Meow"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Pika Pi
+Clip Name: "Pika Pi"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Rawk Hawk
+Clip Name: "Rawk Hawk"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: It's About Damn Time
+Clip Name: "It's About Damn Time"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: I'm Glad Lifes Going Well
+Clip Name: "I'm Glad Life's Going Well"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: There's A Woman
+Clip Name: "There's A Woman"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Money
+Clip Name: "Money"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Drift King [Drunk]
+Clip Name: "They Used Call Me The Drift King" [Drunk]
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Tell A Joke Funny Man
+Clip Name: "Tell A Joke Funny Man"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: So Funny
+Clip Name: "So Funny"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Take Me Home Country Road
+Clip Name: "Take Me Home Country Road"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Remember Guys
+Clip Name: "Remember Guys, Drink Some Water And Stay Hydrated"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: A Little Faith
+Clip Name: "Sometimes All You Need Is A Little Faith"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I'm The Best
+Clip Name: "I'm The Best"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Yellow
+Clip Name: "Yellow"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Gollum
+Clip Name: "Gollum"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Haha Poop
+Clip Name: "Haha Poop"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Elmo Knows Where You Live
+Clip Name: "Elmo Knows Where You Live"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Duck
+Clip Name: "Duck"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Fun Ol Time
+Clip Name: "Just A Fun Little Game Were Playing, Just A Fun Ol Time We’re Havin"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Skibidi Tree
+Clip Name: "Hey Friends You Looking For A Skibidi Tree In The Neighborhood?"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: True
+isConcern: False
+
+File Name: I Don't Want To Be Here Anymore
+Clip Name: "I Don't Want To Be Here Anymore"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: I'm Just Gonna Beat Em
+Clip Name: "I'm Just Gonna Beat Em Within An Inch of Their Life"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+_NSFW_
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+File Name: Come
+Clip Name: "That’s Not How You Say Come"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Smashing Your Brother
+Clip Name: "Starting To Feel Like I’m Smashing My Brother"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I Feel Like There Is A Time And Place
+Clip Name: "I Feel Like There Is A Time And Place For Sniffing Poop But Maybe Not In The Workplace"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Speaking of Lube
+Clip Name: "Speaking of Lube"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Skibidi Rizz
+Clip Name: "Skibidi That Rizz On That Gyatt"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: True
+isConcern: False
+
+File Name: Shit King
+Clip Name: "They Used To Call Me The Shit King"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Mr Shit
+Clip Name: "I Don’t Mean To Brag Here I’m Mr. Shitcano"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: WTF
+Clip Name: "What The Fuck Are They"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: That's An Ass
+Clip Name: "That's An Ass"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Flushed
+Clip Name: "Look I Know I’m Straight Cause I Could Like Suck A Man’s Dick And It's Okay Alright"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Shake That
+Clip Name: "Shake That Thorax For Me Baby"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Do You Eat Ass
+Clip Name: "Do You Eat Ass?"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: The People Demand
+Clip Name: "The People Demand Coc"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Car Door
+Clip Name: "Slammin My Dick In The Car Door"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: YOU'RE A FUCKIN GENIUS
+Clip Name: "YOU'RE A FUCKIN GENIUS"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: HOLY FUCK
+Clip Name: "HOLY FUCK"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Guys What The Fuck
+Clip Name: "Guys What The Fuck"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: HOLY SHIT
+Clip Name: "Holy Shit"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Should Tell You To Go Kill Yourself
+Clip Name: "I Guess I Should Tell You To Go Kill Yourself"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Maybe Just A Quick Sniff
+Clip Name: "Maybe Just A Quick Sniff"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: My Seed Has Been Making The Round
+Clip Name: "My Seed Has Been Making The Round"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: SEX
+Clip Name: "SEX"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Fuck Bollucks Shit
+Clip Name: "Fuck Bollucks Shit"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Asshole
+Clip Name: "Asshole"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: You're My Bitch Now
+Clip Name: "You're My Bitch Now"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Try Finger But Whole
+Clip Name: "Try Finger But Whole"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Now Everyone Is Just Edging
+Clip Name: "Now Everyone Is Just Edging"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: He's Literally Inside Me
+Clip Name: "He's Literally Inside Me"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I Refuse To Be Defeated By Shadow
+Clip Name: "I Refuse To Be Defeated By Shadow The Fuckin Hedgehog"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: IDIOT
+Clip Name: "IDIOT"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: I'm Coming For Your Balls
+Clip Name: "I'm Coming For Your Balls"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Wait There's [YOUTUBE]
+Clip Name: "Wait There's Yaoi"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: The Shooreh Pippi King
+Clip Name: "I’m The Shooreh Pippi King"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hey I Lick Your Toes At Night
+Clip Name: "Hey I Lick Your Toes At Night"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Ya So You Wanna Fuck
+Clip Name: "Ya So You Wanna Fuck"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: True
+
+File Name: Bussy Normal
+Clip Name: "Bussy" [Normal]
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: True
+isConcern: False
+
+File Name: Bussy Shocked
+Clip Name: "Bussy" [Shocked]
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: True
+isConcern: False
+
+File Name: We Gotta
+Clip Name: "We Gotta Strip Him Naked Then Boys"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: Let Me Just Kick
+Clip Name: "Let Me Just Kick The Shit Out of You Real Quick"
+isEnabled: True
+isSFW: False
+isNSFW: True
+isToad: False
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+_Toad_
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+File Name: Toad Noises
+Clip Name: Toad Noises
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Scream 1
+Clip Name: Toad Scream 1
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Scream 2
+Clip Name: Toad Scream 2
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Scream 3
+Clip Name: Toad Scream 3
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Scream 4
+Clip Name: Toad Scream 4
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad DAISY
+Clip Name: "DAISY"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Welcome To Little Fungitown
+Clip Name: "Welcome To Little Fungitown"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Welcome
+Clip Name: "Welcome"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Love
+Clip Name: "Why Don’t You Love Me"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Help Me
+Clip Name: "Help Me"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Wakey Wakey Rise & Shine
+Clip Name: "Wakey Wakey Rise & Shine"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad I Can Also Scare You
+Clip Name: "I Can Also Scare You"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad What The Sigma
+Clip Name: "What The Sigma"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: True
+isConcern: False
+
+File Name: Toad I'm Going Die Soon
+Clip Name: "I'm Going Die Soon"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad HUZZAH
+Clip Name: "HUZZAH"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad HUZZAH Cough
+Clip Name: "HUZZA-" [Cough]
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad I Want To Play A Game
+Clip Name: "I Want To Play A Game"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Why Can’t You Show Me Love
+Clip Name: "Why Can’t You Show Me Love"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad FEED ME
+Clip Name: "FEED ME"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad We Need Sustenance
+Clip Name: "We Need Sustenance, You Cannot Ignore Me Forever Mama"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Death Approaches
+Clip Name: "Death Approaches"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad Time For Slaughter
+Clip Name: "Time For Slaughter"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad I Love Violence
+Clip Name: "I Love Violence"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Toad All Will Perish
+Clip Name: "All Will Perish Before Our Might"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: True
+isNoise: False
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+_Noises_
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+File Name: Mouth Noises
+Clip Name: Mouth Noises
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Star Wars
+Clip Name: Star Wars Intro
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Running Noises
+Clip Name: Running Noises
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hee 1
+Clip Name: "Hehe" [Normal]
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hee 2
+Clip Name: "Hehe" [High Pitched]
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ha 1
+Clip Name: "Aha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ha 2
+Clip Name: "Ahahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Choking
+Clip Name: Choking Noises
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT Flushed
+Clip Name: (°_°)
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: True
+
+File Name: AAAA
+Clip Name: "Aaaaaaaaaaaa"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT Nausea 1
+Clip Name: RT Nausea
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hahaha 1
+Clip Name: "Hahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Hahaha 2
+Clip Name: "Hahahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ahahaha 1
+Clip Name: "Ahahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ahahaha 2
+Clip Name: "Ahahahahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Ahahaha 3
+Clip Name: "Ahahahahahaha"
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT NPC Noises 1
+Clip Name: RT NPC Noises 1
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT NPC Noises 2
+Clip Name: RT NPC Noises 2
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: RT NPC Noises 3
+Clip Name: RT NPC Noises 3
+isEnabled: True
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isYoutube: False
+isChat: False
+isBrainrot: False
+isConcern: False

@@ -35,12 +35,12 @@ public class PauseMenuBaseButtons : MonoBehaviour
     void Start()
     {
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
+        pause = GameObject.Find("Player").GetComponent<MenuPause>();
     }
 
     // Resumes the game
     public void Resume()
     {
-        pause = GameObject.Find("Player").GetComponent<MenuPause>();
         pause.Pause();
     }
 
@@ -88,16 +88,11 @@ public class PauseMenuBaseButtons : MonoBehaviour
         pScreenBase.interactable = false;
         pScreenBase.alpha = 0;
 
-        // Ensures menu is disabled when the option menu is opened
-        audioMenu.interactable = false;
-        audioMenu.alpha = 0;
-        audioMenu.blocksRaycasts = false;
+        GameObject menu = GameObject.Find("Options Menu");
+        OptionsMenuButtons opMenuBtns = menu.GetComponentInChildren<OptionsMenuButtons>();
+        opMenuBtns.GameOpMenu();
 
         EventSystem.current.SetSelectedGameObject(opInitial);
-
-        gameMenu.interactable = true;
-        gameMenu.alpha = 1;
-        gameMenu.blocksRaycasts = true;
 
         opMenu.interactable = true;
         opMenu.alpha = 1;

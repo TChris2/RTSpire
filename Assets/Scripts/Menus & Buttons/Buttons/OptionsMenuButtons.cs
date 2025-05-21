@@ -20,31 +20,15 @@ public class OptionsMenuButtons : MonoBehaviour
     private CanvasGroup gameMenu;
     [SerializeField]
     private GameObject prevScreenOpBtn;
-
-    // For updating navigation of buttons
-    [SerializeField]
-    private Button gameMenuBtn;
-    [SerializeField]
-    private Button audioMenuBtn;
-    [SerializeField]
-    private Button exitMenuBtn;
-    // Intitial button nav for that menu - 1st is Game 2nd is Audio 
-    [SerializeField]
-    private Selectable[] menuBtnNav;
-    // For reseting ScrollRects when a menu is opened
-    [SerializeField]
-    private ScrollRect audioScrollRect;
-    [SerializeField]
-    private ScrollRect gameScrollRect;
-    // Auto Scrolls
-    [SerializeField]
+    // Auto Scrolls for each menu
     private ScrollRectAutoScroll audioOpAutoScroll;
-    [SerializeField]
     private ScrollRectAutoScroll gameOpAutoScroll;
 
     void Start()
     {
         opMenu = GetComponent<CanvasGroup>();
+        gameOpAutoScroll = GameObject.Find("Game Options Scroll View").GetComponent<ScrollRectAutoScroll>();
+        audioOpAutoScroll = GameObject.Find("Audio Options Scroll View").GetComponent<ScrollRectAutoScroll>();
     }
 
     // Opens game menu content
@@ -58,15 +42,18 @@ public class OptionsMenuButtons : MonoBehaviour
         // Enables auto scroll
         gameOpAutoScroll.isMenuOpen = true;
         StartCoroutine(gameOpAutoScroll.AutoScroll());
+
         // Resets scroll view
+        ScrollRect gameScrollRect = gameOpAutoScroll.GetComponent<ScrollRect>();
         gameScrollRect.verticalNormalizedPosition = 1;
 
+        // Updates navigation
+        MenuNavigation menuNav = gameOpAutoScroll.GetComponentInChildren<MenuNavigation>();
+        menuNav.UpdateTopBarNavigation();
 
         gameMenu.interactable = true;
         gameMenu.alpha = 1;
         gameMenu.blocksRaycasts = true;
-
-        UpdateBtnNav(0);
     }
 
     // Opens audio menu content
@@ -80,30 +67,18 @@ public class OptionsMenuButtons : MonoBehaviour
         // Enables auto scroll
         audioOpAutoScroll.isMenuOpen = true;
         StartCoroutine(audioOpAutoScroll.AutoScroll());
+
         // Resets scroll view
+        ScrollRect audioScrollRect = audioOpAutoScroll.GetComponent<ScrollRect>();;
         audioScrollRect.verticalNormalizedPosition = 1;
+
+        // Updates navigation
+        MenuNavigation menuNav = audioOpAutoScroll.GetComponentInChildren<MenuNavigation>();
+        menuNav.UpdateTopBarNavigation();
 
         audioMenu.interactable = true;
         audioMenu.alpha = 1;
         audioMenu.blocksRaycasts = true;
-
-        UpdateBtnNav(1);
-    }
-
-    void UpdateBtnNav(int navMenu)
-    {
-        Navigation gameMenuBtnNav = gameMenuBtn.navigation;
-        gameMenuBtnNav.selectOnDown = menuBtnNav[navMenu];
-
-        Navigation audioMenuBtnNav = audioMenuBtn.navigation;
-        audioMenuBtnNav.selectOnDown = menuBtnNav[navMenu];
-
-        Navigation exitMenuBtnNav = exitMenuBtn.navigation;
-        exitMenuBtnNav.selectOnDown = menuBtnNav[navMenu];
-
-        gameMenuBtn.navigation = gameMenuBtnNav;
-        audioMenuBtn.navigation = audioMenuBtnNav;
-        exitMenuBtn.navigation = exitMenuBtnNav;
     }
 
     // Closes op menu and reopens main pause screen menu

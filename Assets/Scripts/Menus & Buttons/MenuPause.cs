@@ -30,12 +30,14 @@ public class MenuPause : MonoBehaviour
     private CanvasGroup subOpMenu;
     [SerializeField]
     private CanvasGroup subOpYNScreen;
+    private SubOptionMenuButtons subOpMenuBtns;
     
     void Start()
     {
         isPaused = false;
         inputManager = GetComponent<InputManager>();
         pState = GetComponentInChildren<PlayerState>();
+        subOpMenuBtns = FindObjectOfType<SubOptionMenuButtons>();
     }
 
     public void Pause()
@@ -103,7 +105,7 @@ public class MenuPause : MonoBehaviour
         // Resets back to the pause screen
         pScreenBase.interactable = true;
         pScreenBase.alpha = 1;
-        pScreenTotal.blocksRaycasts = true;
+        pScreenBase.blocksRaycasts = true;
 
         // Closes sub menus if they are open
         ynScreen.interactable = false;
@@ -119,6 +121,9 @@ public class MenuPause : MonoBehaviour
         subOpMenu.interactable = false;
         subOpMenu.alpha = 0;
         subOpMenu.blocksRaycasts = false;
+
+        if (subOpMenuBtns.isSubTypeMenuOpen)
+            subOpMenuBtns.CloseSubTypeMenu();
 
         subOpYNScreen.interactable = false;
         subOpYNScreen.alpha = 0;

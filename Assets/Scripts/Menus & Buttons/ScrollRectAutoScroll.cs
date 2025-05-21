@@ -17,21 +17,16 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     private Vector2 m_NextScrollPosition = Vector2.up;
 
     public bool isMenuOpen;
-
-    void OnEnable()
-    {
-        if (m_ScrollRect)
-        {
-            m_ScrollRect.content.GetComponentsInChildren(m_Selectables);
-        }
-    }
+    [SerializeField]
+    private bool hasRows;    
+    public int rowAmt;
 
     void Awake()
     {
         m_ScrollRect = GetComponent<ScrollRect>();
     }
 
-    void Start()
+    public void Start()
     {
         if (m_ScrollRect)
         {
@@ -92,6 +87,9 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         }
         if (selectedIndex > -1)
         {
+            if (hasRows && selectedIndex != 0 && selectedIndex % rowAmt != 0)
+                selectedIndex += rowAmt - (selectedIndex % rowAmt);
+            
             if (quickScroll)
             {
                 m_ScrollRect.normalizedPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));

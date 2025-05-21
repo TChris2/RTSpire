@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class VoiceClips : MonoBehaviour
 {
     // Gets list of voice clips
-    private VoiceClipSelectionMenuButtons vcMenu;
+    private VoiceClipSelectionButtons vcMenu;
     // Gets voice clip variables
     private TumbleAudioSettings tumbleAudio;
     private AudioSource audioSource;
@@ -22,7 +22,7 @@ public class VoiceClips : MonoBehaviour
         // Gets voice clip variables
         tumbleAudio = GameObject.Find("Audio Options Scroll View").GetComponent<TumbleAudioSettings>();
         // Gets list of voice clips
-        vcMenu = GameObject.Find("Enemy Voice Clip Menu Scroll View").GetComponent<VoiceClipSelectionMenuButtons>();
+        vcMenu = GameObject.Find("Voice Clip Main Menu").GetComponent<VoiceClipSelectionButtons>();
         // Gets toggle determining if voice clips play or not
         clipPlayToggle = GameObject.Find("Enemy Voice Clip Toggle Button").GetComponent<Toggle>();
 
