@@ -66,9 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b87480be1260c48bc3cac88e5dba0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
   hurt: {fileID: 8300000, guid: 3829b097410243349b91f494eb12fe63, type: 3}
   fDamage: 5
-  AttackCool: 2
-  RTNormal: {fileID: 0}
-  RTPain: {fileID: 0}
+  attackCool: 2

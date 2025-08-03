@@ -4,28 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
-using System.Data.SqlClient;
+using TMPro;
 
 // Button functions for the voice clip menu
 public class VoiceClipSelectionButtons : MonoBehaviour
 {
+    [Header("Clips")]
     // SFW Clips
     [SerializeField]
-    private List<VoiceClipInfo> sfwClips; 
+    private List<VoiceClipInfo> sfwClips;
     // NSFW Clips
     [SerializeField]
-    private List<VoiceClipInfo> nsfwClips; 
+    private List<VoiceClipInfo> nsfwClips;
     // Toad Clips
     [SerializeField]
-    private List<VoiceClipInfo> toadClips; 
+    private List<VoiceClipInfo> toadClips;
     // Noise clips
     [SerializeField]
-    private List<VoiceClipInfo> noiseClips; 
+    private List<VoiceClipInfo> noiseClips;
     // The combined list of all selected clips
-    public List<AudioClip> clipList = new List<AudioClip>(); 
-
-    // Voice clip toggle buttons 
-    // 0) is toggle in the main menu 1) The toggle in the specific clip menu
+    public List<AudioClip> clipList = new List<AudioClip>();
+    // Keeps track of total amount of clips
+    public int clipTotal;
+    // Toggle buttons 
+    [Header("Toggles")]
+    // 0) is toggle in the main menu 1) The toggle in the specific type menu
     [SerializeField]
     private Toggle AllToggleBtn;
     [SerializeField]
@@ -36,22 +39,37 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     private Toggle[] ToadToggleBtns = new Toggle[2];
     [SerializeField]
     private Toggle[] NoiseToggleBtns = new Toggle[2];
+    // YT audio toggle
+    public bool isYtAudio;
     [SerializeField]
-    private GameObject[] ClipTypeMenuItems = new GameObject[2];    
-    private List<Toggle> clipTypeToggles = new List<Toggle>(); 
+    private Toggle ytAudioToggle;
+    [SerializeField]
+    private TMPro.TMP_Text ytAudioToggleTxt;
+    [Header("Clip Type Menu Stuff")]
+    [SerializeField]
+    private GameObject[] clipTypeMenuItems = new GameObject[2];
+    private List<Toggle> clipTypeToggles = new List<Toggle>();
 
     void Awake()
     {
+        // Loads clip information from file
         LoadFile();
     }
 
-// Loading & Saving Stuff
-//-------------------------------
+    void Start()
+    {
+        ytAudioToggle.isOn = PlayerPrefs.GetFloat("Youtube Audio Toggle", 0) != 0;
+        YtAudioToggle(true);
+    }
+
+    // Loading & Saving Stuff
+    //-------------------------------
     // Loads clip information from file
     public void LoadFile()
     {
-        // Clears the list
+        // Clears the list & total
         clipList.Clear();
+        clipTotal = 0;
 
         string filePath = Path.Combine(Application.persistentDataPath, "VoiceClips.txt");
         //Debug.Log($"persistentDataPath {File.Exists(filePath)}");
@@ -82,14 +100,14 @@ public class VoiceClipSelectionButtons : MonoBehaviour
             // Removes empty space
             string trimmedLine = line.Trim();
             // Skips non data lines
-            if (string.IsNullOrEmpty(trimmedLine) || trimmedLine.StartsWith("-") || 
+            if (string.IsNullOrEmpty(trimmedLine) || trimmedLine.StartsWith("_") ||
                 trimmedLine.StartsWith("=-=-=-=-=-=-=-=-=")) continue;
 
             // Splits data lines into two parts
             string[] parts = trimmedLine.Split(':');
-            
+
             if (parts.Length < 2) continue;
-            
+
             string key = parts[0].Trim();
             string value = parts[1].Trim();
 
@@ -100,7 +118,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
                     // Saves clip to lists
                     if (vClip != null) NewClip(vClip);
                     // Creates a blank entry
-                    vClip = new VoiceClipInfo(value, "", null, false, false, false, false, false, false, false, false, false);
+                    vClip = new VoiceClipInfo(value, "", null, false, false, false, false, false, false, false, false);
                     break;
                 case "Clip Name":
                     if (vClip != null) vClip.clipName = value;
@@ -120,9 +138,6 @@ public class VoiceClipSelectionButtons : MonoBehaviour
                 case "isNoise":
                     if (vClip != null) { if (value == "True") vClip.isNoise = true; else vClip.isNoise = false; }
                     break;
-                case "isYoutube":
-                    if (vClip != null) { if (value == "True") vClip.isYoutube = true; else vClip.isYoutube = false; }
-                    break;
                 case "isChat":
                     if (vClip != null) { if (value == "True") vClip.isChat = true; else vClip.isChat = false; }
                     break;
@@ -136,44 +151,47 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         }
 
         // Saves clip to lists
-        if (vClip != null) 
+        if (vClip != null)
             NewClip(vClip);
     }
 
     // Saves clip to lists
     private void NewClip(VoiceClipInfo vClip)
     {
-        VoiceClipInfo newVClip = new VoiceClipInfo(vClip.fileName, vClip.clipName, vClip.clip, 
-        vClip.isEnabled, vClip.isSFW, vClip.isNSFW, vClip.isToad, vClip.isNoise, vClip.isYoutube,
-        vClip.isChat, vClip.isBrainrot, vClip.isConcern);
+        VoiceClipInfo newVClip = new VoiceClipInfo(vClip.fileName, vClip.clipName, vClip.clip,
+        vClip.isEnabled, vClip.isSFW, vClip.isNSFW, vClip.isToad, vClip.isNoise, vClip.isChat,
+        vClip.isBrainrot, vClip.isConcern);
 
         // Adds the clip to its specific clip type list
         if (newVClip.isSFW)
         {
-            newVClip.clip = Resources.Load<AudioClip>($"SFX/RT Voice Clips/SFW/{newVClip.fileName}");
+            newVClip.clip = Resources.Load<AudioClip>($"RT Voice Clips/SFW/{newVClip.fileName}");
             sfwClips.Add(newVClip);
         }
-        if (newVClip.isNSFW) 
-        { 
-            newVClip.clip = Resources.Load<AudioClip>($"SFX/RT Voice Clips/NSFW/{newVClip.fileName}");
+        if (newVClip.isNSFW)
+        {
+            newVClip.clip = Resources.Load<AudioClip>($"RT Voice Clips/NSFW/{newVClip.fileName}");
             nsfwClips.Add(newVClip);
         }
-        if (newVClip.isToad) 
+        if (newVClip.isToad)
         {
-            newVClip.clip = Resources.Load<AudioClip>($"SFX/RT Voice Clips/Toad/{newVClip.fileName}");
+            newVClip.clip = Resources.Load<AudioClip>($"RT Voice Clips/Toad/{newVClip.fileName}");
             toadClips.Add(newVClip);
         }
-        if (newVClip.isNoise) 
+        if (newVClip.isNoise)
         {
-            newVClip.clip = Resources.Load<AudioClip>($"SFX/RT Voice Clips/Noises/{newVClip.fileName}");
+            newVClip.clip = Resources.Load<AudioClip>($"RT Voice Clips/Noises/{newVClip.fileName}");
             noiseClips.Add(newVClip);
         }
 
-        // Adds it to the clip list if it is enabled
-        if (newVClip.isEnabled) 
+        // Adds it to the list if it is enabled
+        if (newVClip.isEnabled)
         {
             clipList.Add(newVClip.clip);
         }
+
+        // Counts clip
+        clipTotal += 1;
     }
 
     // Saves selected clips to the list and file
@@ -190,18 +208,33 @@ public class VoiceClipSelectionButtons : MonoBehaviour
 
         // Saves clip info to a file
         SaveToFile();
+
+        // Resets enemy audio so changes can occur
+        EnemyAudioReset();
     }
     
-    // Saves selected buttons to prefs and adds them to the list
+    // Resets enemy audio so changes can occur
+    public void EnemyAudioReset()
+    {
+        VoiceClips[] enemiesVC = FindObjectsOfType<VoiceClips>();
+        if (enemiesVC != null)
+        {
+            foreach (VoiceClips enemy in enemiesVC)
+                if (enemy.audioSource.isPlaying)
+                    enemy.audioSource.Stop();
+        }
+    }
+
+    // Adds clips to the list if selected
     private void AddToList(List<VoiceClipInfo> vClips)
     {
         foreach (VoiceClipInfo clip in vClips)
-        {   
+        {
             // Makes it temp value the current value
             clip.isEnabled = clip.isEnabledTemp;
 
             // Adds it to the clip list if it is enabled
-            if (clip.isEnabledTemp) 
+            if (clip.isEnabledTemp)
                 clipList.Add(clip.clip);
         }
     }
@@ -219,7 +252,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         }
 
         Debug.Log("Voice clips saved to file");
-    }   
+    }
 
     // Write the clip information to the file in the same format it was read
     void WriteToFile(StreamWriter writer, List<VoiceClipInfo> vClips)
@@ -233,7 +266,6 @@ public class VoiceClipSelectionButtons : MonoBehaviour
             writer.WriteLine($"isNSFW: {clip.isNSFW}");
             writer.WriteLine($"isToad: {clip.isToad}");
             writer.WriteLine($"isNoise: {clip.isNoise}");
-            writer.WriteLine($"isYoutube: {clip.isYoutube}");
             writer.WriteLine($"isChat: {clip.isChat}");
             writer.WriteLine($"isBrainrot: {clip.isBrainrot}");
             writer.WriteLine($"isConcern: {clip.isConcern}");
@@ -242,7 +274,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     }
 
     // Resets all clip's temp enabled values
-    public void ReloadClips()
+    public void ReloadEnables()
     {
         ReloadClipType(sfwClips);
         ReloadClipType(nsfwClips);
@@ -254,17 +286,13 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     public void ReloadClipType(List<VoiceClipInfo> vClips)
     {
         foreach (VoiceClipInfo clip in vClips)
-        {   
-            // Makes it temp value the current value
             clip.isEnabled = clip.isEnabledTemp;
-            clipList.Add(clip.clip);
-        }
     }
 
-// Toggles
-//-------------------------------
+    // Toggles
+    //-------------------------------
     // Enables or Disables All Clips depending on if it is enabled or disabled
-    public void AllToggle(bool isToggle) 
+    public void AllToggle(bool isToggle)
     {
         // isToggle is so that all preset button can use the same code all the all toggle
         if (!isToggle)
@@ -284,9 +312,9 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         EnableDisableAll(toadClips, isEnabled);
 
         NoiseToggleBtns[0].isOn = AllToggleBtn.isOn;
-        EnableDisableAll(toadClips, isEnabled);
+        EnableDisableAll(noiseClips, isEnabled);
     }
-    
+
     // Enables or Disables All Clips of that type depending on if it is enabled or disabled
     // SFW
     public void SFWToggle(int tBtn) { Toggle(tBtn, "SFW", false); }
@@ -298,7 +326,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     public void NoiseToggle(int tBtn) { Toggle(tBtn, "Noise", false); }
 
     // Enables or Disables All of the selected toggles clips depending on if it is enabled or disabled
-    public void Toggle(int tBtn, string clipType, bool inTypeMenu) 
+    public void Toggle(int tBtn, string clipType, bool inTypeMenu)
     {
         Toggle[] tempToggleBtns = GetToggles(clipType);
         List<VoiceClipInfo> vClips = GetClipType(clipType);
@@ -312,7 +340,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
 
         if (inTypeMenu)
             EnableDisableAllBtns(vClips, tempToggleBtns[0].isOn);
-        else 
+        else
             EnableDisableAll(vClips, tempToggleBtns[0].isOn);
     }
 
@@ -334,7 +362,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     Toggle[] GetToggles(string clipType)
     {
         // Gets the array length of that clipType
-        switch(clipType)
+        switch (clipType)
         {
             case "SFW":
                 return SFWToggleBtns;
@@ -349,11 +377,11 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         }
     }
 
-// Presets
-//-------------------------------
+    // Presets
+    //-------------------------------
     // Gets the preset type from the button and applies preset to each group of toggle buttons
     public void Preset(string presetType)
-    {   
+    {
         // Enables that preset's type toggle buttons & disables the others
         ToggleEnableDisable(presetType);
         // Applies preset to all clips
@@ -374,7 +402,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         AllToggleBtn.isOn = false;
 
         // Renables the specific preset button
-        switch(presetType)
+        switch (presetType)
         {
             case "SFW":
                 SFWToggleBtns[0].isOn = true;
@@ -410,7 +438,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     // Finds the preset value the preset button is applying and returns it 
     private bool GetPresetValue(string presetType, VoiceClipInfo clip)
     {
-        switch(presetType)
+        switch (presetType)
         {
             case "SFW":
                 return clip.isSFW;
@@ -420,8 +448,6 @@ public class VoiceClipSelectionButtons : MonoBehaviour
                 return clip.isToad;
             case "Noise":
                 return clip.isNoise;
-            case "Youtube":
-                return clip.isYoutube;
             case "Chat":
                 return clip.isChat;
             case "Brainrot":
@@ -437,7 +463,7 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     public List<VoiceClipInfo> GetClipType(string clipType)
     {
         // Gets the array length of that clipType
-        switch(clipType)
+        switch (clipType)
         {
             case "SFW":
                 return sfwClips;
@@ -461,18 +487,20 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         // Gets clip type of menu being created
         List<VoiceClipInfo> vClips = GetClipType(subTypeMenuName);
 
-        GameObject item = Instantiate(ClipTypeMenuItems[0], subTypeContent);
+        // Header toggler
+        GameObject item = Instantiate(clipTypeMenuItems[0], subTypeContent);
         TMPro.TMP_Text txt = item.GetComponentInChildren<TMPro.TMP_Text>();
-        txt.text = subTypeMenuName;
+        txt.text = $"{subTypeMenuName} -";
         Toggle toggle = item.GetComponentInChildren<Toggle>();
         toggle.onValueChanged.AddListener((bool isOn) => { Toggle(1, subTypeMenuName, true); });
 
         Toggle[] tempToggleBtns = GetToggles(subTypeMenuName);
         tempToggleBtns[1] = toggle;
 
+        // Main items of subtype menu
         foreach (VoiceClipInfo clip in vClips)
         {
-            item = Instantiate(ClipTypeMenuItems[1], subTypeContent);
+            item = Instantiate(clipTypeMenuItems[1], subTypeContent);
 
             // Gives it a name
             item.name = $"{subTypeMenuName} Voice Clip {clip.fileName}";
@@ -490,12 +518,40 @@ public class VoiceClipSelectionButtons : MonoBehaviour
             Button btn = item.GetComponentInChildren<Button>();
             txt = btn.GetComponentInChildren<TMPro.TMP_Text>();
             txt.text = clip.clipName;
+            if (clip.clipName.Contains("<sprite"))
+            {
+                txt.alignment = TextAlignmentOptions.MidlineLeft;
+                txt.fontSizeMax = 100;
+            }
+            
             // Plays associated audio clip when button is pressed
-            btn.onClick.AddListener(() => 
+                btn.onClick.AddListener(() =>
             {
                 audioSource.clip = clip.clip;
                 audioSource.Play();
             });
         }
+    }
+
+    // Enable instead of "removing" clips from the pool it instead "replaces" those clips with Youtube Clips
+    public void YtAudioToggle(bool isStart)
+    {
+        if (ytAudioToggle.isOn)
+            ytAudioToggleTxt.text = "- Disabled Clips <style=\"Active\">Are</style> Replaced With <sprite name=\"youtube\">";
+        else
+            ytAudioToggleTxt.text = "- Disabled Clips <style=\"InActive\">Are Not</style> Replaced With <sprite name=\"youtube\">";
+        isYtAudio = ytAudioToggle.isOn;
+
+        // Resets enemy audio so changes can occur, does not occur at start
+        if (!isStart)
+            EnemyAudioReset();
+    }
+    
+    private void OnDisable()
+    {
+        // Saves prefs
+        PlayerPrefs.SetFloat("Youtube Audio Toggle", isYtAudio ? 1 : 0);
+
+        PlayerPrefs.Save();
     }
 }

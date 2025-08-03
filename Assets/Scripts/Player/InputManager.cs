@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour
         player.CamZoomOut.performed += ctx => look.StartZoomOut();
         player.CamZoomOut.canceled += ctx => look.StopZoomOut();
         player.Pause.performed += ctx => pause.Pause();
-        menu.Pause.performed += ctx => pause.Pause();
+        menu.Resume.performed += ctx => pause.Resume();
 
         pState = GetComponentInChildren<PlayerState>();
     }

@@ -12,6 +12,12 @@ public class StartMenuButtons : MonoBehaviour
     private Animator deathUIAni;
     float healthRefill = 100;
 
+    void Awake()
+    {
+        // Sets target frame rate in first scene
+        Application.targetFrameRate = 60;
+    }
+
     // Opening screen when the player presses start
     public void StartGame()
     {
@@ -52,7 +58,8 @@ public class StartMenuButtons : MonoBehaviour
 
     private void OnDisable()
     {
-        // Saves player health for next lv
+        // Saves prefs
+        // Saves player health to full
         PlayerPrefs.SetFloat("PlayerHealth", healthRefill);
         PlayerPrefs.Save();
     }

@@ -87,18 +87,49 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         }
         if (selectedIndex > -1)
         {
-            if (hasRows && selectedIndex != 0 && selectedIndex % rowAmt != 0)
-                selectedIndex += rowAmt - (selectedIndex % rowAmt);
-            
-            if (quickScroll)
-            {
-                m_ScrollRect.normalizedPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
-                m_NextScrollPosition = m_ScrollRect.normalizedPosition;
-            }
+            if (!hasRows)
+                ScrollNormal(quickScroll, selectedIndex);
             else
-            {
-                m_NextScrollPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
-            }
+                ScrollRow(quickScroll, selectedIndex);
+        }
+    }
+
+    void ScrollNormal(bool quickScroll, int selectedIndex)
+    {
+        if (quickScroll)
+        {
+            m_ScrollRect.normalizedPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
+            m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+        }
+        else
+        {
+            m_NextScrollPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
+        }
+    }
+
+    void ScrollRow(bool quickScroll, int selectedIndex)
+    {
+        // Offset for header items
+        int headerOffset = 1;
+
+        // Adjusts index for header offset
+        int gridIndex = Mathf.Max(0, selectedIndex - headerOffset);
+        int gridCount = Mathf.Max(1, m_Selectables.Count - headerOffset);
+
+        int rowIndex = gridIndex / rowAmt;
+        int totalRows = Mathf.CeilToInt(gridCount / (float)rowAmt);
+
+        float scrollPercent = 1f - (rowIndex / (float)(totalRows - 1));
+        scrollPercent = Mathf.Clamp01(scrollPercent);
+
+        if (quickScroll)
+        {
+            m_ScrollRect.normalizedPosition = new Vector2(0, scrollPercent);
+            m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+        }
+        else
+        {
+            m_NextScrollPosition = new Vector2(0, scrollPercent);
         }
     }
 

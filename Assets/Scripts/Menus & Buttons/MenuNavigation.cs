@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Sets ups keyboard/controllor navigation
+// Sets up keyboard/controller navigation for menus
 public class MenuNavigation : MonoBehaviour
 {
     [SerializeField]

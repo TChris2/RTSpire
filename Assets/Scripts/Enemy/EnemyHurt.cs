@@ -2,88 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// How enemies are hit and effects of different on them by different player attacks
+// Handles how damage is dealt to enemies
 public class EnemyHurt : MonoBehaviour
 {
-    // Gets attack info from the player attack
-    AttackInfo atkInfo;
-    // Gets health for entity
-    Entity eEntity;
     // Applies forces to rigidbody
     Rigidbody enemyRb;
     // Navmeshagent
-    UnityEngine.AI.NavMeshAgent enemy;
+    UnityEngine.AI.NavMeshAgent enemyAI;
+    // Scripts
     // Enemy movment
     EnemyFollow eFollow;
+    // Gets health for entity
+    Entity eEntity;
     Animator eAni;
     // Checks to see whether the enemy has been hit
-    public bool isHit;
+    public bool isHit = false;
+    [HideInInspector]
     // Controls when the EnemyFollow script can start the checking to renable movement
-    // Used in EnemyFollow script
-    public bool airWait;
-    private BoxCollider attackCollider;
+    public bool airWait = false;
 
     void Start()
     {
         // Gets the enemy's components
         eEntity = GetComponent<Entity>();
         enemyRb = GetComponent<Rigidbody>();
-        enemy = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        enemyAI = GetComponent<UnityEngine.AI.NavMeshAgent>();
         eFollow = GetComponent<EnemyFollow>();
         eAni = GetComponent<Animator>();
-        isHit = false;
         enemyRb.isKinematic = true;
-        airWait = false;
     }
 
-    // When the enemy enters the collider of one of the player's attacks
+    // When the player's attack enters the enemy's collider
     private void OnTriggerEnter(Collider other)
     {
         // Checks to see if the enemy has already been hit
         if (!isHit)
         {
+            // Debug.Log("Something has entered the collider");
             // Checks to see which attack the enemy is being attacked by\
             // If RT attack
-            if (other.CompareTag("RT Attack") && other.gameObject.name == "Attack Hitbox")
+            if (other.CompareTag("RT Attack") && other.GetComponent<AttackInfo>())
             {
+                // Debug.Log("RT Attacked");
                 // Sets to true to prevent the enemy being hit multiple times while hit
                 isHit = true;
                 airWait = true;
                 // Gets collider of attack
-                attackCollider = other.GetComponent<BoxCollider>();
+                BoxCollider attackCollider = other.GetComponent<BoxCollider>();
                 // Gets attack info
-                atkInfo = other.GetComponent<AttackInfo>();
+                AttackInfo atkInfo = other.GetComponent<AttackInfo>();
                 // Deals damage
                 eEntity.Health -= atkInfo.dmg;
 
                 // Applies knockback
-                StartCoroutine(MeleeKnockback(other));
+                StartCoroutine(MeleeKnockback(other, attackCollider, atkInfo));
             }
             // If Cupcake
-            else if (other.CompareTag("Cupcake") && other.gameObject.name == "Cupcake Orientate")
+            else if (other.CompareTag("Cupcake") && other.GetComponent<AttackInfo>())
             {
+                // Debug.Log("Cupcake Attacked");
                 // Sets to true to prevent the enemy being hit multiple times while hit
                 isHit = true;
                 airWait = true;
-                attackCollider = other.GetComponent<BoxCollider>();
+                BoxCollider attackCollider = other.GetComponent<BoxCollider>();
                 // Gets attack info
-                atkInfo = other.GetComponent<AttackInfo>();
+                AttackInfo atkInfo = other.GetComponent<AttackInfo>();
                 // Deals damage
                 eEntity.Health -= atkInfo.dmg;
 
                 // Applies knockback
-                StartCoroutine(CupcakeKnockback(other));
+                StartCoroutine(CupcakeKnockback(other, attackCollider, atkInfo));
             }
         }
     }
     
     // Applies knockback of melee attacks (Punches & Kicks)
-    IEnumerator MeleeKnockback(Collider other) {
+    IEnumerator MeleeKnockback(Collider other, BoxCollider attackCollider, AttackInfo atkInfo) {
         // Gets transform of collider
         Transform attackTransform = attackCollider.transform;
 
         // Disables navmeshagent
-        enemy.enabled = false;
+        enemyAI.enabled = false;
         enemyRb.isKinematic = false;
 
         // Calculate the direction from the collider to the attack transform
@@ -116,11 +115,11 @@ public class EnemyHurt : MonoBehaviour
     }
 
     // Applies knockback of Cupcake
-    IEnumerator CupcakeKnockback(Collider other) {
+    IEnumerator CupcakeKnockback(Collider other, Collider attackCollider, AttackInfo atkInfo) {
         // Gets transform of collider
         Transform attackTransform = attackCollider.transform;
 
-        enemy.enabled = false;
+        enemyAI.enabled = false;
         enemyRb.isKinematic = false;
 
         // Calculate the direction from the collider to the attack transform

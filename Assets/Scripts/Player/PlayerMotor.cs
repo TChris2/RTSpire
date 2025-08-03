@@ -63,7 +63,7 @@ public class PlayerMotor : MonoBehaviour
     }
 
     // Orientates the player to the camera
-    void LateUpdate ()
+    void LateUpdate()
     {
         //orientates player to camera
         Vector3 eulerRotation = new Vector3(transform.eulerAngles.x, pCam.transform.eulerAngles.y, transform.eulerAngles.z);

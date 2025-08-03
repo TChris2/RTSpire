@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 // Controls the different sliders that effect the enemy voice clips
 public class TumbleAudioSettings : MonoBehaviour
 {
+    [Header("Sliders & Toggles")]
     // Yap Rate
     public float yapRate;
     [SerializeField]
@@ -22,44 +23,31 @@ public class TumbleAudioSettings : MonoBehaviour
     private Slider maxDelaySlider;
     [SerializeField]
     private TMPro.TMP_Text delayText;
-    // Op menu
-    [SerializeField]
-    private CanvasGroup opMenu;
-    // Main audio menu
-    [SerializeField]
-    private CanvasGroup audioMenu;
-    // Clip menu stored in the sub op menu
-    [SerializeField]
-    private CanvasGroup clipMenu;
-    // Sub op menu
-    [SerializeField]
-    private CanvasGroup subOpMenu;
-    // Initial selected object for the sub op menu
-    [SerializeField]
-    private GameObject subMenuInitial;
-    [SerializeField]
-    private VoiceClipSelectionButtons vClipMenu;
-    [SerializeField]
-    private SubOptionMenuButtons SubOpMenuBtns;
     // Toggle for Enemy Voice Clip Play
     [SerializeField]
     private Toggle clipPlayToggle;
     // Txt for Enemy Voice Clip Play Toggle 
     [SerializeField]
     private TMPro.TMP_Text clipPlayToggleTxt;
-    // For updating navigation for the sub menu when it is opened
+    public bool isClipPlay;
+    [Header("Menus")]
+    // Op menu
     [SerializeField]
-    private Button saveSubMenuBtn;
+    private CanvasGroup opMenu;
+    // Main audio op menu
     [SerializeField]
-    private Button exitSubMenuBtn;
+    private CanvasGroup audioMenu;
+    // Sub op menu
     [SerializeField]
-    private Selectable vClipMenuBtnNav;
-    // Auto Scroll
-    private ScrollRectAutoScroll vClipAutoScroll;
+    private CanvasGroup subOpMenu;
+    [Header("Scripts")]
+    [SerializeField]
+    private SubOptionMenuButtons SubOpMenuBtns;
 
     void Start()
     {
-        vClipAutoScroll = GameObject.Find("Voice Clip Main Menu").GetComponent<ScrollRectAutoScroll>();
+        // Get components
+        SubOpMenuBtns.vClipAutoScroll = GameObject.Find("Voice Clip Menu").GetComponent<ScrollRectAutoScroll>();
 
         // Loads the previous value of the sliders
         yapSlider.value = PlayerPrefs.GetFloat("Tumble Yap Rate", 75);
@@ -68,20 +56,15 @@ public class TumbleAudioSettings : MonoBehaviour
         SetMaxDelay();
         minDelaySlider.value = PlayerPrefs.GetFloat("Tumble Yap Delay Min", 20);
         SetMinDelay();
-
-        // If enabled
-        if (PlayerPrefs.GetFloat("Enemy Voice Clip Play Toggle", 1) == 1) 
-            clipPlayToggle.isOn = true;
-        // If disabled
-        else
-            clipPlayToggle.isOn = false;
+        clipPlayToggle.isOn = PlayerPrefs.GetFloat("Enemy Voice Clip Play Toggle", 1) == 1 ? true : false;
+        VoiceClipPlayToggle(true);
     }
 
     // Updates the slider for the yap rate
     public void SetYapRate()
     {
         yapRate = yapSlider.value;
-        yapText.text = $"{"An Enemy Voice Clip Has A " + yapRate + "% Chance of Playing"}";
+        yapText.text = $"- An Enemy Has A <style=\"Highlight\">{yapRate}%</style> Chance of Playing A Voice Clip";
     }
 
     // Updates the slider for the min delay for enemy voice clips to play
@@ -119,83 +102,78 @@ public class TumbleAudioSettings : MonoBehaviour
     {
         // If they are the same value
         if (minDelay == maxDelay)
-            delayText.text = $"{"An Enemy Has A Delay of " + minDelay + " Seconds\nBefore Playing A Voice Clip"}";
+            delayText.text = $"Enemies Have A Delay of <style=\"Min\">{minDelay}</style> Seconds\nBefore Playing A Voice Clip";
         // If they are not
         else
-            delayText.text = $"{"An Enemy Has A Delay Between " + minDelay + "-" + maxDelay + " Seconds\nBefore Playing A Voice Clip"}";
+            delayText.text = $"Enemies Have A Delay Between <style=\"Min\">{minDelay}</style>-<style=\"Max\">{maxDelay}</style> Seconds\nBefore Playing A Voice Clip";
     }
 
     // Enables or disables voice clips from playing
-    public void VoiceClipPlayToggle() 
+    public void VoiceClipPlayToggle(bool isStart)
     {
         if (clipPlayToggle.isOn)
-            clipPlayToggleTxt.text = $"{"Enemy Voice Clips Enabled"}";
+            clipPlayToggleTxt.text = $"{"- Enemies <style=\"Active\">Will</style> Randomly Play Voice Clips"}";
         else
-            clipPlayToggleTxt.text = $"{"Enemy Voice Clips Disabled"}";
+            clipPlayToggleTxt.text = $"{"- Enemies <style=\"InActive\">Will Not</style> Randomly Play Voice Clips"}";
+
+        isClipPlay = clipPlayToggle.isOn;
+
+        // Resets enemy audio so changes can occur, does not occur at start
+        if (!isStart)
+            SubOpMenuBtns.vClipMenuBtns.EnemyAudioReset();
     }
-    
+
     // Opens the Enemy Voice Clip Menu
-    public void ClipMenuOpen() 
+    public void ClipMenuOpen()
     {
         // Tells the script which sub menu it is opening
         SubOpMenuBtns.subOpMenuOpen = "Voice Clip";
-        
+
         // Resets all clip's temp enabled values before entering the menu
-        vClipMenu.ReloadClips();
+        SubOpMenuBtns.vClipMenuBtns.ReloadEnables();
 
         // Disables the audio menu
-        audioMenu.interactable = false;
-        audioMenu.alpha = 0;
-        audioMenu.blocksRaycasts = false;
+        MenuOpenClose(audioMenu, false);
+
         // Disables the option menu buttons whilst the sub menu is open
         opMenu.interactable = false;
 
         // Enables the sub option menu
-        subOpMenu.interactable = true;
-        subOpMenu.alpha = 1;
-        subOpMenu.blocksRaycasts = true;
+        MenuOpenClose(SubOpMenuBtns.subOpMenu, true);
 
         // Enables auto scroll
-        vClipAutoScroll.isMenuOpen = true;
-        StartCoroutine(vClipAutoScroll.AutoScroll());
+        SubOpMenuBtns.vClipAutoScroll.isMenuOpen = true;
+        StartCoroutine(SubOpMenuBtns.vClipAutoScroll.AutoScroll());
         // Resets scroll view
-        ScrollRect vClipScrollRect = vClipAutoScroll.GetComponent<ScrollRect>();
+        ScrollRect vClipScrollRect = SubOpMenuBtns.vClipAutoScroll.GetComponent<ScrollRect>();
         vClipScrollRect.verticalNormalizedPosition = 1;
         // Updates navigation
-        MenuNavigation menuNav = vClipAutoScroll.GetComponentInChildren<MenuNavigation>();
+        MenuNavigation menuNav = SubOpMenuBtns.vClipAutoScroll.GetComponentInChildren<MenuNavigation>();
         menuNav.UpdateTopBarNavigation();
 
-        // Updates sub menu navigation to the open menu
-        Navigation saveSubMenuBtnNav = saveSubMenuBtn.navigation;
-        saveSubMenuBtnNav.selectOnDown = vClipMenuBtnNav;
-
-        Navigation exitSubMenuBtnNav = exitSubMenuBtn.navigation;
-        exitSubMenuBtnNav.selectOnDown = vClipMenuBtnNav;
-
-        saveSubMenuBtn.navigation = saveSubMenuBtnNav;
-        exitSubMenuBtn.navigation = exitSubMenuBtnNav;
-
         // Sets the initially selected object for the menu
-        EventSystem.current.SetSelectedGameObject(subMenuInitial);
+        EventSystem.current.SetSelectedGameObject(SubOpMenuBtns.subOpMenuInitial);
 
         // Enables the enemy voice clip menu
-        clipMenu.interactable = true;
-        clipMenu.alpha = 1;
-        clipMenu.blocksRaycasts = true;
+        MenuOpenClose(SubOpMenuBtns.clipMenu, true);
+    }
+
+    // Opens or closes selected menus
+    private void MenuOpenClose(CanvasGroup menu, bool isOpen)
+    {
+        menu.interactable = isOpen;
+        menu.alpha = isOpen ? 1 : 0;
+        menu.blocksRaycasts = isOpen;
     }
 
     private void OnDisable()
     {
+        // Saves prefs
         PlayerPrefs.SetFloat("Tumble Yap Rate", yapRate);
         PlayerPrefs.SetFloat("Tumble Yap Delay Min", minDelay);
         PlayerPrefs.SetFloat("Tumble Yap Delay Max", maxDelay);
+        PlayerPrefs.SetFloat("Enemy Voice Clip Play Toggle", isClipPlay ? 1 : 0);
 
-        // If enabled
-        if (clipPlayToggle.isOn) 
-            PlayerPrefs.SetFloat("Enemy Voice Clip Play Toggle", 1);
-        // If disabled
-        else
-            PlayerPrefs.SetFloat("Enemy Voice Clip Play Toggle", 0);
         PlayerPrefs.Save();
     }
 }

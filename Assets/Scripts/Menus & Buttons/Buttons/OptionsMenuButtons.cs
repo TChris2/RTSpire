@@ -7,8 +7,9 @@ using UnityEngine.UI;
 // Button functions for the top buttons of the option menu
 public class OptionsMenuButtons : MonoBehaviour
 {
+    [Header("Menus")]
     // Main op menu
-    private CanvasGroup opMenu;
+    public CanvasGroup opMenu;
     [SerializeField]
     // Main pause screen
     private CanvasGroup pScreenBase;
@@ -18,6 +19,7 @@ public class OptionsMenuButtons : MonoBehaviour
     // Content of game menu
     [SerializeField]
     private CanvasGroup gameMenu;
+    [Header("Objects")]
     [SerializeField]
     private GameObject prevScreenOpBtn;
     // Auto Scrolls for each menu
@@ -27,16 +29,14 @@ public class OptionsMenuButtons : MonoBehaviour
     void Start()
     {
         opMenu = GetComponent<CanvasGroup>();
-        gameOpAutoScroll = GameObject.Find("Game Options Scroll View").GetComponent<ScrollRectAutoScroll>();
-        audioOpAutoScroll = GameObject.Find("Audio Options Scroll View").GetComponent<ScrollRectAutoScroll>();
+        gameOpAutoScroll = GameObject.Find("Game Options Menu").GetComponent<ScrollRectAutoScroll>();
+        audioOpAutoScroll = GameObject.Find("Audio Options Menu").GetComponent<ScrollRectAutoScroll>();
     }
 
     // Opens game menu content
     public void GameOpMenu()
     {
-        audioMenu.interactable = false;
-        audioMenu.alpha = 0;
-        audioMenu.blocksRaycasts = false;
+        MenuOpenClose(audioMenu, false);
         audioOpAutoScroll.isMenuOpen = false;
 
         // Enables auto scroll
@@ -51,17 +51,13 @@ public class OptionsMenuButtons : MonoBehaviour
         MenuNavigation menuNav = gameOpAutoScroll.GetComponentInChildren<MenuNavigation>();
         menuNav.UpdateTopBarNavigation();
 
-        gameMenu.interactable = true;
-        gameMenu.alpha = 1;
-        gameMenu.blocksRaycasts = true;
+        MenuOpenClose(gameMenu, true);        
     }
 
     // Opens audio menu content
     public void AudioOpMenu()
     {
-        gameMenu.interactable = false;
-        gameMenu.alpha = 0;
-        gameMenu.blocksRaycasts = false;
+        MenuOpenClose(gameMenu, false);
         gameOpAutoScroll.isMenuOpen = false;
 
         // Enables auto scroll
@@ -69,16 +65,14 @@ public class OptionsMenuButtons : MonoBehaviour
         StartCoroutine(audioOpAutoScroll.AutoScroll());
 
         // Resets scroll view
-        ScrollRect audioScrollRect = audioOpAutoScroll.GetComponent<ScrollRect>();;
+        ScrollRect audioScrollRect = audioOpAutoScroll.GetComponent<ScrollRect>(); ;
         audioScrollRect.verticalNormalizedPosition = 1;
 
         // Updates navigation
         MenuNavigation menuNav = audioOpAutoScroll.GetComponentInChildren<MenuNavigation>();
         menuNav.UpdateTopBarNavigation();
 
-        audioMenu.interactable = true;
-        audioMenu.alpha = 1;
-        audioMenu.blocksRaycasts = true;
+        MenuOpenClose(audioMenu, true);
     }
 
     // Closes op menu and reopens main pause screen menu
@@ -88,13 +82,22 @@ public class OptionsMenuButtons : MonoBehaviour
         audioOpAutoScroll.isMenuOpen = false;
         gameOpAutoScroll.isMenuOpen = false;
 
-        opMenu.interactable = false;
-        opMenu.alpha = 0;
-        opMenu.blocksRaycasts = false;
+        MenuOpenClose(opMenu, false);
+
+        MenuOpenClose(gameMenu, true);
+
+        MenuOpenClose(audioMenu, false);
 
         EventSystem.current.SetSelectedGameObject(prevScreenOpBtn);
 
-        pScreenBase.interactable = true;
-        pScreenBase.alpha = 1;
+        MenuOpenClose(pScreenBase, true);
+    }
+    
+    // Opens or closes selected menus
+    private void MenuOpenClose(CanvasGroup menu, bool isOpen)
+    {
+        menu.interactable = isOpen;
+        menu.alpha = isOpen ? 1 : 0;
+        menu.blocksRaycasts = isOpen;
     }
 }

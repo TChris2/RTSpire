@@ -7,13 +7,13 @@ using UnityEngine.AI;
 public class EnemyFollow : MonoBehaviour
 {
     // NavMeshAgent
-    private NavMeshAgent enemy;
+    private NavMeshAgent enemyAI;
     // Player location
     private Transform player;
     // Checks to see if the player is no longer on hit cooldown and can get back up
     private EnemyHurt eHurt;
     // Checks whether the enemy is on a navmesh
-    public bool IsOnNavMesh;
+    private bool IsOnNavMesh;
     // Radius to check where the enemy is on a navmesh
     [SerializeField]
     private float checkRadius = 1.0f;
@@ -23,27 +23,26 @@ public class EnemyFollow : MonoBehaviour
     // Enemy animator
     Animator eAni;
     // If the enemy can move
-    // Used in EnemyHurt
-    public bool isWalk;
+    [HideInInspector]
+    public bool isWalk = true;
     Rigidbody enemyRb;
 
     void Start()
     {
         // Gets player transform
         player = GameObject.Find("Player").GetComponent<Transform>();
-        enemy = GetComponent<NavMeshAgent>();
+        enemyAI = GetComponent<NavMeshAgent>();
 
-        // Gets enemy comps
+        // Gets comps
         eHurt = GetComponent<EnemyHurt>();
         eAni = gameObject.GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody>();
-        isWalk = true;
     }
 
     void Update()
     {
-        // If airWait, the navmesh agent, and isWalk is disabled
-        if (!eHurt.airWait && !enemy.enabled && !isWalk)
+        // While the enemy is still spinning after getting hit
+        if (!eHurt.airWait && !enemyAI.enabled && !isWalk)
         {
             // Checks to see if the enemy is on a navmesh
             IsOnNavMesh = CheckIfOnNavMesh();
@@ -55,12 +54,12 @@ public class EnemyFollow : MonoBehaviour
                 // Plays down animation
                 eAni.SetTrigger("Down");
                 // Renables movement
-                StartCoroutine(NavMeshOn());
+                StartCoroutine(EnemyUp());
             }
         }
         // Sets player's current position as a destination
-        if (enemy.enabled)
-            enemy.SetDestination(player.position);
+        if (enemyAI.enabled)
+            enemyAI.SetDestination(player.position);
     }
 
     // Checks to see if the player is on a navmesh
@@ -78,10 +77,12 @@ public class EnemyFollow : MonoBehaviour
             return false;
     }
 
-    // Renables movement
-    IEnumerator NavMeshOn() 
+    // Gets enemy up and renables movement
+    IEnumerator EnemyUp() 
     {
+        // Intial delay
         yield return new WaitForSeconds(1f);
+        // Renables movement
         enemyRb.velocity = Vector3.zero;
         enemyRb.angularVelocity = Vector3.zero;
         enemyRb.isKinematic = false;
@@ -89,8 +90,8 @@ public class EnemyFollow : MonoBehaviour
         // Plays getting up animation
         eAni.Play("Enemy Up");
         // Renables navmeshagent
-        enemy.enabled = true;
-        enemy.ResetPath();
+        enemyAI.enabled = true;
+        enemyAI.ResetPath();
         eHurt.isHit = false;
     }
 }

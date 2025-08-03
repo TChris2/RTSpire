@@ -11,20 +11,20 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     private float yRotation = 0f;
     // Sensitivity of cam movement
-    [SerializeField]
-    private float rotateSens = 30;
+    public float rotateSens = 30;
     // Distance from camera
     [SerializeField]
     private float distance = 24;
     public Quaternion playerRotation;
-
+    [HideInInspector]
     public bool isZoomIn = false;
+    [HideInInspector]
     public bool isZoomOut = false;
     public float zoomSens = 20;
     
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GetComponent<Transform>();
         pCam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         // Get player cam distance between lvs/instances
@@ -38,11 +38,11 @@ public class PlayerLook : MonoBehaviour
     public void ProcessLook(Vector2 input)
     {
         // Camera can be movement whilst the player still hasn't won or died
-        yRotation += (input.x * Time.deltaTime) * rotateSens;
+        yRotation += (input.x * Time.deltaTime) * -rotateSens;
         xRotation += (input.y * Time.deltaTime) * rotateSens;
 
         // Restricts up down cam movement
-        xRotation = Mathf.Clamp(xRotation, -30, 60);
+        xRotation = Mathf.Clamp(xRotation, -30, 35);
             
         // Updates cam rotations
         playerRotation = Quaternion.Euler(xRotation, yRotation, 0);

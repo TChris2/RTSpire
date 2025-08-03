@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Controls health of enemies
+// Handles health of enemies
 public class Entity : MonoBehaviour
 {
     // Enemy hurt sounds
@@ -13,9 +13,9 @@ public class Entity : MonoBehaviour
     private float StartHealth = 5;
     // Keeps track of enemy health
     private float health;
-    private UnityEngine.AI.NavMeshAgent enemy;
     private Animator eAni;
 
+    // Updates health
     public float Health
     {
         get
@@ -23,10 +23,11 @@ public class Entity : MonoBehaviour
             return health;
         }
         set
-        {   
+        {
             health = value;
-            // Plays clip when enemy is hurt
-            if (audioSource != null && health > 0f) {
+            // If the enemy is not dead when hit
+            if (audioSource != null && health > 0f)
+            {
                 audioSource.PlayOneShot(hurtClips[0]);
                 float delay = hurtClips[0].length;
                 eAni.Play("Enemy Hurt");
@@ -34,13 +35,13 @@ public class Entity : MonoBehaviour
             // When enemy health reaches zero and dies
             else if (audioSource != null && health <= 0f)
             {
-                
-                int randomClipNum = Random.Range(1, 101);
-                if (randomClipNum > 15) 
+                // Plays one of three hurt clips
+                int randomClipNum = Random.Range(1, 201);
+                if (randomClipNum > 20)
                 {
                     randomClipNum = 0;
                 }
-                else if (randomClipNum <= 15 && randomClipNum > 5)
+                else if (randomClipNum <= 20 && randomClipNum > 5)
                 {
                     randomClipNum = 1;
                 }
@@ -48,11 +49,13 @@ public class Entity : MonoBehaviour
                 {
                     randomClipNum = 2;
                 }
+                // Plays sfx
                 audioSource.PlayOneShot(hurtClips[randomClipNum]);
-                enemy.enabled = false;
                 float delay = hurtClips[randomClipNum].length;
+
+                // Plays hurt animation and death fade
                 eAni.Play("Enemy Hurt");
-                eAni.Play("DeathFade");
+                eAni.Play("Death Fade");
                 // Destroys enemy after the sound is played
                 Invoke("DestroyEnemy", delay);
             }
@@ -71,7 +74,6 @@ public class Entity : MonoBehaviour
         Health = StartHealth;
         // Gets enemy components
         audioSource = gameObject.GetComponent<AudioSource>();
-        enemy = GetComponent<UnityEngine.AI.NavMeshAgent>();
         eAni = GetComponent<Animator>();
     }
 }

@@ -25,11 +25,10 @@ public class PlayerState : MonoBehaviour
     [SerializeField]
     private float eAttackCool = 2f;
     // Used in EnemySpawn, EnemyFollow
-    public bool isDead;
-    public bool isDamaged;
+    public bool isDead = false;
+    public bool isDamaged = false;
     // Used in EnemySpawn, EnemyFollow, VoiceClips
-    public bool isWin;
-    public bool hasWon;
+    public bool isWin = false;
     [SerializeField]
     private bool isInvincible;
 
@@ -39,17 +38,6 @@ public class PlayerState : MonoBehaviour
 
     [SerializeField]
     private GameObject dMenuInitial;
-
-    AttackInfo eAtkInfo;
-    EnemyHurt eHurt;
-
-    void Awake()
-    { 
-        isDead = false;
-        isDamaged = false;
-        isWin = false;
-        hasWon = false;
-    }
     
     void Start()
     {   
@@ -70,17 +58,6 @@ public class PlayerState : MonoBehaviour
         playerUIAni = GameObject.Find("Player UI").GetComponent<Animator>();
         playerAni = GetComponentInParent<Animator>();
     }
-
-    void Update()
-    {
-        // Checks if the player has won
-        if (isWin) {
-            if (!hasWon)
-            {
-                StartCoroutine(PlayerWin());
-            }
-        } 
-    }
     
     // Takes damage from enemy
     private void OnTriggerEnter(Collider other)
@@ -91,11 +68,11 @@ public class PlayerState : MonoBehaviour
             // Check if the object entering collider is an enemy
             if (other.CompareTag("Enemy") && !isInvincible)
             {
-                eHurt = other.GetComponent<EnemyHurt>();
+                EnemyHurt eHurt = other.GetComponent<EnemyHurt>();
                 if (!eHurt.isHit)
                 {
                     isDamaged = true;
-                    eAtkInfo = other.GetComponent<AttackInfo>();
+                    AttackInfo eAtkInfo = other.GetComponent<AttackInfo>();
 
                     if (health - eAtkInfo.dmg < 0)
                         health = 0;
@@ -161,9 +138,9 @@ public class PlayerState : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(dMenuInitial);
     }
 
-    private IEnumerator PlayerWin()
+    public IEnumerator PlayerWin()
     {
-        hasWon = true;
+        isWin = true;
         AudioListener.pause = true;
         audioSource.ignoreListenerPause = true;
         playerAni.updateMode = AnimatorUpdateMode.UnscaledTime;

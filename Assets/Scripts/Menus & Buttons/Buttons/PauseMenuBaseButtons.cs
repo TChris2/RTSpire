@@ -9,23 +9,25 @@ public class PauseMenuBaseButtons : MonoBehaviour
 {
     // Animator for lv load object
     private Animator lvLoadAni;
+    // Scripts
     private MenuPause pause;
-
-    [SerializeField]
-    private CanvasGroup pScreenBase;
-    [SerializeField]
-    private CanvasGroup ynScreen;
-    [SerializeField]
-    private GameObject ynInitial;
-    private GameObject pScreenPrev;
-    [SerializeField]
-    private TMPro.TMP_Text ynText;
+    private OptionsMenuButtons opMenuBtns;
+    // Menus
+    [Header("Menus")]
+    public CanvasGroup pScreenBase;
+    public CanvasGroup ynScreen;
     [SerializeField]
     private CanvasGroup opMenu;
     [SerializeField]
     private CanvasGroup gameMenu;
     [SerializeField]
     private CanvasGroup audioMenu;
+    [Header("Objects")]
+    [SerializeField]
+    private GameObject ynInitial;
+    private GameObject pScreenPrev;
+    [SerializeField]
+    private TMPro.TMP_Text ynText;
     [SerializeField]
     private GameObject opInitial;
     // Decides what scene the game exits to
@@ -34,14 +36,16 @@ public class PauseMenuBaseButtons : MonoBehaviour
 
     void Start()
     {
+        // Gets components
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
         pause = GameObject.Find("Player").GetComponent<MenuPause>();
+        opMenuBtns = FindObjectOfType<OptionsMenuButtons>();
     }
 
     // Resumes the game
     public void Resume()
     {
-        pause.Pause();
+        pause.Resume();
     }
 
     // Exits to hub
@@ -68,35 +72,26 @@ public class PauseMenuBaseButtons : MonoBehaviour
         ynMenuOpen(prevBtn);
     }
 
-    void ynMenuOpen(GameObject prevBtn) 
+    void ynMenuOpen(GameObject prevBtn)
     {
         pScreenPrev = prevBtn;
-        pScreenBase.interactable = false;
-        pScreenBase.alpha = 0;
-        pScreenBase.blocksRaycasts = false;
+        MenuOpenClose(pScreenBase, false);
 
         EventSystem.current.SetSelectedGameObject(ynInitial);
 
-        ynScreen.interactable = true;
-        ynScreen.alpha = 1;
-        ynScreen.blocksRaycasts = true;
+        MenuOpenClose(ynScreen, true);
     }
 
-    public void OpMenuOpen(GameObject prevBtn) 
+    public void OpMenuOpen(GameObject prevBtn)
     {
         pScreenPrev = prevBtn;
-        pScreenBase.interactable = false;
-        pScreenBase.alpha = 0;
+        MenuOpenClose(pScreenBase, false);
 
-        GameObject menu = GameObject.Find("Options Menu");
-        OptionsMenuButtons opMenuBtns = menu.GetComponentInChildren<OptionsMenuButtons>();
         opMenuBtns.GameOpMenu();
 
         EventSystem.current.SetSelectedGameObject(opInitial);
 
-        opMenu.interactable = true;
-        opMenu.alpha = 1;
-        opMenu.blocksRaycasts = true;
+        MenuOpenClose(opMenu, true);
     }
 
     public void Yes()
@@ -120,8 +115,8 @@ public class PauseMenuBaseButtons : MonoBehaviour
         {
             // 1: Hub 
             case 1:
-                Debug.Log("Does Not Have Functionality Currently");
-                No();
+                Debug.Log("Don't forgot to change to hub scene when that exists");
+                SceneManager.LoadScene(0);
                 break;
             // 2: Menu
             case 2:
@@ -136,15 +131,19 @@ public class PauseMenuBaseButtons : MonoBehaviour
 
     public void No()
     {
-        ynScreen.interactable = false;
-        ynScreen.alpha = 0;
-        ynScreen.blocksRaycasts = false;
+        MenuOpenClose(ynScreen, false);
 
         EventSystem.current.SetSelectedGameObject(pScreenPrev);
 
-        pScreenBase.interactable = true;
-        pScreenBase.alpha = 1;
-        pScreenBase.blocksRaycasts = true;
+        MenuOpenClose(pScreenBase, true);
+    }
+
+    // Opens or closes selected menus
+    private void MenuOpenClose(CanvasGroup menu, bool isOpen)
+    {
+        menu.interactable = isOpen;
+        menu.alpha = isOpen ? 1 : 0;
+        menu.blocksRaycasts = isOpen;
     }
 
     private void OnDisable()

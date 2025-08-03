@@ -275,8 +275,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Main Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0058147d16bcc6a4fb5aeb6acd538f21, type: 2}
-  m_sharedMaterial: {fileID: 3476846520379276970, guid: 0058147d16bcc6a4fb5aeb6acd538f21, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 657faf108b170b5459aa1a0081ad36e9, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 05c054e2fc7649844a8172a0c3c3e263, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -542,8 +542,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart Level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0058147d16bcc6a4fb5aeb6acd538f21, type: 2}
-  m_sharedMaterial: {fileID: 3476846520379276970, guid: 0058147d16bcc6a4fb5aeb6acd538f21, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 657faf108b170b5459aa1a0081ad36e9, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 05c054e2fc7649844a8172a0c3c3e263, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -718,7 +718,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8943659963095794aa319f8ed98428c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LvLoad: {fileID: 3763172523488613446, guid: 02f72c27829d77c4b8c05906b61a835a, type: 3}
 --- !u!1 &7456521982145187988
 GameObject:
   m_ObjectHideFlags: 0

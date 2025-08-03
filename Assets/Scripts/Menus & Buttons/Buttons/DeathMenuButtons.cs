@@ -21,7 +21,7 @@ public class DeathMenuButtons : MonoBehaviour
     public void LvRestart()
     {
         // Resets player health
-        pState.health = 100;
+        pState.health = pState.hMax;
 
         StartCoroutine(TransitionDeath(1));
     }
@@ -41,7 +41,7 @@ public class DeathMenuButtons : MonoBehaviour
     // Opening screen when the player presses start
     public void StartGame()
     {
-        pState.health = 100;
+        pState.health = pState.hMax;
         StartCoroutine(Transition(1));
     }
 
@@ -97,6 +97,7 @@ public class DeathMenuButtons : MonoBehaviour
 
     private void OnDisable()
     {
+        // Saves prefs
         // Saves player health for next lv
         PlayerPrefs.SetFloat("PlayerHealth", pState.health);
         PlayerPrefs.Save();

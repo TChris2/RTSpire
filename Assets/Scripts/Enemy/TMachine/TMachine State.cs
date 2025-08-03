@@ -5,8 +5,10 @@ using UnityEngine;
 // Controls animation state of TMachines
 public class TMachineState : MonoBehaviour
 {
-    public AudioClip ding; 
+    [SerializeField]
+    private AudioClip ding; 
     private AudioSource audioSource;
+    // Gets health from TMachineEntity
     private TMachineEntity TMEntity;
     // Determines whether the machine is breakable or unbreakable
     [SerializeField]
@@ -30,9 +32,11 @@ public class TMachineState : MonoBehaviour
         TMEntity = GetComponentInChildren<TMachineEntity>();
         TMAni = GetComponent<Animator>();
 
+        // Starts spawn function
         StartCoroutine(ESpawn());
     }
 
+    // Spawns enemies
     IEnumerator ESpawn() 
     {
         while (true) 
@@ -44,6 +48,7 @@ public class TMachineState : MonoBehaviour
             if (isBreakable && TMEntity != null && TMEntity.isTMachineDestroyed) 
                 break;
 
+            // plays opening animation and sfx
             TMAni.Play("TMachineOpen");
             audioSource.PlayOneShot(ding);
             float delay = ding.length; 
@@ -54,9 +59,10 @@ public class TMachineState : MonoBehaviour
             Instantiate(Enemy, centerPos.position + new Vector3(0, 0, 10), Quaternion.identity);
             Instantiate(Enemy, centerPos.position + new Vector3(0, 0, -10), Quaternion.identity);
             
-            yield return new WaitForSeconds(delay-1f);
+            // Plays slight delay for sfx before closing machine again
+            yield return new WaitForSeconds(delay - 1f);
 
-            // Prevents closed animation from spawning when the TMachine is destroyed
+            // Prevents closed animation from occuring if the TMachine is destroyed
             if (isBreakable && TMEntity != null && TMEntity.isTMachineDestroyed)
                 break;
 

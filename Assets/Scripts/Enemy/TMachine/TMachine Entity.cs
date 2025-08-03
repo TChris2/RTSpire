@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Controls health of TMachines
+// Handles health of TMachines
 public class TMachineEntity : MonoBehaviour
 {
     // Stores hurt clips
@@ -14,30 +14,30 @@ public class TMachineEntity : MonoBehaviour
     // Tracks health of enemy
     private float health;
     // Checks to see if the machine has reached 0 health
-    public bool isTMachineDestroyed;
+    [HideInInspector]
+    public bool isTMachineDestroyed = false;
+    // Destroy counter components
     private GameObject DestroyCounter;
     private ObjectiveDestroyMachine objDestroy;
     // Machine counter text
     private TMPro.TMP_Text DestroyCounterTxt;
+    // TMachine animator
     private Animator TMAni; 
-    private PlayerState pState;
 
     void Start()
     {
-        // Sets health
+        // Sets intial health
         Health = StartHealth;
-        isTMachineDestroyed = false;
+        // Gets comps from t machine
+        TMAni = GetComponent<Animator>();
         audioSource = gameObject.GetComponentInChildren<AudioSource>();
-        // Get destroy counter
+        // Get comps from destroy counter
         DestroyCounter = GameObject.Find("DestroyCounter");
         objDestroy = DestroyCounter.GetComponent<ObjectiveDestroyMachine>();
         DestroyCounterTxt = DestroyCounter.GetComponent<TMPro.TMP_Text>();
-        DestroyCounterTxt.text = $"{objDestroy.TMachineCounter}";
-        TMAni = GetComponent<Animator>();
-
-        pState = GameObject.Find("Player Hitbox").GetComponent<PlayerState>();
     }
     
+    // Updates health
     public float Health
     {
         get
@@ -47,10 +47,12 @@ public class TMachineEntity : MonoBehaviour
         set
         {
             health = value;
-            if (audioSource != null && health > 0f) 
+            // If the TMachine is not dead when hit
+            if (audioSource != null && health > 0f)
             {
                 // Plays hurt clip
                 audioSource.PlayOneShot(hurtClips[0]);
+                // Plays hit effect
                 TMAni.Play("TMachineHurt");
             }
             // Destroys machine when their health reaches 0
@@ -59,29 +61,22 @@ public class TMachineEntity : MonoBehaviour
                 // Sets to true to prevent it from playing multiple times
                 isTMachineDestroyed = true;
                 audioSource.PlayOneShot(hurtClips[1]);
-                float delay = hurtClips[1].length; 
+                float delay = hurtClips[1].length;
 
                 // Plays destroyed animation
                 TMAni.Play("TMachineDestroyed");
-                
+
                 // Updates counter
                 objDestroy.TMachineCounter -= 1;
                 DestroyCounterTxt.text = $"{objDestroy.TMachineCounter}";
 
                 // Checks to see if the player has destroyed all the machines
-                if (objDestroy.TMachineCounter <= 0)
-                    Invoke("Win", .9f);
+                objDestroy.WinCheck();
 
                 // Destroys machine
-                Invoke("DestroyMachine", delay-1f);
+                Invoke("DestroyMachine", delay - 1f);
             }
         }
-    }
-
-    // If the player has destroyed all machines
-    void Win()
-    {
-        pState.isWin = true;
     }
 
     // Destroys machine

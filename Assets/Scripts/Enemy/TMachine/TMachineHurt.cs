@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// How TMachines are hit and effects of different on them by different player attacks
+// Handles how damage is dealt to TMachines
 public class TMachineHurt : MonoBehaviour
 {
     // Gets attack info from the player attack
@@ -10,36 +10,22 @@ public class TMachineHurt : MonoBehaviour
     // Gets health for entity
     TMachineEntity TMEntity;
     // Controls when player can attack the enemy again
-    public bool isHit;
+    [HideInInspector]
+    public bool isHit = false;
     void Start()
     {
-        // Gets the enemy's components
+        // Gets components
         TMEntity = GetComponent<TMachineEntity>();
-        isHit = false;
     }
 
-    // When the TMachine enters the collider of one of the player's attacks
+    // When the player's attack enters the TMachine's collider
     private void OnTriggerEnter(Collider other)
     {
-        // Checks to see if the enemy has already been hit
+        // Checks to see if the TMachine has already been hit
         if (!isHit)
         {
-            // Checks to see which attack the enemy is being attacked by
-            // If RT attack
-            if (other.CompareTag("RT Attack") && other.gameObject.name == "Attack Hitbox")
-            {
-                // Sets to true to prevent the enemy being hit multiple times while hit
-                isHit = true;
-                // Gets attack info
-                atkInfo = other.GetComponent<AttackInfo>();
-                // Deals damage
-                TMEntity.Health -= atkInfo.dmg;
-
-                // Starts hit cooldown
-                StartCoroutine(HitCooldown());
-            }
-            // If Cupcake
-            else if (other.CompareTag("Cupcake") && other.gameObject.name == "Cupcake Orientate")
+            // Checks if either of the player's attacks have enter the TMachines collider
+            if ((other.CompareTag("RT Attack") || other.CompareTag("Cupcake")) && other.GetComponent<AttackInfo>())
             {
                 // Sets to true to prevent the enemy being hit multiple times while hit
                 isHit = true;

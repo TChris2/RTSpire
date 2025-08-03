@@ -7,48 +7,60 @@ using UnityEngine.EventSystems;
 // Button functions for the sub option menu main buttons
 public class SubOptionMenuButtons : MonoBehaviour
 {
-    // Content of audio menu
+    [Header("Menus")]
+    // Audio settings menu
     [SerializeField]
     private CanvasGroup audioMenu;
-    // Content of voice clip menu
+    // Voice clip menu
+    public CanvasGroup clipMenu;
+    // Game settings menu
     [SerializeField]
-    private CanvasGroup clipMenu;
+    private CanvasGroup gameMenu;
+    // Tumble design menu
+    [SerializeField]
+    private CanvasGroup designMenu;
     // The main sub op menu
-    private CanvasGroup subOpMenu;
+    public CanvasGroup subOpMenu;
     // The main op menu
     [SerializeField]
     private CanvasGroup opMenu;
-    // Sets as selected object when player goes back to the base audio settings
-    [SerializeField]
-    // Buttons of the previous menu - 1st is Game 2nd is Audio 
-    private GameObject[] prevOpMenuButton;
-    [SerializeField]
-    private VoiceClipSelectionButtons vClipMenuBtns;
-    [SerializeField]
-    private AudioClip saveClip;
-    private AudioSource audioSource;
-    [SerializeField]
-    private TMPro.TMP_Text saveSelectTxt;
-    private bool isPressed;
     // For sub option yes or no screen
-    [SerializeField]
-    private CanvasGroup ynScreen;
+    public CanvasGroup ynScreen;
+    private CanvasGroup subTypeMenu;
+    // Scripts
+    public VoiceClipSelectionButtons vClipMenuBtns;
+    public TumbleDesignSelectionButtons tDesignMenuBtns;
+    [HideInInspector]
+    public ScrollRectAutoScroll vClipAutoScroll;
+    [HideInInspector]
+    public ScrollRectAutoScroll tDesignAutoScroll;
+    [Header("Objects")]
     [SerializeField]
     private GameObject ynInitial;
     // Initial selected object for the clip menu
-    [SerializeField]
-    private GameObject subOpMenuInitial;
+    public GameObject subOpMenuInitial;
     private GameObject subOpMenuPrev;
+    // Sets as selected object when player goes back to the prev menu
+    // Buttons of the previous menu - 1st is Game 2nd is Audio 
+    [SerializeField]
+    private GameObject[] prevOpMenuButton;
+    [SerializeField]
+    private TMPro.TMP_Text saveSelectTxt;
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip saveClip;
+    private bool isPressed;
     // Keeps tracks of which sub option menu was open
-    private ScrollRectAutoScroll vClipAutoScroll;
     public string subOpMenuOpen;
     public bool isSubTypeMenuOpen;
-    private CanvasGroup subTypeMenu;
 
     void Start()
     {
-        vClipAutoScroll = GameObject.Find("Voice Clip Main Menu").GetComponent<ScrollRectAutoScroll>();
+        vClipAutoScroll = GameObject.Find("Voice Clip Menu").GetComponent<ScrollRectAutoScroll>();
+        tDesignAutoScroll = GameObject.Find("Tumble Design Menu").GetComponent<ScrollRectAutoScroll>();
         subTypeMenu = GameObject.Find($"Type Menu").GetComponent<CanvasGroup>();
+        vClipMenuBtns = FindObjectOfType<VoiceClipSelectionButtons>();
+        tDesignMenuBtns = FindObjectOfType<TumbleDesignSelectionButtons>();
 
         audioSource = GetComponent<AudioSource>();
         audioSource.ignoreListenerPause = true;
@@ -58,10 +70,13 @@ public class SubOptionMenuButtons : MonoBehaviour
 
     public void SaveSelection()
     {
-        if (!isPressed) {
+        if (!isPressed)
+        {
             isPressed = true;
             if (clipMenu.interactable)
                 vClipMenuBtns.SaveClipSelection();
+            if (designMenu.interactable)
+                tDesignMenuBtns.SaveDesignSelection();
 
             StartCoroutine(UpdateTxt());
         }
@@ -73,39 +88,31 @@ public class SubOptionMenuButtons : MonoBehaviour
         float clipLength = saveClip.length;
         yield return new WaitForSecondsRealtime(.15f);
         saveSelectTxt.text = $"{"Selection Saved"}";
-        yield return new WaitForSecondsRealtime(clipLength-1.1f);
+        yield return new WaitForSecondsRealtime(clipLength - 1.1f);
 
-        saveSelectTxt.text = $"{"Save Selection"}";     
+        saveSelectTxt.text = $"{"Save Selection"}";
         isPressed = false;
     }
 
     // Opens yes no screen for exitting sub option menu
-    public void ExitSubOpMenu() 
+    public void ExitSubOpMenu()
     {
         if (!isSubTypeMenuOpen)
         {
             // Closes currently open sub menu
             if (subOpMenuOpen == "Voice Clip")
-            {
-                clipMenu.interactable = false;
-                clipMenu.alpha = 0;
-                clipMenu.blocksRaycasts = false;
-            }
-            if (subOpMenuOpen == "Tumble Mat")
-            {
-
-            }
+                MenuOpenClose(clipMenu, false);
+            if (subOpMenuOpen == "Tumble Design")
+                MenuOpenClose(designMenu, false);
 
             subOpMenu.interactable = false;
 
             EventSystem.current.SetSelectedGameObject(ynInitial);
 
-            ynScreen.interactable = true;
-            ynScreen.alpha = 1;
-            ynScreen.blocksRaycasts = true;
+            MenuOpenClose(ynScreen, true);
         }
         // Closes all sub sub menus
-        else 
+        else
         {
             CloseSubTypeMenu();
         }
@@ -121,17 +128,16 @@ public class SubOptionMenuButtons : MonoBehaviour
             menuNav = vClipAutoScroll.GetComponentInChildren<MenuNavigation>();
         }
 
-        if (subOpMenuOpen == "Tumble Mat")
+        if (subOpMenuOpen == "Tumble Design")
         {
-
+            // Gets comp from previously opened menu
+            menuNav = tDesignAutoScroll.GetComponentInChildren<MenuNavigation>();
         }
 
         // Updates navigation
         menuNav.UpdateTopBarNavigation();
-            
-        subTypeMenu.alpha = 0;
-        subTypeMenu.interactable = false;
-        subTypeMenu.blocksRaycasts = false;
+
+        MenuOpenClose(subTypeMenu, false);
 
         ScrollRectAutoScroll subTypeMenuAutoScroll = subTypeMenu.GetComponent<ScrollRectAutoScroll>();
 
@@ -143,20 +149,16 @@ public class SubOptionMenuButtons : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(subOpMenuPrev);
 
         if (subOpMenuOpen == "Voice Clip")
-        {
-            clipMenu.interactable = true;
-            clipMenu.alpha = 1;
-            clipMenu.blocksRaycasts = true;
-        }
-            
+            MenuOpenClose(clipMenu, true);
+        if (subOpMenuOpen == "Tumble Design")
+            MenuOpenClose(designMenu, true);
+
         isSubTypeMenuOpen = false;
     }
 
     public void No()
     {
-        ynScreen.interactable = false;
-        ynScreen.alpha = 0;
-        ynScreen.blocksRaycasts = false;
+        MenuOpenClose(ynScreen, false);
 
         EventSystem.current.SetSelectedGameObject(subOpMenuInitial);
 
@@ -164,33 +166,38 @@ public class SubOptionMenuButtons : MonoBehaviour
 
         // Reopens the currently open sub menu
         if (subOpMenuOpen == "Voice Clip")
-        {
-            clipMenu.interactable = true;
-            clipMenu.alpha = 1;
-            clipMenu.blocksRaycasts = true;
-        }
+            MenuOpenClose(clipMenu, true);
+        if (subOpMenuOpen == "Tumble Design")
+            MenuOpenClose(designMenu, true);
     }
 
-    public void CloseSubOpMenu() 
+    public void CloseSubOpMenu()
     {
-        ynScreen.interactable = false;
-        ynScreen.alpha = 0;
-        ynScreen.blocksRaycasts = false; 
-
-        subOpMenu.interactable = false;
-        subOpMenu.alpha = 0;
-        subOpMenu.blocksRaycasts = false;
+        // Closes sub option menu items
+        MenuOpenClose(ynScreen, false);
+        MenuOpenClose(subOpMenu, false);
 
         // Reopens previous menu
         if (subOpMenuOpen == "Voice Clip")
         {
+            MenuOpenClose(clipMenu, false);
+
             vClipAutoScroll.isMenuOpen = false;
-            
+
             EventSystem.current.SetSelectedGameObject(prevOpMenuButton[1]);
 
-            audioMenu.interactable = true;
-            audioMenu.alpha = 1;
-            audioMenu.blocksRaycasts = true;
+            MenuOpenClose(audioMenu, true);
+            opMenu.interactable = true;
+        }
+        if (subOpMenuOpen == "Tumble Design")
+        {
+            MenuOpenClose(designMenu, false);
+
+            tDesignAutoScroll.isMenuOpen = false;
+
+            EventSystem.current.SetSelectedGameObject(prevOpMenuButton[0]);
+
+            MenuOpenClose(gameMenu, true);
             opMenu.interactable = true;
         }
     }
@@ -205,6 +212,15 @@ public class SubOptionMenuButtons : MonoBehaviour
         {
             vClipMenuBtns.CreateClipTypeMenu(subTypeMenuName, menuNav.gameObject, GetComponent<AudioSource>());
             subTypeMenuAutoScroll.rowAmt = 2;
+            // Closes sub option menu
+            MenuOpenClose(clipMenu, false);
+        }
+        if (subOpMenuOpen == "Tumble Design")
+        {
+            tDesignMenuBtns.CreateSubDesignMenu(int.Parse(subTypeMenuName), menuNav.gameObject, GetComponent<AudioSource>());
+            subTypeMenuAutoScroll.rowAmt = 5;
+            // Closes sub option menu
+            MenuOpenClose(designMenu, false);
         }
 
         // Enables auto scroll
@@ -216,7 +232,7 @@ public class SubOptionMenuButtons : MonoBehaviour
         subTypeMenuScrollRect.verticalNormalizedPosition = 1;
 
         // Updates navigation
-        menuNav.UpdateTypeMenuNav(2);
+        menuNav.UpdateTypeMenuNav(subTypeMenuAutoScroll.rowAmt);
         menuNav.UpdateTopBarNavigation();
 
         subOpMenuPrev = EventSystem.current.currentSelectedGameObject;
@@ -226,14 +242,8 @@ public class SubOptionMenuButtons : MonoBehaviour
 
         isSubTypeMenuOpen = true;
 
-        clipMenu.interactable = false;
-        clipMenu.alpha = 0;
-        clipMenu.blocksRaycasts = false;
-
-        // Enables the menu
-        subTypeMenu.alpha = 1;
-        subTypeMenu.interactable = true;
-        subTypeMenu.blocksRaycasts = true;
+        // Enables the sub type menu
+        MenuOpenClose(subTypeMenu, true);
     }
 
     // Clears contents of type menu
@@ -245,5 +255,13 @@ public class SubOptionMenuButtons : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+    
+    // Opens or closes selected menus
+    private void MenuOpenClose(CanvasGroup menu, bool isOpen)
+    {
+        menu.interactable = isOpen;
+        menu.alpha = isOpen ? 1 : 0;
+        menu.blocksRaycasts = isOpen;
     }
 }
