@@ -1,4 +1,24 @@
-﻿# Version 0.2.0 Options Update - 8/2/2025
+# 0.2.1 Options Update Bug Fixes - 8/5/2025
+## General
+- Changed Tumble selection menu to use a grid layout instead of a vertical layout.
+- Selection menus now allow you move left or right to go to preceding or following rows.
+- Exiting either Tumble Design or Voice Clip Selection menus with the Esc key now takes you to the Sub Option Menu Yes No page first before exiting the menu.
+- Pressing the X key or East gamepad button on controller now exits menus.
+- Level no longer plays immediately and now waits until all necessary elements have been loaded before starting.
+- Updated presets of some clips.
+- Added 2 hurt sfxs to enemy hurt sfx pool
+- Added 11 RT voice clips to the enemy voice clip pool.
+## Bug Fixes
+- Fixed bug where lv transition does play properly.
+- Fixed issue where selected clips or designs would not save while in a sub selection menu.
+- Fixed issue where other sprites could be barely visible Tumble enemies.
+- Fixed issue when textures further from the camera would be displayed at a lower resolution.
+- Fixed navigation bug in options menu where when the Audio menu was selected moving up to the menu tabs would instead take the player to the Game menu tab instead of the Audio tab.
+- Fixed version number on start scene.
+- Fixed issue with aspect ratio on end scene
+
+
+# Version 0.2.0 Options Update - 8/2/2025
 ## **UI General:**
 - Redid how UI is handled.
     - Instead of instantiating UI when needed, instead needed UI for a scene/level is stored in one parent object.
@@ -72,22 +92,3 @@
 ## Animations General:
 - Added hit effect to player, enemies, and TMachines.
 - Added fade in/out animations to Cupcake, Muffins, & Enemies.
-
-# 0.2.1 Options Update Bug Fixes - 8/5/2025
-## General
-- Changed Tumble selection menu to use a grid layout instead of a vertical layout.
-- Selection menus now allow you move left or right to go to preceding or following rows.
-- Exiting either Tumble Design or Voice Clip Selection menus with the Esc key now takes you to the Sub Option Menu Yes No page first before exiting the menu.
-- Pressing the X key or East gamepad button on controller now exits menus.
-- Level no longer plays immediately and now waits until all necessary elements have been loaded before starting.
-- Updated presets of some clips.
-- Added 2 hurt sfxs to enemy hurt sfx pool
-- Added 11 RT voice clips to the enemy voice clip pool.
-## Bug Fixes
-- Fixed bug where lv transition does play properly.
-- Fixed issue where selected clips or designs would not save while in a sub selection menu.
-- Fixed issue where other sprites could be barely visible Tumble enemies.
-- Fixed issue when textures further from the camera would be displayed at a lower resolution.
-- Fixed navigation bug in options menu where when the Audio menu was selected moving up to the menu tabs would instead take the player to the Game menu tab instead of the Audio tab.
-- Fixed version number on start scene.
-- Fixed issue with aspect ratio on end scene
