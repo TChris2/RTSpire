@@ -33,6 +33,8 @@ public class TumbleDesignSelectionButtons : MonoBehaviour
     [SerializeField]
     private GameObject[] typeMenuItems = new GameObject[2];
     private List<Toggle> typeMenuToggles = new List<Toggle>();
+    [HideInInspector]
+    public bool isLoaded = false;
 
     void Awake()
     {
@@ -133,6 +135,8 @@ public class TumbleDesignSelectionButtons : MonoBehaviour
         // Saves tumble to lists
         if (tDesign != null)
             NewTumble(tDesign);
+
+        isLoaded = true;
     }
 
     // Saves tumble to lists
@@ -321,35 +325,34 @@ public class TumbleDesignSelectionButtons : MonoBehaviour
             EnableDisableAllBtns(0, (subDesignMenu == 999) ? 50 : 100, !isOn);
         });
 
+        item = Instantiate(typeMenuItems[1], subTypeContent);
+        subTypeContent = item.transform;
+
         Sprite[] sprites = Resources.LoadAll<Sprite>($"Tumble Designs/{subDesignMenu}");
 
         // Main items of subtype menu
-        for (int i = loopStart; i < loopEnd;)
+        for (int i = loopStart; i < loopEnd; i++)
         {
-            item = Instantiate(typeMenuItems[1], subTypeContent);
+            item = Instantiate(typeMenuItems[2], subTypeContent);
 
             // Toggle
-            Toggle[] toggles = item.GetComponentsInChildren<Toggle>();
+            toggle = item.GetComponentInChildren<Toggle>();
 
-            for (int l = 0; l < 5; l++)
+            // So items has a seperate index value
+            int index = i;
+            // Gives it a name
+            item.name = $"{subDesignMenu}_{(index + 101) % subDesignMenu}";
+
+            Image image = toggle.GetComponentInChildren<Image>();
+            image.sprite = sprites[(index + 100) % subDesignMenu];
+            toggle.isOn = !tumbleInfoList[index].isEnabledTemp;
+
+            toggle.onValueChanged.AddListener((bool isOn) =>
             {
-                int index = i;
-                // Gives it a name
-                item.name = $"{subDesignMenu}_{(index + 101) % subDesignMenu}";
-                
-                Image image = toggles[l].GetComponentInChildren<Image>();
-                image.sprite = sprites[(index + 100) % subDesignMenu];
-                toggles[l].isOn = !tumbleInfoList[index].isEnabledTemp;
-
-                toggles[l].onValueChanged.AddListener((bool isOn) =>
-                {
-                    tumbleInfoList[index].isEnabledTemp = !isOn;
-                    Debug.Log(tumbleInfoList[index].no);
-                });
-                typeMenuToggles.Add(toggles[l]);
-                
-                i++;
-            }
+                tumbleInfoList[index].isEnabledTemp = !isOn;
+                // Debug.Log(tumbleInfoList[index].no);
+            });
+            typeMenuToggles.Add(toggle);
         }
     }
 

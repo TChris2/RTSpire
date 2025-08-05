@@ -46,8 +46,6 @@ public class PlayerState : MonoBehaviour
         deathUIAni = GameObject.Find("Death UI").GetComponent<Animator>();
         deathLoadAni = GameObject.Find("Death Transition").GetComponent<Animator>();
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
-        // Lv intro transition
-        lvLoadAni.Play("LvIntro");
 
         // Sets health display
         healthDisplay = GameObject.Find("HealthDisplay").GetComponent<TMPro.TMP_Text>();
@@ -153,7 +151,7 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         
         // Lv outro transition
-        lvLoadAni.Play("LvOutro");
+        lvLoadAni.Play("Lv Load Outro");
 
         yield return new WaitForSecondsRealtime(2f);
         // Next level

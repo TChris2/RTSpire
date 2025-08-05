@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,32 +46,55 @@ public class MenuNavigation : MonoBehaviour
         nav.selectOnDown = selectables[1];
         selectables[0].navigation = nav;
 
+        // Sets up navigation to top element for the first main row
         for (int i = 1; i < rowAmt + 1; i++)
         {
             nav = selectables[i].navigation;
             nav.mode = Navigation.Mode.Explicit;
 
-            // Set selectOnDown (next)
+            // Goes down a row
             if (i < selectables.Length - rowAmt)
                 nav.selectOnDown = selectables[i + rowAmt];
 
-            // Set selectOnUp (previous)
+            // Goes to the item left of it
+            if (i != 1)
+                nav.selectOnLeft = selectables[i - 1];
+            
+            if (i + 1 != selectables.Length)
+                nav.selectOnRight = selectables[i + 1];
+            
+            // Goes to the item right of it
+            if (i < selectables.Length - rowAmt)
+                nav.selectOnDown = selectables[i + rowAmt];
+
+            // Goes up a row to the first row
             if (i > 0)
                 nav.selectOnUp = selectables[0];
 
             selectables[i].navigation = nav;
         }
 
+        // General nav
         for (int i = rowAmt + 1; i < selectables.Length; i++)
         {
             nav = selectables[i].navigation;
             nav.mode = Navigation.Mode.Explicit;
 
-            // Set selectOnDown (next)
+            // Goes down a row
             if (i < selectables.Length - rowAmt)
                 nav.selectOnDown = selectables[i + rowAmt];
 
-            // Set selectOnUp (previous)
+            // Goes to the item left of it
+            nav.selectOnLeft = selectables[i - 1];
+                
+            if (i + 1 != selectables.Length)
+                nav.selectOnRight = selectables[i + 1];
+                
+            // Goes to the item right of it
+            if (i < selectables.Length - rowAmt)
+                nav.selectOnDown = selectables[i + rowAmt];
+
+            // Goes up a row to the first row
             if (i > 0)
                 nav.selectOnUp = selectables[i - rowAmt];
 

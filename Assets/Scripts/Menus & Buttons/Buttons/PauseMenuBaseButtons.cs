@@ -39,7 +39,7 @@ public class PauseMenuBaseButtons : MonoBehaviour
         // Gets components
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
         pause = GameObject.Find("Player").GetComponent<MenuPause>();
-        opMenuBtns = FindObjectOfType<OptionsMenuButtons>();
+        opMenuBtns = GameObject.Find("Options Menu").GetComponent<OptionsMenuButtons>();
     }
 
     // Resumes the game
@@ -104,7 +104,7 @@ public class PauseMenuBaseButtons : MonoBehaviour
     {
         // Lv outro transition
         lvLoadAni.speed = 1.5f;
-        lvLoadAni.Play("LvOutro");
+        lvLoadAni.Play("Lv Load Outro");
         // ---------------------------
         // ---------------------------
         // ---------------------------

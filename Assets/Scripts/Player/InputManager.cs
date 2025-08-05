@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 // Gets inputs from the player
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     public PlayerInput.PlayerActions player;
     public PlayerInput.MenuActions menu;
     
@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
         player.CamZoomOut.canceled += ctx => look.StopZoomOut();
         player.Pause.performed += ctx => pause.Pause();
         menu.Resume.performed += ctx => pause.Resume();
+        menu.Cancel.performed += ctx => pause.Resume();
 
         pState = GetComponentInChildren<PlayerState>();
     }
@@ -64,9 +65,9 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.Enable();
-        menu.Disable();
+        playerInput.Disable();
     }
+
     private void OnDisable()
     {
         playerInput.Disable();

@@ -25,39 +25,43 @@ public class Entity : MonoBehaviour
         set
         {
             health = value;
-            // If the enemy is not dead when hit
-            if (audioSource != null && health > 0f)
-            {
-                audioSource.PlayOneShot(hurtClips[0]);
-                float delay = hurtClips[0].length;
-                eAni.Play("Enemy Hurt");
-            }
-            // When enemy health reaches zero and dies
-            else if (audioSource != null && health <= 0f)
-            {
-                // Plays one of three hurt clips
-                int randomClipNum = Random.Range(1, 201);
-                if (randomClipNum > 20)
-                {
-                    randomClipNum = 0;
-                }
-                else if (randomClipNum <= 20 && randomClipNum > 5)
-                {
-                    randomClipNum = 1;
-                }
-                else if (randomClipNum <= 5)
-                {
-                    randomClipNum = 2;
-                }
-                // Plays sfx
-                audioSource.PlayOneShot(hurtClips[randomClipNum]);
-                float delay = hurtClips[randomClipNum].length;
 
-                // Plays hurt animation and death fade
-                eAni.Play("Enemy Hurt");
-                eAni.Play("Death Fade");
-                // Destroys enemy after the sound is played
-                Invoke("DestroyEnemy", delay);
+            if (audioSource != null)
+            {
+                // If the enemy is not dead when hit
+                if (health > 0f)
+                {
+                    audioSource.PlayOneShot(hurtClips[Random.Range(0, 3)]);   
+                    eAni.Play("Enemy Hurt");
+                }
+                // When enemy health reaches zero and dies
+                else if (health <= 0f)
+                {
+                    // Plays one of three hurt clips
+                    int randomClipNum = Random.Range(1, 201);
+                    if (randomClipNum > 15)
+                    {
+                        randomClipNum = Random.Range(0, 3);
+                    }
+                    else if (randomClipNum <= 15 && randomClipNum > 5)
+                    {
+                        randomClipNum = 3;
+                    }
+                    else if (randomClipNum <= 5)
+                    {
+                        randomClipNum = 4;
+                    }
+
+                    // Plays sfx
+                    audioSource.PlayOneShot(hurtClips[randomClipNum]);
+                    float delay = hurtClips[randomClipNum].length;
+
+                    // Plays hurt animation and death fade
+                    eAni.Play("Enemy Hurt");
+                    eAni.Play("Death Fade");
+                    // Destroys enemy after the sound is played
+                    Invoke("DestroyEnemy", delay);
+                }
             }
         }
     }

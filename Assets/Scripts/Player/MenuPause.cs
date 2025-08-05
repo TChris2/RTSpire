@@ -32,14 +32,15 @@ public class MenuPause : MonoBehaviour
         isPaused = false;
         inputManager = GetComponent<InputManager>();
         pState = GetComponentInChildren<PlayerState>();
-        subOpMenuBtns = FindObjectOfType<SubOptionMenuButtons>();
-        pMenuBaseBtns = FindObjectOfType<PauseMenuBaseButtons>();
-        opMenuBtns = FindObjectOfType<OptionsMenuButtons>();
+        subOpMenuBtns = GameObject.Find("Sub Options Menu").GetComponent<SubOptionMenuButtons>();
+        pMenuBaseBtns = GameObject.Find("Pause Screen Base").GetComponent<PauseMenuBaseButtons>();
+        opMenuBtns = GameObject.Find("Options Menu").GetComponent<OptionsMenuButtons>();
     }
 
     // Pauses the game
     public void Pause()
     {
+        // Debug.Log("Pausing Game");
         // Stops player from pausing the game if they had died or won
         if (!pState.isDead && !pState.isWin)
         {
@@ -63,6 +64,7 @@ public class MenuPause : MonoBehaviour
     // Resumes the game if the player is not in a sub menu
     public void Resume()
     {
+        // Debug.Log("Resuming Game");
         // Closes sub menu player is in currently
         if (!pMenuBaseBtns.pScreenBase.interactable)
             CloseMenus();
@@ -96,14 +98,14 @@ public class MenuPause : MonoBehaviour
         else if (subOpMenuBtns.ynScreen.interactable)
         {
             // Debug.Log("Closing Sub Option Menu Yes No Screen");
-            subOpMenuBtns.No();
+            subOpMenuBtns.CloseSubOpMenu();
         }
 
         // Closes sub option menus
         else if (subOpMenuBtns.subOpMenu.interactable)
         {
             // Debug.Log("Closing Sub Option Menu");
-            subOpMenuBtns.CloseSubOpMenu();
+            subOpMenuBtns.ExitSubOpMenu();
         }
 
         // Closes option menu

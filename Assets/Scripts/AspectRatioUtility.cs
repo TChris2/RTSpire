@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Updates aspect ratio - Script from Max O'Didily
+// Updates aspect ratio when changing window size - Script from Max O'Didily
 public class AspectRatioUtility : MonoBehaviour
 {
     Camera camera;

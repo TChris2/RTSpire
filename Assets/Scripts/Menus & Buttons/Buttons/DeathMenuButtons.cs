@@ -72,7 +72,7 @@ public class DeathMenuButtons : MonoBehaviour
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
 
         // Lv outro transition
-        lvLoadAni.Play("LvOutro");
+        lvLoadAni.Play("Lv Load Outro");
         // ---------------------------
         // ---------------------------
         // ---------------------------

@@ -99,10 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
   ytSprites:
-  - {fileID: 592966861, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
-  - {fileID: 2094259161, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
-  - {fileID: 849237657, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
-  - {fileID: 1399182566, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
+  - {fileID: 246149326, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
+  - {fileID: -715815944, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
+  - {fileID: -423699665, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
+  - {fileID: 238529934, guid: 084f548e4cc19b740ac3e5bd8f9ecebb, type: 3}
 --- !u!1 &5454778379122511400
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7845405c8fd714eae591b810bd093a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOnNavMesh: 0
   checkRadius: 3.9
   groundLayer:
     serializedVersion: 2
@@ -246,6 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurtClips:
   - {fileID: 8300000, guid: 3829b097410243349b91f494eb12fe63, type: 3}
+  - {fileID: 8300000, guid: 45024da96d2c75740b4ce2382bc3df21, type: 3}
+  - {fileID: 8300000, guid: ef7c440b5acc9a346a37a5248e68d58b, type: 3}
   - {fileID: 8300000, guid: e0b86e71557527e47b3f32f395565d76, type: 3}
   - {fileID: 8300000, guid: e6607b21bef7ed646a83ac4079613ad4, type: 3}
   StartHealth: 1
@@ -329,7 +330,6 @@ MonoBehaviour:
   distanceToGround: 0
   sizeBuff: 1
   sizeDivide: 0.4
-  frames: 60
 --- !u!82 &6188055119844451885
 AudioSource:
   m_ObjectHideFlags: 0

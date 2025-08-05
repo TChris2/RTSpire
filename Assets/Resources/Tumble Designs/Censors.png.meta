@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 600
+        y: 602
         width: 600
         height: 600
       alignment: 0
@@ -137,18 +137,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86a5e1b804d76324698d8e21b2f636c3
-      internalID: 592966861
+      spriteID: 9fb8cefb1afdc104099e46a2a169d4a2
+      internalID: 246149326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Garsh
+      name: Goofy
       rect:
         serializedVersion: 2
-        x: 600
-        y: 600
+        x: 602
+        y: 602
         width: 600
         height: 600
       alignment: 0
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7bcc06c875f135448504a7aaceb988f
-      internalID: 2094259161
+      spriteID: 1ad74c69222164043a3b37e881969857
+      internalID: -715815944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NSFW_1
+      name: Ganon_1
       rect:
         serializedVersion: 2
         x: 0
@@ -179,17 +179,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74453132875b87841a6c16607721724e
-      internalID: 849237657
+      spriteID: eb4613369da648e4b9d9eea976d0e6a1
+      internalID: -423699665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NSFW_2
+      name: Ganon_2
       rect:
         serializedVersion: 2
-        x: 600
+        x: 602
         y: 0
         width: 600
         height: 600
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6ac2d810b3c3c46a0103d6365b8954
-      internalID: 1399182566
+      spriteID: 98740c58d7675924ea3bbdc50800d9bc
+      internalID: 238529934
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Garsh: 2094259161
-      NSFW_1: 849237657
-      NSFW_2: 1399182566
-      Youtube: 592966861
+      Ganon_1: -423699665
+      Ganon_2: 238529934
+      Goofy: -715815944
+      Youtube: 246149326
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

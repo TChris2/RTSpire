@@ -728,6 +728,82 @@ isChat: False
 isBrainrot: False
 isConcern: False
 
+File Name: Bowser Rules
+Clip Name: "BOWSER RULES"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Bowser
+Clip Name: "BOWSER"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Wee
+Clip Name: "Wee"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: That's Me
+Clip Name: "That's Me"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Knife
+Clip Name: "I Got A Knife"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: I See You
+Clip Name: "I See You"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: False
+isBrainrot: False
+isConcern: False
+
+File Name: Taxes
+Clip Name: "Have You Filed Your Taxes?"
+isEnabled: True
+isSFW: True
+isNSFW: False
+isToad: False
+isNoise: False
+isChat: True
+isBrainrot: False
+isConcern: False
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 _NSFW_
@@ -1192,7 +1268,7 @@ isToad: False
 isNoise: False
 isChat: False
 isBrainrot: False
-isConcern: False
+isConcern: True
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 _Toad_
@@ -1675,6 +1751,50 @@ isConcern: False
 
 File Name: Gambling Noises
 Clip Name: Gambling Noises
+isEnabled: False
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Yay 1
+Clip Name: "YAAAAAAAAAAAY"
+isEnabled: False
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Yay 2
+Clip Name: "YAAAAAAAAAAAAAAAY"
+isEnabled: False
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Go 1
+Clip Name: "GOOOOOOOOOOOOOO"
+isEnabled: False
+isSFW: False
+isNSFW: False
+isToad: False
+isNoise: True
+isChat: True
+isBrainrot: False
+isConcern: False
+
+File Name: Go 2
+Clip Name: "GOOOOOO"
 isEnabled: False
 isSFW: False
 isNSFW: False

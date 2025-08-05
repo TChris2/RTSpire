@@ -73,6 +73,7 @@ public class SubOptionMenuButtons : MonoBehaviour
         if (!isPressed)
         {
             isPressed = true;
+
             if (clipMenu.interactable)
                 vClipMenuBtns.SaveClipSelection();
             if (designMenu.interactable)
@@ -108,7 +109,6 @@ public class SubOptionMenuButtons : MonoBehaviour
             subOpMenu.interactable = false;
 
             EventSystem.current.SetSelectedGameObject(ynInitial);
-
             MenuOpenClose(ynScreen, true);
         }
         // Closes all sub sub menus
@@ -126,12 +126,14 @@ public class SubOptionMenuButtons : MonoBehaviour
         {
             // Gets comp from previously opened menu
             menuNav = vClipAutoScroll.GetComponentInChildren<MenuNavigation>();
+            clipMenu.alpha = 1;
         }
 
         if (subOpMenuOpen == "Tumble Design")
         {
             // Gets comp from previously opened menu
             menuNav = tDesignAutoScroll.GetComponentInChildren<MenuNavigation>();
+            designMenu.alpha = 1;
         }
 
         // Updates navigation
@@ -147,11 +149,6 @@ public class SubOptionMenuButtons : MonoBehaviour
         ClearTypeMenu(menuNav.gameObject);
 
         EventSystem.current.SetSelectedGameObject(subOpMenuPrev);
-
-        if (subOpMenuOpen == "Voice Clip")
-            MenuOpenClose(clipMenu, true);
-        if (subOpMenuOpen == "Tumble Design")
-            MenuOpenClose(designMenu, true);
 
         isSubTypeMenuOpen = false;
     }
@@ -212,15 +209,13 @@ public class SubOptionMenuButtons : MonoBehaviour
         {
             vClipMenuBtns.CreateClipTypeMenu(subTypeMenuName, menuNav.gameObject, GetComponent<AudioSource>());
             subTypeMenuAutoScroll.rowAmt = 2;
-            // Closes sub option menu
-            MenuOpenClose(clipMenu, false);
+            clipMenu.alpha = 0;
         }
         if (subOpMenuOpen == "Tumble Design")
         {
             tDesignMenuBtns.CreateSubDesignMenu(int.Parse(subTypeMenuName), menuNav.gameObject, GetComponent<AudioSource>());
             subTypeMenuAutoScroll.rowAmt = 5;
-            // Closes sub option menu
-            MenuOpenClose(designMenu, false);
+            designMenu.alpha = 0;
         }
 
         // Enables auto scroll

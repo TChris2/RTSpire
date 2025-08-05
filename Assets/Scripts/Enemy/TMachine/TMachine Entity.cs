@@ -47,34 +47,39 @@ public class TMachineEntity : MonoBehaviour
         set
         {
             health = value;
-            // If the TMachine is not dead when hit
-            if (audioSource != null && health > 0f)
+
+            if (audioSource != null)
             {
-                // Plays hurt clip
-                audioSource.PlayOneShot(hurtClips[0]);
-                // Plays hit effect
-                TMAni.Play("TMachineHurt");
-            }
-            // Destroys machine when their health reaches 0
-            else if (audioSource != null && health <= 0f && !isTMachineDestroyed)
-            {
-                // Sets to true to prevent it from playing multiple times
-                isTMachineDestroyed = true;
-                audioSource.PlayOneShot(hurtClips[1]);
-                float delay = hurtClips[1].length;
+                // If the TMachine is not dead when hit
+                if (audioSource != null && health > 0f)
+                {
+                    // Plays hurt clip
+                    audioSource.PlayOneShot(hurtClips[0]);
 
-                // Plays destroyed animation
-                TMAni.Play("TMachineDestroyed");
+                    // Plays hit effect
+                    TMAni.Play("TMachineHurt");
+                }
+                // Destroys machine when their health reaches 0
+                else if (audioSource != null && health <= 0f && !isTMachineDestroyed)
+                {
+                    // Sets to true to prevent it from playing multiple times
+                    isTMachineDestroyed = true;
+                    audioSource.PlayOneShot(hurtClips[1]);
+                    float delay = hurtClips[1].length;
 
-                // Updates counter
-                objDestroy.TMachineCounter -= 1;
-                DestroyCounterTxt.text = $"{objDestroy.TMachineCounter}";
+                    // Plays destroyed animation
+                    TMAni.Play("TMachineDestroyed");
 
-                // Checks to see if the player has destroyed all the machines
-                objDestroy.WinCheck();
+                    // Updates counter
+                    objDestroy.TMachineCounter -= 1;
+                    DestroyCounterTxt.text = $"{objDestroy.TMachineCounter}";
 
-                // Destroys machine
-                Invoke("DestroyMachine", delay - 1f);
+                    // Checks to see if the player has destroyed all the machines
+                    objDestroy.WinCheck();
+
+                    // Destroys machine
+                    Invoke("DestroyMachine", delay - 1f);
+                }
             }
         }
     }

@@ -49,6 +49,8 @@ public class VoiceClipSelectionButtons : MonoBehaviour
     [SerializeField]
     private GameObject[] clipTypeMenuItems = new GameObject[2];
     private List<Toggle> clipTypeToggles = new List<Toggle>();
+    [HideInInspector]
+    public bool isLoaded = false;
 
     void Awake()
     {
@@ -153,6 +155,8 @@ public class VoiceClipSelectionButtons : MonoBehaviour
         // Saves clip to lists
         if (vClip != null)
             NewClip(vClip);
+
+        isLoaded = true;
     }
 
     // Saves clip to lists

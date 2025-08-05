@@ -16,6 +16,7 @@ public class StartMenuButtons : MonoBehaviour
     {
         // Sets target frame rate in first scene
         Application.targetFrameRate = 60;
+        // ScreenCapture.CaptureScreenshot("Thumbnail.png");
     }
 
     // Opening screen when the player presses start
@@ -36,7 +37,7 @@ public class StartMenuButtons : MonoBehaviour
         lvLoadAni = GameObject.Find("Lv Transition").GetComponent<Animator>();
 
         // Lv outro transition
-        lvLoadAni.Play("LvOutro");
+        lvLoadAni.Play("Lv Load Outro");
         // ---------------------------
         // ---------------------------
         // ---------------------------
